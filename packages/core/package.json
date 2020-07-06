@@ -5,8 +5,8 @@
   "author": "Amir Beshkar <amir.beshkar@gmail.com>",
   "homepage": "",
   "license": "ISC",
-  "main": "build/core.js",
-  "typings": "build/core.d.ts",
+  "main": "build/index.js",
+  "typings": "build/index.d.ts",
   "directories": {
     "build": "build",
     "test": "__tests__"
@@ -19,6 +19,7 @@
   ],
   "scripts": {
     "build": "tsc",
+    "start": "tsc -w",
     "test": "echo \"Error: run tests from root\" && exit 1"
   }
 }
