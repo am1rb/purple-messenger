@@ -1,9 +1,8 @@
 {
   "name": "@purple-messenger/client",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "author": "Amir Beshkar <amir.beshkar@gmail.com>",
   "license": "ISC",
-  "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
