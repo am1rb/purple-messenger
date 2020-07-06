@@ -1,0 +1,23 @@
+{
+  "name": "@purple-messenger/client",
+  "version": "0.0.0",
+  "description": "> TODO: description",
+  "author": "Amir Beshkar <amir.beshkar@gmail.com>",
+  "homepage": "",
+  "license": "ISC",
+  "main": "build/client.js",
+  "typings": "build/client.d.js",
+  "directories": {
+    "build": "build",
+    "test": "__tests__"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "build"
+  ],
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  }
+}
