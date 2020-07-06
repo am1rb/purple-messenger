@@ -1,5 +1,5 @@
 import express from "express";
-import Core from '@purple-messenger/core';
+import {redirectTo} from '@purple-messenger/core';
 
 const app = express();
 const port = 4000;
@@ -12,5 +12,5 @@ app.get("/", (req, res) => {
 // start the Express server
 app.listen(port, () => {
   console.log(`server started at http://localhost:${port}`);
-  console.log((new Core()).get(10))
+  console.log(redirectTo('https://sample.com'))
 });
