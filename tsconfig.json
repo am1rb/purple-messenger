@@ -11,10 +11,20 @@
    "sourceMap": true,
    "lib": [
      "es6"
-   ]
+   ],
+   "paths": {
+      "@purple-messenger/core": ["./packages/core/src"],
+      "@purple-messenger/core/*": ["./packages/core/src/*"],
+      "@purple-messenger/server": ["./packages/server/src"],
+      "@purple-messenger/server/*": ["./packages/server/src/*"],
+      "@purple-messenger/client": ["./packages/client/src"],
+      "@purple-messenger/client/*": ["./packages/client/src/*"],
+    },
+    "baseUrl": "./"
  },
  "exclude": [
    "node_modules",
-   "**/*.spec.ts"
+   "**/*.spec.ts",
+   "**/build/"
  ]
 }
