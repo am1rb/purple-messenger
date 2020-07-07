@@ -1,6 +1,6 @@
 {
   "name": "@purple-messenger/client",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "author": "Amir Beshkar <amir.beshkar@gmail.com>",
   "license": "ISC",
   "dependencies": {
