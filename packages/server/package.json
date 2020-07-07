@@ -1,6 +1,6 @@
 {
   "name": "@purple-messenger/server",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "The purple-messenger server app",
   "author": "Amir Beshkar <amir.beshkar@gmail.com>",
   "homepage": "https://github.com/am1rb/purple-messenger#readme",
@@ -22,7 +22,7 @@
     "@types/node": "^14.0.14"
   },
   "dependencies": {
-    "@purple-messenger/core": "^0.0.3",
+    "@purple-messenger/core": "^0.0.4",
     "express": "^4.17.1"
   }
 }
