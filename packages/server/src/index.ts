@@ -1,18 +1,84 @@
-import express from "express";
-import {redirectTo,} from '@purple-messenger/core';
+import express from 'express';
+import bodyParser from 'body-parser';
+import { createServer } from 'http';
+import socketIo from 'socket.io';
+import {
+  authActionTypes,
+  SingInAction,
+  setIsAuthenticated,
+  setAuthError,
+  setToken,
+  VerifyTokenAction,
+  ProfileInfo,
+  setProfileInfo,
+  signOut,
+} from '@purple-messenger/core';
+
+const serverPort = 8000;
 
 const app = express();
-const port = 4000;
 
-// define a route handler for the default home page
-app.get("/", (req, res) => {
-  res.send("Hello world! "+req.path);
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }));
+
+// parse application/json
+app.use(bodyParser.json());
+
+const server = createServer(app);
+const io = socketIo(server);
+
+server.listen(serverPort, function() {
+  console.log('server run on ' + serverPort);
 });
 
-// // start the Express server
-app.listen(port, () => {
-  console.log(`server started at http://localhost:${port}`);
-  console.log(redirectTo('https://sample.com'))
-});
+const demoAccount = 'demo';
+const testToken = 'test-token';
+const testProfileInfo: ProfileInfo = {
+  image: 'https://picsum.photos/200',
+  firstName: 'John',
+  lastName: 'Doe',
+  email: 'john@doe.demo',
+  bio: "Hi, My name is John Doe and I'm a demo user",
+};
 
-export default app
+io.on('connection', socket => {
+  const client = (function(socket) {
+    return {
+      dispatch: (action: { type: string }) => {
+        socket.emit('dispatch', action);
+      },
+    };
+  })(socket);
+
+  socket.on(authActionTypes.auth.saga.signIn, (message: SingInAction) => {
+    if (message.email === demoAccount && message.password === demoAccount) {
+      client.dispatch(setToken(testToken));
+      client.dispatch(setProfileInfo(testProfileInfo));
+    } else {
+      client.dispatch(setAuthError('Email or Password is incorrect'));
+      client.dispatch(setIsAuthenticated(false));
+    }
+  });
+
+  socket.on(
+    authActionTypes.auth.saga.verifyToken,
+    (message: VerifyTokenAction) => {
+      if (message.token === testToken) {
+        client.dispatch(setIsAuthenticated(true));
+        client.dispatch(setProfileInfo(testProfileInfo));
+      } else {
+        client.dispatch(setAuthError('Invalid token'));
+        client.dispatch(signOut());
+      }
+    },
+  );
+
+  socket.on(authActionTypes.auth.saga.signOut, () => {
+    // remove token from server
+    console.log('signout');
+  });
+
+  socket.on('disconnect', () => {
+    console.log('disconnect');
+  });
+});
