@@ -1,5 +1,5 @@
 import express from "express";
-import {redirectTo} from '@purple-messenger/core';
+import {redirectTo,} from '@purple-messenger/core';
 
 const app = express();
 const port = 4000;
