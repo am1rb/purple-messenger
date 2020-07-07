@@ -1,12 +1,12 @@
 import React, { memo, useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Button } from '@material-ui/core';
 import Unform from 'components/Unform';
 import UnformTextField from 'components/UnformTextField';
 import { SignInFormContent } from '../../type/formContent';
-import schema from './schema';
-import { useDispatch, useSelector } from 'react-redux';
 import { signIn, setAuthError } from '@purple-messenger/core';
 import { getAuthError } from 'features/auth/selectors';
+import schema from './schema';
 import useStyles from './styles';
 
 function SignInForm() {
@@ -24,7 +24,7 @@ function SignInForm() {
 
   return (
     <Unform<SignInFormContent>
-      schema={schema}
+      schema={schema as any}
       onSubmit={handleSubmit}
       className={classes.form}
     >

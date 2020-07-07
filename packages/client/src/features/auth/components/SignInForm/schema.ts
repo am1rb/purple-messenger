@@ -1,13 +1,10 @@
 import * as yup from "yup";
 
-function demoValueOrSchema(schema: yup.StringSchema) {
-  return yup.lazy((value: string) =>
+function demoValueOrSchema(schema: yup.StringSchema<string>) {
+  return yup.lazy((value: string) => 
     value !== "demo"
-      ? yup
-          .string()
-          .email()
-          .required()
-      : yup.string()
+      ? schema
+      : yup.string().required()
   );
 }
 

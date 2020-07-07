@@ -24,25 +24,18 @@ function connect() {
 
 const subscribe = (socket: SocketIOClient.Socket) =>
   eventChannel(emit => {
-    const handleConnect = () => {
-      emit(connected());
-    };
+    const handleConnect = () => emit(connected());    
+    const handleDisconnect = () => emit(disconnected());
+    const handleDispatch = (action: Action) => emit(action);
+    
     socket.on('connect', handleConnect);
-
-    const handleDisconnect = () => {
-      emit(disconnected());
-    };
     socket.on('disconnect', handleDisconnect);
-
-    const handleMessage = (action: Action) => {
-      emit(action);
-    };
-    socket.on('message', handleMessage);
+    socket.on('dispatch', handleDispatch);
 
     return function() {
       socket.off('connect', handleConnect);
       socket.off('disconnect', handleDisconnect);
-      socket.off('message', handleMessage);
+      socket.off('dispatch', handleDispatch);
     };
   });
 
