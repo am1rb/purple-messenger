@@ -23,9 +23,13 @@
   },
   "dependencies": {
     "@purple-messenger/core": "^0.0.4",
+    "@types/jsonwebtoken": "^8.5.0",
+    "@types/socket.io": "^2.1.8",
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
     "http": "^0.0.1-security",
+    "jsonwebtoken": "^8.5.1",
+    "redux": "^4.0.5",
     "socket.io": "^2.3.0"
   },
   "gitHead": "ff68d54d2ca35787f8b04723b891fe8abbdfade2"
