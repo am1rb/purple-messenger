@@ -14,8 +14,8 @@ import Socket from "core/type/socket";
 import jwt from "core/helper/jwt";
 
 const demoAccount = "demo";
-const testUserId = 1;
 const testProfileInfo: ProfileInfo = {
+  id: 1,
   image: "https://picsum.photos/200",
   firstName: "John",
   lastName: "Doe",
@@ -28,7 +28,7 @@ function auth(socket: Socket) {
     authActionTypes.auth.saga.signIn,
     ({ email, password }: SingInAction) => {
       if (email === demoAccount && password === demoAccount) {
-        socket.session = { id: testUserId };
+        socket.session = { id: testProfileInfo.id };
 
         dispatch(socket, setToken(jwt.sign(socket.session)));
         dispatch(socket, setProfileInfo(testProfileInfo));

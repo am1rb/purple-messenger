@@ -2,8 +2,10 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import { createServer } from 'http';
 import socketIo from 'socket.io';
+import Socket from "core/type/socket";
 
-import auth from 'modules/auth';
+import auth from 'services/auth';
+import conversation from 'services/conversation';
 
 const serverPort = 8000;
 
@@ -22,13 +24,13 @@ server.listen(serverPort, function() {
   console.log('server run on ' + serverPort);
 });
 
-io.on('connection', socket => {
+io.on('connection', (socket: Socket) => {
 
   auth(socket);
-
-  
+  conversation(socket);
 
   socket.on('disconnect', () => {
+    delete socket.session;
     console.log('disconnect');
   });
 });
