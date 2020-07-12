@@ -1,4 +1,5 @@
 export interface ProfileInfo {
+  id: number;
   image: string;
   firstName: string;
   lastName: string;

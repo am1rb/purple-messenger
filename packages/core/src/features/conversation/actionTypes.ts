@@ -2,8 +2,13 @@ import uniqueActionTypes from "../../core/helper/uniqueActionTypes";
 
 const actionTypes = uniqueActionTypes({
   conversation: {
-    reducer: { },
-    saga: { },
+    reducer: {
+      setConversationList: '',
+    },
+    saga: {
+      loadConversationList: '',
+      unloadConversationList: '',
+    },
   },
 });
 
