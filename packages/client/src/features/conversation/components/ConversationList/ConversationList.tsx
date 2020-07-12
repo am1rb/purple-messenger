@@ -1,6 +1,11 @@
-import React, { memo } from 'react';
-import clsx from 'clsx';
-import useStyles from './styles';
+import React, { memo, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import clsx from "clsx";
+import {
+  loadConversationList,
+  unloadConversationList,
+} from "@purple-messenger/core";
+import useStyles from "./styles";
 
 interface Props {
   className: string;
@@ -8,6 +13,15 @@ interface Props {
 
 function ConversationList({ className }: Props) {
   const classes = useStyles();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(loadConversationList());
+    return () => {
+      dispatch(unloadConversationList())
+    };
+  }, []);
+
   return <div className={clsx(classes.root, className)}>conversation list</div>;
 }
 
