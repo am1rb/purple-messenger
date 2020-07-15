@@ -1,18 +1,19 @@
 import React from 'react';
 import { Conversation } from '@purple-messenger/core';
-import { Card, CardActionArea, CardContent, Box, Avatar, Typography } from '@material-ui/core';
+import { Card, CardContent, Box, Avatar, Typography } from '@material-ui/core';
 import MessageStatus from 'features/message/components/MessageStatus';
-import useStyles from './styles';
 import MessageSentAt from 'features/message/components/MessageSentAt';
+import CardActionArea from 'components/CardActionArea';
+import useStyles from './styles';
 
 export type Props = Conversation;
 
-function ConversationRow({message, friend}: Props) {
+function ConversationRow({id, message, friend}: Props) {
   const classes = useStyles();
 
   return (
     <Card className={classes.root}>
-      <CardActionArea>
+      <CardActionArea to={'/conversation/'+id}>
         <CardContent>
           <Box display="flex">
             <Avatar src={friend.image} />
