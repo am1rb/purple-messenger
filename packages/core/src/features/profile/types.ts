@@ -4,6 +4,7 @@ export interface ProfileInfo {
   firstName: string;
   lastName: string;
   email: string;
+  username: string;
   bio: string;
 }
 
