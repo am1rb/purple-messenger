@@ -1,64 +1,24 @@
 import {
   conversationActionTypes,
   Conversation,
-  MessageOwner,
-  MessageStatus,
   AccountStatus,
   setConversationList,
 } from "@purple-messenger/core";
 import Socket from "core/type/socket";
 import { dispatch } from "core/helper/client";
+import { sampleProfiles } from "./auth";
 
 function conversation(socket: Socket) {
   socket.on(
     conversationActionTypes.conversation.saga.loadConversationList,
     () => {
-      const conversations: Conversation[] = [
-        {
-          id: 1,
+      const conversations: Conversation[] = sampleProfiles
+        .filter((u) => u.id !== socket.session!.id)
+        .map<Conversation>((friendProfile) => ({
+          id: socket.session!.id * friendProfile.id,
           isTyping: false,
-          message: {
-            id: 1,
-            body: "391 Ekve Manor 1762 Wikcu Manor 1798 Afda Boulevard",
-            owner: MessageOwner.Friend,
-            sentAt: new Date(),
-            status: MessageStatus.Received,
-            unreadCount: 0,
-          },
-          friend: {
-            id: 2,
-            username: 'john',
-            email: "uve@dis.br",
-            bio: "French Southern Territories Ireland",
-            firstName: "Chad",
-            lastName: "Laos",
-            image: "https://picsum.photos/201",
-            status: AccountStatus.Online,
-          },
-        },
-        {
-          id: 2,
-          isTyping: false,
-          message: {
-            id: 1,
-            body: "708 Guhhet Manor 784 Mopo Heights",
-            owner: MessageOwner.Me,
-            sentAt: new Date(),
-            status: MessageStatus.Sent,
-            unreadCount: 0,
-          },
-          friend: {
-            id: 3,
-            username: 'sara',
-            email: "ma@pazmiz.mt",
-            bio: "Dominica Kazakhstan",
-            firstName: "Equatorial",
-            lastName: "Guinea",
-            image: "https://picsum.photos/202",
-            status: AccountStatus.Online,
-          },
-        },
-      ];
+          friend: { ...friendProfile, status: AccountStatus.Online },
+        }));
 
       dispatch(socket, setConversationList(conversations));
 
