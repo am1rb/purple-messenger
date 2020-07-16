@@ -8,6 +8,6 @@ export interface LastMessage extends Message {
 export interface Conversation {
   id: number;
   isTyping: boolean;
-  message: LastMessage;
+  message?: LastMessage;
   friend: FriendProfileInfo;
 }
