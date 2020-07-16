@@ -13,9 +13,9 @@ import { dispatch } from "core/helper/client";
 import Socket from "core/type/socket";
 import jwt from "core/helper/jwt";
 
-const demoAccount = "demo";
-const testProfileInfo: ProfileInfo = {
+const demoProfileInfo: ProfileInfo = {
   id: 1,
+  username: 'demo',
   image: "https://picsum.photos/200",
   firstName: "John",
   lastName: "Doe",
@@ -27,11 +27,14 @@ function auth(socket: Socket) {
   socket.on(
     authActionTypes.auth.saga.signIn,
     ({ email, password }: SingInAction) => {
-      if (email === demoAccount && password === demoAccount) {
-        socket.session = { id: testProfileInfo.id };
+      if (email === demoProfileInfo.username && password === demoProfileInfo.username) {
+        socket.session = {
+          id: demoProfileInfo.id,
+          username: demoProfileInfo.username,
+        };
 
         dispatch(socket, setToken(jwt.sign(socket.session)));
-        dispatch(socket, setProfileInfo(testProfileInfo));
+        dispatch(socket, setProfileInfo(demoProfileInfo));
       } else {
         dispatch(socket, signOut());
         dispatch(socket, setAuthError("Email or Password is incorrect"));
@@ -46,7 +49,7 @@ function auth(socket: Socket) {
       if (!!session) {
         socket.session = session;
         dispatch(socket, setIsAuthenticated(true));
-        dispatch(socket, setProfileInfo(testProfileInfo));
+        dispatch(socket, setProfileInfo(demoProfileInfo));
       } else {
         delete socket.session;
         dispatch(socket, signOut());

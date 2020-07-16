@@ -27,6 +27,7 @@ function conversation(socket: Socket) {
           },
           friend: {
             id: 2,
+            username: 'john',
             email: "uve@dis.br",
             bio: "French Southern Territories Ireland",
             firstName: "Chad",
@@ -48,6 +49,7 @@ function conversation(socket: Socket) {
           },
           friend: {
             id: 3,
+            username: 'sara',
             email: "ma@pazmiz.mt",
             bio: "Dominica Kazakhstan",
             firstName: "Equatorial",
