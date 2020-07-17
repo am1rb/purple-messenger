@@ -15,6 +15,6 @@ export * from "./features/conversation/actions";
 export * from "./features/conversation/types";
 export { default as conversationActionTypes } from "./features/conversation/actionTypes";
 
-// export * from "./features/message/actions";
+export * from "./features/message/actions";
 export * from "./features/message/types";
-// export { default as messageActionTypes } from "./features/message/actionTypes";
+export { default as messageActionTypes } from "./features/message/actionTypes";
