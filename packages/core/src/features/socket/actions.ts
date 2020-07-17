@@ -9,11 +9,11 @@ export const disconnected = () => ({
   type: actionTypes.socket.reducer.disconnected
 });
 
-export const sendMessage = (message: Action) => ({
-  type: actionTypes.socket.saga.sendMessage,
-  message
+export const sendData = (data: Action) => ({
+  type: actionTypes.socket.saga.sendData,
+  data
 });
-export type SendMessageAction = ReturnType<typeof sendMessage>;
+export type SendDataAction = ReturnType<typeof sendData>;
 
 export const setIsReady = (status: boolean) => ({
   type: actionTypes.socket.reducer.setIsReady,

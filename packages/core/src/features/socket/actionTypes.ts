@@ -7,7 +7,7 @@ const actionTypes = uniqueActionTypes({
       disconnected: "",
       setIsReady: ""
     },
-    saga: { sendMessage: "" }
+    saga: { sendData: "" }
   }
 });
 
