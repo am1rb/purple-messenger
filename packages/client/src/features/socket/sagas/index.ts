@@ -5,7 +5,7 @@ import { Action } from 'redux';
 import {
   connected,
   disconnected,
-  SendMessageAction,
+  SendDataAction,
   socketActionTypes,
   appActionTypes,
   setIsReady,
@@ -49,10 +49,10 @@ function* read(socket: SocketIOClient.Socket) {
 
 function* write(socket: SocketIOClient.Socket) {
   while (true) {
-    const action: SendMessageAction = yield take(
-      socketActionTypes.socket.saga.sendMessage
+    const action: SendDataAction = yield take(
+      socketActionTypes.socket.saga.sendData
     );
-    socket.emit(action.message.type, action.message);
+    socket.emit(action.data.type, action.data);
   }
 }
 

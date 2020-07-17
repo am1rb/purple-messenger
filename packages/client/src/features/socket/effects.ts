@@ -1,6 +1,6 @@
 import { put, take, select } from "redux-saga/effects";
 import { Action } from "redux";
-import { sendMessage, socketActionTypes } from "@purple-messenger/core";
+import { sendData, socketActionTypes } from "@purple-messenger/core";
 import { getIsReady } from "./selectors";
 
 export function* send(action: Action) {
@@ -8,5 +8,5 @@ export function* send(action: Action) {
   if (!isReady) {
     yield take(socketActionTypes.socket.reducer.setIsReady);
   }
-  yield put(sendMessage(action));
+  yield put(sendData(action));
 }
