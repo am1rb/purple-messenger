@@ -1,19 +1,26 @@
-import React from 'react';
-import clsx from 'clsx';
-import useStyles from './styles';
+import React, { useCallback } from "react";
+import { Box } from "@material-ui/core";
+import SendMessageForm from "../SendMessageForm";
+import MessageList from "../MessageList";
 
 interface Props {
   className: string;
-  conversationId?: number;
+  friendUsername: string | undefined;
 }
 
-function MessageZone({ className, conversationId }: Props) {
-  const classes = useStyles();
+function MessageZone({ className, friendUsername }: Props) {
   return (
-    <div className={clsx(classes.root, className)}>
-      {conversationId}
-      please select a conversation
-    </div>
+    <Box className={className} display="flex" flexDirection="column">
+      <Box flexGrow="1" flexShrink="1" overflow="auto">
+        <MessageList />
+      </Box>
+      <Box flexGrow="0" flexShrink="0" m={1}>
+        <SendMessageForm
+          key={friendUsername}
+          disabled={!friendUsername}
+        />
+      </Box>
+    </Box>
   );
 }
 
