@@ -7,7 +7,7 @@ import { useField } from '@rocketseat/unform';
 
 export type Props = Omit<
   TextFieldProps,
-  'name' | 'inputRef' | 'defaultValue'
+  'name' | 'inputRef' | 'defaultValue' | 'defaultChecked'
 > & {
   name: string;
 };
