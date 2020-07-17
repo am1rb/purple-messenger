@@ -5,15 +5,15 @@ import UnformTextField, {
 } from "components/UnformTextField";
 
 interface Props extends Omit<UnformTextFieldProps, "multiline" | "fullWidth"> {
-  onTypeStart?: () => void;
-  onTypeStop?: () => void;
+  onStartTyping?: () => void;
+  onStopTyping?: () => void;
   onEnter?: () => void;
   detectTypeTime?: number;
 }
 
 function MessageTextField({
-  onTypeStart,
-  onTypeStop,
+  onStartTyping,
+  onStopTyping,
   detectTypeTime = 1500,
   onEnter,
   onChange,
@@ -24,18 +24,18 @@ function MessageTextField({
   const handleStartTyping = useCallback(
     debounce(detectTypeTime, true, () => {
       isTyping.current = true;
-      onTypeStart?.();
+      onStartTyping?.();
     }),
-    [detectTypeTime, onTypeStart]
+    [detectTypeTime, onStartTyping]
   );
   const handleStopTyping = useCallback(
     debounce(detectTypeTime, () => {
       if (isTyping.current) {
         isTyping.current = false;
-        onTypeStop?.();
+        onStopTyping?.();
       }
     }),
-    [detectTypeTime, onTypeStop]
+    [detectTypeTime, onStopTyping]
   );
 
   const handleChange = useCallback(
@@ -51,7 +51,7 @@ function MessageTextField({
     (event: React.KeyboardEvent<HTMLDivElement>) => {
       if (event.keyCode === 13 && !event.shiftKey) {
         isTyping.current = false;
-        onTypeStop?.();
+        onStopTyping?.();
         onEnter?.();
         event.preventDefault();
       }
