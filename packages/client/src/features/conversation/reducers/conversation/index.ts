@@ -6,7 +6,7 @@ import {
 } from "@purple-messenger/core";
 
 export interface ConversationState {
-  list: OrderedMap<number, Conversation>;
+  list: OrderedMap<string, Conversation>;
 }
 
 const initialState: ConversationState = {
@@ -21,7 +21,7 @@ function reducer(
     case conversationActionTypes.conversation.reducer.setConversationList:
       return {
         ...state,
-        list: OrderedMap(action.list.map(item => [item.id, item])),
+        list: OrderedMap(action.list.map(item => [item.friend.username, item])),
       };
     default:
       return state;

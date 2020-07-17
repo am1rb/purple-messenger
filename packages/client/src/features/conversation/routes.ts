@@ -3,8 +3,9 @@ import Conversation from './pages/Conversation';
 
 const routes: Routes = [
   {
-    path: '/',
+    path: ['/conversation/@:username', '/'],
     component: Conversation,
+    exact: true,
     authMode: RouteAuthMode.Auth
   }
 ];
