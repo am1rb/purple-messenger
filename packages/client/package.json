@@ -1,12 +1,12 @@
 {
   "name": "@purple-messenger/client",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "author": "Amir Beshkar <amir.beshkar@gmail.com>",
   "license": "ISC",
   "dependencies": {
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
-    "@purple-messenger/core": "^0.0.5",
+    "@purple-messenger/core": "^0.0.6",
     "@rocketseat/unform": "^1.6.2",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",

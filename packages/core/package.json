@@ -1,6 +1,6 @@
 {
   "name": "@purple-messenger/core",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "The purple-messenger core package",
   "author": "Amir Beshkar <amir.beshkar@gmail.com>",
   "homepage": "https://github.com/am1rb/purple-messenger#readme",
