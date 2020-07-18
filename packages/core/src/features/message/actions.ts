@@ -34,7 +34,7 @@ export const startTypingMessage = (
   username: string,
   phase = TypingMessagePhase.Send
 ) => ({
-  type: actionTypes.message.reducer.startTypingMessage,
+  type: actionTypes.message.saga.startTypingMessage,
   username,
   phase,
 });
@@ -44,7 +44,7 @@ export const stopTypingMessage = (
   username: string,
   phase = TypingMessagePhase.Send
 ) => ({
-  type: actionTypes.message.reducer.stopTypingMessage,
+  type: actionTypes.message.saga.stopTypingMessage,
   username,
   phase,
 });

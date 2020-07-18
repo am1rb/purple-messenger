@@ -7,6 +7,7 @@ import {
   StartTypingMessageAction,
   TypingMessagePhase,
   StopTypingMessageAction,
+  NewMessageAction,
 } from "@purple-messenger/core";
 
 export interface ConversationState {
@@ -23,6 +24,7 @@ function reducer(
     | SetConversationListAction
     | StartTypingMessageAction
     | StopTypingMessageAction
+    | NewMessageAction
 ) {
   switch (action.type) {
     case conversationActionTypes.conversation.reducer.setConversationList:
@@ -35,7 +37,7 @@ function reducer(
           ])
         ),
       };
-    case messageActionTypes.message.reducer.startTypingMessage: {
+    case messageActionTypes.message.saga.startTypingMessage: {
       const startTypingMessageAction = action as StartTypingMessageAction;
       return startTypingMessageAction.phase === TypingMessagePhase.Send
         ? state
@@ -50,7 +52,7 @@ function reducer(
             ),
           };
     }
-    case messageActionTypes.message.reducer.stopTypingMessage: {
+    case messageActionTypes.message.saga.stopTypingMessage: {
       const stopTypingMessageAction = action as StopTypingMessageAction;
       return stopTypingMessageAction.phase === TypingMessagePhase.Send
         ? state
@@ -64,6 +66,12 @@ function reducer(
               })
             ),
           };
+    }
+    case messageActionTypes.message.reducer.newMessage: {
+      const newMessageAction = action as NewMessageAction;
+      return {
+        ...state,
+      }
     }
     default:
       return state;

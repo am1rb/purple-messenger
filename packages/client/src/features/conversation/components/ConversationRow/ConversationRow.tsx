@@ -26,16 +26,14 @@ function ConversationRow({ id, message, friend, selected, isTyping }: Props) {
                 <Typography noWrap>
                   {friend.firstName} {friend.lastName}
                 </Typography>
-                {(isTyping || message) && (
-                  <Typography
-                    variant="subtitle2"
-                    noWrap
-                    color="textSecondary"
-                    gutterBottom
-                  >
-                    {isTyping ? 'Typing...' : message?.body}
-                  </Typography>
-                )}
+                <Typography
+                  variant="subtitle2"
+                  noWrap
+                  color="textSecondary"
+                  gutterBottom
+                >
+                  {isTyping ? "Typing..." : message?.body || "No message"}
+                </Typography>
               </Box>
               {message && (
                 <Box display="flex" justifyContent="space-between">

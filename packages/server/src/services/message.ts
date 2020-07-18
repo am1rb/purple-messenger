@@ -21,6 +21,12 @@ function message(socket: Socket) {
   socket.on(
     messageActionTypes.message.reducer.sendMessage,
     ({ receiverUsername, message }: SendMessageAction) => {
+      const senderUsername = socket.session?.username;
+
+      if (!senderUsername) {
+        return;
+      }
+
       const msg = {
         ...message,
         id: savedMessageId++,
@@ -32,14 +38,14 @@ function message(socket: Socket) {
 
       clientDispatchQueue(
         socket,
-        newMessage(receiverUsername, {
+        newMessage(senderUsername, receiverUsername, {
           ...msg,
           owner: MessageOwner.Me,
         })
       );
       dispatchQueue(
         receiverUsername,
-        newMessage(receiverUsername, {
+        newMessage(senderUsername, receiverUsername, {
           ...msg,
           owner: MessageOwner.Friend,
         })
@@ -48,7 +54,7 @@ function message(socket: Socket) {
   );
 
   socket.on(
-    messageActionTypes.message.reducer.startTypingMessage,
+    messageActionTypes.message.saga.startTypingMessage,
     ({ username: receiverUsername, phase }: StartTypingMessageAction) => {
       const senderUsername = socket.session?.username;
       if (phase === TypingMessagePhase.Send && senderUsername) {
@@ -61,7 +67,7 @@ function message(socket: Socket) {
   );
 
   socket.on(
-    messageActionTypes.message.reducer.stopTypingMessage,
+    messageActionTypes.message.saga.stopTypingMessage,
     ({ username: receiverUsername, phase }: StopTypingMessageAction) => {
       const senderUsername = socket.session?.username;
       if (phase === TypingMessagePhase.Send && senderUsername) {
