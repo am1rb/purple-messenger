@@ -1,15 +1,16 @@
 import React, { useCallback, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { SubmitHandler } from "@rocketseat/unform";
 import { Box, IconButton } from "@material-ui/core";
 import SendIcon from "@material-ui/icons/Send";
 import {
   startTypingMessage,
   stopTypingMessage,
-  sendMessage,
+  submitMessage,
+  decreaseLastMessageId,
 } from "@purple-messenger/core";
 import Unform from "components/Unform";
 import MessageTextField from "../MessageTextField";
-import { useDispatch } from "react-redux";
 import useConversation from "features/conversation/components/useConversation";
 import { MessageFormContent } from "features/message/types/formContent";
 
@@ -24,8 +25,8 @@ function SendMessageForm({ disabled }: Props) {
 
   const handleSubmit = useCallback<SubmitHandler<MessageFormContent>>(
     (data, helpers) => {
-      if (username) {
-        dispatch(sendMessage(username, data.message));
+      if (username) {        
+        dispatch(submitMessage(username, data.message));
       }
       helpers.resetForm();
     },

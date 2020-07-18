@@ -10,12 +10,16 @@ import profileReducers, {
 import conversationReducers, {
   State as ConversationState,
 } from "features/conversation/reducers";
+import messageReducers, {
+  State as MessageState,
+} from "features/message/reducers";
 
 export type State = RouterRootState &
   AuthState &
   SocketState &
   ProfileState &
-  ConversationState;
+  ConversationState &
+  MessageState;
 
 const createRootReducer = (history: History) =>
   combineReducers({
@@ -24,6 +28,7 @@ const createRootReducer = (history: History) =>
     ...socketReducers,
     ...profileReducers,
     ...conversationReducers,
+    ...messageReducers,
   });
 
 export default createRootReducer;
