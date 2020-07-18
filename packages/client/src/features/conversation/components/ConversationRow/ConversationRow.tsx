@@ -12,7 +12,7 @@ export interface Props extends Conversation {
   selected: boolean;
 }
 
-function ConversationRow({ id, message, friend, selected }: Props) {
+function ConversationRow({ id, message, friend, selected, isTyping }: Props) {
   const classes = useStyles();
 
   return (
@@ -26,14 +26,14 @@ function ConversationRow({ id, message, friend, selected }: Props) {
                 <Typography noWrap>
                   {friend.firstName} {friend.lastName}
                 </Typography>
-                {message && (
+                {(isTyping || message) && (
                   <Typography
                     variant="subtitle2"
                     noWrap
                     color="textSecondary"
                     gutterBottom
                   >
-                    {message.body}
+                    {isTyping ? 'Typing...' : message?.body}
                   </Typography>
                 )}
               </Box>
