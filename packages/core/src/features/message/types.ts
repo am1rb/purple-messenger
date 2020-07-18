@@ -5,15 +5,24 @@ export enum MessageOwner {
 
 export enum MessageStatus {
   Pending = 0,
-  Received,
   Sent,
+  Received,
+  Seen,
 }
 
-export interface Message {
+export interface NewMessage {
   id: number;
   body: string;
+}
+
+export interface Message extends NewMessage {
   status: MessageStatus;
   sentAt: Date;
   receivedAt?: Date;
   owner: MessageOwner;
+}
+
+export enum TypingMessagePhase {
+  Send = 0,
+  Receive,
 }
