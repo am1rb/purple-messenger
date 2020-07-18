@@ -18,21 +18,32 @@ export const sendMessage = (receiverUsername: string, message: NewMessage) => ({
 });
 export type SendMessageAction = ReturnType<typeof sendMessage>;
 
-export const newMessage = (receiverUsername: string, message: Message) => ({
+export const newMessage = (
+  senderUsername: string,
+  receiverUsername: string,
+  message: Message
+) => ({
   type: actionTypes.message.reducer.newMessage,
+  senderUsername,
   receiverUsername,
   message,
 });
 export type NewMessageAction = ReturnType<typeof newMessage>;
 
-export const startTypingMessage = (username: string, phase = TypingMessagePhase.Send) => ({
+export const startTypingMessage = (
+  username: string,
+  phase = TypingMessagePhase.Send
+) => ({
   type: actionTypes.message.reducer.startTypingMessage,
   username,
   phase,
 });
 export type StartTypingMessageAction = ReturnType<typeof startTypingMessage>;
 
-export const stopTypingMessage = (username: string, phase = TypingMessagePhase.Send) => ({
+export const stopTypingMessage = (
+  username: string,
+  phase = TypingMessagePhase.Send
+) => ({
   type: actionTypes.message.reducer.stopTypingMessage,
   username,
   phase,
