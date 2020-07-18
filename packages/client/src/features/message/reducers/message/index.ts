@@ -5,7 +5,6 @@ import {
   authActionTypes,
   SendMessageAction,
   MessageStatus,
-  MessageOwner,
   SentMessageAckAction,
 } from "@purple-messenger/core";
 import { OrderedMap } from "immutable";
@@ -34,12 +33,7 @@ function reducer(
       const sendMessageAction = action as SendMessageAction;
       return {
         ...state,
-        list: state.list.set(sendMessageAction.message.id, {
-          ...sendMessageAction.message,
-          status: MessageStatus.Pending,
-          owner: MessageOwner.Me,
-          sentAt: new Date(),
-        }),
+        list: state.list.set(sendMessageAction.message.id, sendMessageAction.message),
       };
     }
     case messageActionTypes.message.reducer.sentMessageAck: {

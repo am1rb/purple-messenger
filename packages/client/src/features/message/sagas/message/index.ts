@@ -6,6 +6,8 @@ import {
   StartTypingMessageAction,
   StopTypingMessageAction,
   TypingMessagePhase,
+  MessageStatus,
+  MessageOwner,
 } from "@purple-messenger/core";
 import { getLastMessageId } from "features/message/selectors";
 import { send } from "features/socket/effects";
@@ -21,6 +23,9 @@ export function* submitMessage({
     sendMessage(receiverUsername, {
       id: messageId,
       body: message,
+      status: MessageStatus.Pending,
+      owner: MessageOwner.Me,
+      sentAt: new Date(),
     })
   );
 }

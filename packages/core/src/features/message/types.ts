@@ -13,13 +13,13 @@ export enum MessageStatus {
 export interface NewMessage {
   id: number;
   body: string;
+  status: MessageStatus;
+  sentAt: Date;
+  owner: MessageOwner;
 }
 
 export interface Message extends NewMessage {
-  status: MessageStatus;
-  sentAt: Date;
   receivedAt?: Date;
-  owner: MessageOwner;
 }
 
 export enum TypingMessagePhase {

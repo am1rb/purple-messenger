@@ -8,6 +8,8 @@ import {
   TypingMessagePhase,
   StopTypingMessageAction,
   NewMessageAction,
+  MessageOwner,
+  SendMessageAction,
 } from "@purple-messenger/core";
 
 export interface ConversationState {
@@ -25,6 +27,7 @@ function reducer(
     | StartTypingMessageAction
     | StopTypingMessageAction
     | NewMessageAction
+    | SendMessageAction
 ) {
   switch (action.type) {
     case conversationActionTypes.conversation.reducer.setConversationList:
@@ -71,7 +74,30 @@ function reducer(
       const newMessageAction = action as NewMessageAction;
       return {
         ...state,
+        list: state.list.update(
+          (newMessageAction.message.owner===MessageOwner.Me ? newMessageAction.receiverUsername : newMessageAction.senderUsername ),
+          (conversation) => ({
+            ...conversation,
+            message: {
+              unreadCount: conversation.message?.unreadCount || 0,
+              ...newMessageAction.message,
+            },
+          })
+        ),
       }
+    }
+    case messageActionTypes.message.reducer.sendMessage: {
+      const sendMessageAction = action as SendMessageAction;
+      return {
+        ...state,
+        list: state.list.update(sendMessageAction.receiverUsername, conversation => ({
+          ...conversation,
+          message: {
+            unreadCount: conversation.message?.unreadCount || 0,
+            ...sendMessageAction.message,
+          },
+        })),
+      };
     }
     default:
       return state;

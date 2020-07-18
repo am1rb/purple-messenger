@@ -1,6 +1,6 @@
 import React, { memo } from "react";
 import clsx from "clsx";
-import { Conversation } from "@purple-messenger/core";
+import { Conversation, MessageOwner } from "@purple-messenger/core";
 import { Card, CardContent, Box, Avatar, Typography } from "@material-ui/core";
 import MessageStatus from "features/message/components/MessageStatus";
 import MessageSentAt from "features/message/components/MessageSentAt";
@@ -12,7 +12,7 @@ export interface Props extends Conversation {
   selected: boolean;
 }
 
-function ConversationRow({ id, message, friend, selected, isTyping }: Props) {
+function ConversationRow({ message, friend, selected, isTyping }: Props) {
   const classes = useStyles();
 
   return (
@@ -32,6 +32,7 @@ function ConversationRow({ id, message, friend, selected, isTyping }: Props) {
                   color="textSecondary"
                   gutterBottom
                 >
+                  {message?.owner===MessageOwner.Me && 'You: '}
                   {isTyping ? "Typing..." : message?.body || "No message"}
                 </Typography>
               </Box>

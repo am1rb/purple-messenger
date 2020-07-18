@@ -41,6 +41,7 @@ function message(socket: Socket) {
         newMessage(senderUsername, receiverUsername, {
           ...msg,
           owner: MessageOwner.Me,
+          status: MessageStatus.Sent,
         })
       );
       dispatchQueue(
