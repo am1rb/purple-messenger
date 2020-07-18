@@ -29,8 +29,8 @@ export const sampleProfiles: ProfileInfo[] = [
     username: 'john',
     email: "john@doe.demo",
     bio: "French Southern Territories Ireland",
-    firstName: "Chad",
-    lastName: "Laos",
+    firstName: "John",
+    lastName: "Doe",
     image: "https://picsum.photos/201",
   },
   {
@@ -38,8 +38,8 @@ export const sampleProfiles: ProfileInfo[] = [
     username: 'sara',
     email: "sara@doe.demo",
     bio: "Dominica Kazakhstan",
-    firstName: "Equatorial",
-    lastName: "Guinea",
+    firstName: "Sara",
+    lastName: "Doe",
     image: "https://picsum.photos/202",
   },
 ];
@@ -48,7 +48,7 @@ function auth(socket: Socket) {
   socket.on(
     authActionTypes.auth.saga.signIn,
     ({ email, password }: SingInAction) => {
-      const user = sampleProfiles.find(u => email===u.username && password===u.username);
+      const user = sampleProfiles.find(u => (email===u.username && password===u.username) || (email===u.email && password===u.email));
 
       if (user) {
         socket.session = {

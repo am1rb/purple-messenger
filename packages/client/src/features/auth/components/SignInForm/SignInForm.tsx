@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Button } from '@material-ui/core';
 import Unform from 'components/Unform';
 import UnformTextField from 'components/UnformTextField';
-import { SignInFormContent } from '../../type/formContent';
+import { SignInFormContent } from '../../types/formContent';
 import { signIn, setAuthError } from '@purple-messenger/core';
 import { getAuthError } from 'features/auth/selectors';
 import schema from './schema';

@@ -6,6 +6,7 @@ import Socket from "core/type/socket";
 
 import auth from 'services/auth';
 import conversation from 'services/conversation';
+import message from 'services/message';
 
 const serverPort = 8000;
 
@@ -28,6 +29,7 @@ io.on('connection', (socket: Socket) => {
 
   auth(socket);
   conversation(socket);
+  message(socket);
 
   socket.on('disconnect', () => {
     delete socket.session;

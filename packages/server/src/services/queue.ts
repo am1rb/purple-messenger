@@ -45,3 +45,16 @@ export function dispatchQueue(queueId: string, action: Action) {
 
   return true;
 }
+
+export function clientDispatchQueue(socket: Socket, action: Action, skipCurrentSocket = true) {
+  const queueId = socket.session?.username;
+  if (!queueId || !queue[queueId]) {
+    return false;
+  }
+
+  queue[queueId]
+    .filter(qSocket => !skipCurrentSocket || qSocket!==socket)
+    .forEach((qSocket) => dispatch(qSocket, action));
+
+  return true;
+}
