@@ -10,6 +10,8 @@ import {
   NewMessageAction,
   MessageOwner,
   SendMessageAction,
+  SentMessageAckAction,
+  MessageStatus,
 } from "@purple-messenger/core";
 
 export interface ConversationState {
@@ -28,6 +30,7 @@ function reducer(
     | StopTypingMessageAction
     | NewMessageAction
     | SendMessageAction
+    | SentMessageAckAction
 ) {
   switch (action.type) {
     case conversationActionTypes.conversation.reducer.setConversationList:
@@ -75,7 +78,9 @@ function reducer(
       return {
         ...state,
         list: state.list.update(
-          (newMessageAction.message.owner===MessageOwner.Me ? newMessageAction.receiverUsername : newMessageAction.senderUsername ),
+          newMessageAction.message.owner === MessageOwner.Me
+            ? newMessageAction.receiverUsername
+            : newMessageAction.senderUsername,
           (conversation) => ({
             ...conversation,
             message: {
@@ -84,19 +89,39 @@ function reducer(
             },
           })
         ),
-      }
+      };
     }
     case messageActionTypes.message.reducer.sendMessage: {
       const sendMessageAction = action as SendMessageAction;
       return {
         ...state,
-        list: state.list.update(sendMessageAction.receiverUsername, conversation => ({
-          ...conversation,
-          message: {
-            unreadCount: conversation.message?.unreadCount || 0,
-            ...sendMessageAction.message,
-          },
-        })),
+        list: state.list.update(
+          sendMessageAction.receiverUsername,
+          (conversation) => ({
+            ...conversation,
+            message: {
+              unreadCount: conversation.message?.unreadCount || 0,
+              ...sendMessageAction.message,
+            },
+          })
+        ),
+      };
+    }
+    case messageActionTypes.message.reducer.sentMessageAck: {
+      const sentMessageAck = action as SentMessageAckAction;
+      return {
+        ...state,
+        list: state.list.update(
+          sentMessageAck.receiverUsername,
+          (conversation) => conversation.message?.id===sentMessageAck.tempMessageId ? ({
+            ...conversation,
+            message: {
+              ...conversation.message,
+              id: sentMessageAck.messageId,
+              status: MessageStatus.Sent,
+            },
+          }) : conversation
+        ),
       };
     }
     default:

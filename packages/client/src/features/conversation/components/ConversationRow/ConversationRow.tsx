@@ -19,9 +19,9 @@ function ConversationRow({ message, friend, selected, isTyping }: Props) {
     <Card className={clsx(classes.root, iff(selected, classes.selected))}>
       <CardActionArea to={"/conversation/@" + friend.username} disableRipple>
         <CardContent>
-          <Box display="flex" alignItems="center">
+          <Box display="flex" alignItems="center" width="100%">
             <Avatar src={friend.image} />
-            <Box ml={1} overflow="hidden">
+            <Box ml={1} overflow="hidden" width="100%">
               <Box>
                 <Typography noWrap>
                   {friend.firstName} {friend.lastName}
@@ -37,7 +37,7 @@ function ConversationRow({ message, friend, selected, isTyping }: Props) {
                 </Typography>
               </Box>
               {message && (
-                <Box display="flex" justifyContent="space-between">
+                <Box display="flex" justifyContent="space-between" width="100%">
                   <MessageSentAt sentAt={message.sentAt} />
                   <MessageStatus status={message.status} />
                 </Box>
