@@ -50,8 +50,9 @@ export const stopTypingMessage = (
 });
 export type StopTypingMessageAction = ReturnType<typeof stopTypingMessage>;
 
-export const sentMessageAck = (tempMessageId: number, messageId: number) => ({
+export const sentMessageAck = (receiverUsername: string, tempMessageId: number, messageId: number) => ({
   type: actionTypes.message.reducer.sentMessageAck,
+  receiverUsername,
   tempMessageId,
   messageId,
 });
