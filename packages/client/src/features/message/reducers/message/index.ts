@@ -40,10 +40,14 @@ function reducer(
       const sentMessageAck = action as SentMessageAckAction;
       return {
         ...state,
-        list: state.list.update(sentMessageAck.tempMessageId, (message) => ({
-          ...message,
-          status: MessageStatus.Sent,
-        })),
+        list: state.list.mapEntries(([messageId, message]: [number, Message]) => [
+          messageId===sentMessageAck.tempMessageId ? sentMessageAck.messageId : messageId,
+          messageId===sentMessageAck.tempMessageId ? {
+            ...message,
+            id: sentMessageAck.messageId,
+            status: MessageStatus.Sent,
+          } : message,
+        ])
       };
     }
     case authActionTypes.auth.saga.signOut:
