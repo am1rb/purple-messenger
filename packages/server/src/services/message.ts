@@ -31,17 +31,16 @@ function message(socket: Socket) {
         ...message,
         id: savedMessageId++,
         sentAt: new Date(),
-        status: MessageStatus.Pending,
+        status: MessageStatus.Sent,
       };
 
-      dispatch(socket, sentMessageAck(message.id, msg.id));
+      dispatch(socket, sentMessageAck(receiverUsername, message.id, msg.id));
 
       clientDispatchQueue(
         socket,
         newMessage(senderUsername, receiverUsername, {
           ...msg,
           owner: MessageOwner.Me,
-          status: MessageStatus.Sent,
         })
       );
       dispatchQueue(
