@@ -21,7 +21,7 @@ export const sampleProfiles: ProfileInfo[] = [
     image: "https://picsum.photos/200",
     firstName: "Demo",
     lastName: "Demo",
-    email: "john@doe.demo",
+    email: "demo@doe.demo",
     bio: "Hi, My name is John Doe and I'm a demo user",
   },
   {

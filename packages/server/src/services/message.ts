@@ -7,7 +7,7 @@ import {
   MessageOwner,
   MessageStatus,
   StartTypingMessageAction,
-  TypingMessagePhase,
+  MessagePhase,
   startTypingMessage,
   StopTypingMessageAction,
   stopTypingMessage,
@@ -57,10 +57,10 @@ function message(socket: Socket) {
     messageActionTypes.message.saga.startTypingMessage,
     ({ username: receiverUsername, phase }: StartTypingMessageAction) => {
       const senderUsername = socket.session?.username;
-      if (phase === TypingMessagePhase.Send && senderUsername) {
+      if (phase === MessagePhase.Send && senderUsername) {
         dispatchQueue(
           receiverUsername,
-          startTypingMessage(senderUsername, TypingMessagePhase.Receive)
+          startTypingMessage(senderUsername, MessagePhase.Receive)
         );
       }
     }
@@ -70,10 +70,10 @@ function message(socket: Socket) {
     messageActionTypes.message.saga.stopTypingMessage,
     ({ username: receiverUsername, phase }: StopTypingMessageAction) => {
       const senderUsername = socket.session?.username;
-      if (phase === TypingMessagePhase.Send && senderUsername) {
+      if (phase === MessagePhase.Send && senderUsername) {
         dispatchQueue(
           receiverUsername,
-          stopTypingMessage(senderUsername, TypingMessagePhase.Receive)
+          stopTypingMessage(senderUsername, MessagePhase.Receive)
         );
       }
     }
