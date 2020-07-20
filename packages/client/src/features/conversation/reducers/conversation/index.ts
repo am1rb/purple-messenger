@@ -5,7 +5,7 @@ import {
   SetConversationListAction,
   messageActionTypes,
   StartTypingMessageAction,
-  TypingMessagePhase,
+  MessagePhase,
   StopTypingMessageAction,
   NewMessageAction,
   MessageOwner,
@@ -45,7 +45,7 @@ function reducer(
       };
     case messageActionTypes.message.saga.startTypingMessage: {
       const startTypingMessageAction = action as StartTypingMessageAction;
-      return startTypingMessageAction.phase === TypingMessagePhase.Send
+      return startTypingMessageAction.phase === MessagePhase.Send
         ? state
         : {
             ...state,
@@ -60,7 +60,7 @@ function reducer(
     }
     case messageActionTypes.message.saga.stopTypingMessage: {
       const stopTypingMessageAction = action as StopTypingMessageAction;
-      return stopTypingMessageAction.phase === TypingMessagePhase.Send
+      return stopTypingMessageAction.phase === MessagePhase.Send
         ? state
         : {
             ...state,
@@ -73,7 +73,7 @@ function reducer(
             ),
           };
     }
-    case messageActionTypes.message.reducer.newMessage: {
+    case messageActionTypes.message.saga.newMessage: {
       const newMessageAction = action as NewMessageAction;
       return {
         ...state,

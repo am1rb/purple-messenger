@@ -5,12 +5,16 @@ import {
   sendMessage,
   StartTypingMessageAction,
   StopTypingMessageAction,
-  TypingMessagePhase,
+  MessagePhase,
   MessageStatus,
   MessageOwner,
+  NewMessageAction,
+  receivedMessageAck,
+  addMessage,
 } from "@purple-messenger/core";
 import { getLastMessageId } from "features/message/selectors";
 import { send } from "features/socket/effects";
+import { getCurrentConversationUsername } from "features/conversation/selectors";
 
 export function* submitMessage({
   receiverUsername,
@@ -31,13 +35,27 @@ export function* submitMessage({
 }
 
 export function* startTypingMessage(action: StartTypingMessageAction) {
-  if(action.phase===TypingMessagePhase.Send) {
+  if(action.phase===MessagePhase.Send) {
     yield call(send, action);
   }
 }
 
 export function* stopTypingMessage(action: StopTypingMessageAction) {
-  if(action.phase===TypingMessagePhase.Send) {
+  if(action.phase===MessagePhase.Send) {
     yield call(send, action);
   }
+}
+
+export function* newMessage({senderUsername, message}: NewMessageAction) {
+  const selectedConversation: string|undefined = yield select(getCurrentConversationUsername);
+
+  if(selectedConversation!==senderUsername) {
+    return;
+  }
+
+  // append to the list if the list is selected
+  yield put(addMessage(message))
+
+  // send the ack to the sender
+  yield call(send, receivedMessageAck(senderUsername, message.id));
 }

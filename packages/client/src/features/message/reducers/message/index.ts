@@ -6,6 +6,7 @@ import {
   SendMessageAction,
   MessageStatus,
   SentMessageAckAction,
+  AddMessageAction,
 } from "@purple-messenger/core";
 import { OrderedMap } from "immutable";
 
@@ -21,7 +22,7 @@ const initialState: MessageState = {
 
 function reducer(
   state = initialState,
-  action: DecreaseLastMessageIdAction
+  action: DecreaseLastMessageIdAction | AddMessageAction
 ): MessageState {
   switch (action.type) {
     case messageActionTypes.message.reducer.decreaseLastMessageId:
@@ -37,17 +38,24 @@ function reducer(
       };
     }
     case messageActionTypes.message.reducer.sentMessageAck: {
-      const sentMessageAck = action as SentMessageAckAction;
+      const sentMessageAckAction = action as SentMessageAckAction;
       return {
         ...state,
         list: state.list.mapEntries(([messageId, message]: [number, Message]) => [
-          messageId===sentMessageAck.tempMessageId ? sentMessageAck.messageId : messageId,
-          messageId===sentMessageAck.tempMessageId ? {
+          messageId===sentMessageAckAction.tempMessageId ? sentMessageAckAction.messageId : messageId,
+          messageId===sentMessageAckAction.tempMessageId ? {
             ...message,
-            id: sentMessageAck.messageId,
+            id: sentMessageAckAction.messageId,
             status: MessageStatus.Sent,
           } : message,
         ])
+      };
+    }
+    case messageActionTypes.message.reducer.addMessage: {
+      const addMessageAction = action as AddMessageAction;
+      return {
+        ...state,
+        list: state.list.set(addMessageAction.message.id, addMessageAction.message),
       };
     }
     case authActionTypes.auth.saga.signOut:
