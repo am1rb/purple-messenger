@@ -4,19 +4,20 @@ const actionTypes = uniqueActionTypes({
   message: {
     reducer: {
       decreaseLastMessageId: '',
-      newMessage: '',
+      addMessage: '',
       clearMessageList: '',
-
+      
       sentMessageAck: '',
       receivedMessageAck: '',
       seenMessageAck: '',
-
+      
       sendMessage: '',
     },
     saga: {
       submitMessage: '',
       startTypingMessage: '',
       stopTypingMessage: '',
+      newMessage: '',
     },
   },
 });

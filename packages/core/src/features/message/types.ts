@@ -22,7 +22,7 @@ export interface Message extends NewMessage {
   receivedAt?: Date;
 }
 
-export enum TypingMessagePhase {
+export enum MessagePhase {
   Send = 0,
   Receive,
 }

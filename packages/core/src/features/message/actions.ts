@@ -1,5 +1,5 @@
 import actionTypes from "./actionTypes";
-import { NewMessage, Message, TypingMessagePhase } from "./types";
+import { NewMessage, Message, MessagePhase } from "./types";
 
 export const submitMessage = (
   receiverUsername: string,
@@ -23,16 +23,22 @@ export const newMessage = (
   receiverUsername: string,
   message: Message
 ) => ({
-  type: actionTypes.message.reducer.newMessage,
+  type: actionTypes.message.saga.newMessage,
   senderUsername,
   receiverUsername,
   message,
 });
 export type NewMessageAction = ReturnType<typeof newMessage>;
 
+export const addMessage = (message: Message) => ({
+  type: actionTypes.message.reducer.addMessage,
+  message,
+});
+export type AddMessageAction = ReturnType<typeof addMessage>;
+
 export const startTypingMessage = (
   username: string,
-  phase = TypingMessagePhase.Send
+  phase = MessagePhase.Send
 ) => ({
   type: actionTypes.message.saga.startTypingMessage,
   username,
@@ -42,7 +48,7 @@ export type StartTypingMessageAction = ReturnType<typeof startTypingMessage>;
 
 export const stopTypingMessage = (
   username: string,
-  phase = TypingMessagePhase.Send
+  phase = MessagePhase.Send
 ) => ({
   type: actionTypes.message.saga.stopTypingMessage,
   username,
@@ -50,7 +56,11 @@ export const stopTypingMessage = (
 });
 export type StopTypingMessageAction = ReturnType<typeof stopTypingMessage>;
 
-export const sentMessageAck = (receiverUsername: string, tempMessageId: number, messageId: number) => ({
+export const sentMessageAck = (
+  receiverUsername: string,
+  tempMessageId: number,
+  messageId: number
+) => ({
   type: actionTypes.message.reducer.sentMessageAck,
   receiverUsername,
   tempMessageId,
@@ -59,19 +69,26 @@ export const sentMessageAck = (receiverUsername: string, tempMessageId: number, 
 export type SentMessageAckAction = ReturnType<typeof sentMessageAck>;
 
 export const receivedMessageAck = (
-  senderUsername: string,
-  messageId: number
+  username: string,
+  messageId: number,
+  phase = MessagePhase.Send
 ) => ({
   type: actionTypes.message.reducer.receivedMessageAck,
-  senderUsername,
+  username,
   messageId,
+  phase,
 });
 export type ReceivedMessageAckAction = ReturnType<typeof receivedMessageAck>;
 
-export const seenMessageAck = (senderUsername: string, messageId: number) => ({
+export const seenMessageAck = (
+  username: string,
+  messageId: number,
+  phase = MessagePhase.Send
+) => ({
   type: actionTypes.message.reducer.seenMessageAck,
-  senderUsername,
+  username,
   messageId,
+  phase,
 });
 export type SeenMessageAckAction = ReturnType<typeof seenMessageAck>;
 
