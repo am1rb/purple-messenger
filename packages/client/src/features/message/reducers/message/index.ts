@@ -58,6 +58,11 @@ function reducer(
         list: state.list.set(addMessageAction.message.id, addMessageAction.message),
       };
     }
+    case messageActionTypes.message.reducer.clearMessageList:
+      return {
+        ...state,
+        list: state.list.clear(),
+      };
     case authActionTypes.auth.saga.signOut:
       return initialState;
     default:

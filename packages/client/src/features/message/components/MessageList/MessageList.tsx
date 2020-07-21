@@ -1,18 +1,27 @@
-import React, { memo } from "react";
+import React, { memo, useEffect } from "react";
 import { Box } from "@material-ui/core";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { getMessageList } from "features/message/selectors";
-import MessageRow from '../MessageRow';
+import MessageRow from "../MessageRow";
+import useConversation from "features/conversation/components/useConversation";
+import { clearMessageList } from "@purple-messenger/core";
 
 function MessageList() {
   const messageList = useSelector(getMessageList);
+  const {username} = useConversation();
+  const dispatch = useDispatch();
 
-  return <Box>
-    {messageList.toArray().map(([id, message]) => (
-      <MessageRow key={id} {...message} />
-    ))}
+  useEffect(() => {
+    dispatch(clearMessageList());
+  }, [username]);
 
-  </Box>;
+  return (
+    <Box>
+      {messageList.toArray().map(([id, message]) => (
+        <MessageRow key={id} {...message} />
+      ))}
+    </Box>
+  );
 }
 
 export default memo(MessageList);
