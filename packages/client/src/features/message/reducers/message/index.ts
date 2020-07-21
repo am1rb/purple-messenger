@@ -7,6 +7,7 @@ import {
   MessageStatus,
   SentMessageAckAction,
   AddMessageAction,
+  ReceivedMessageAckAction,
 } from "@purple-messenger/core";
 import { OrderedMap } from "immutable";
 
@@ -22,7 +23,10 @@ const initialState: MessageState = {
 
 function reducer(
   state = initialState,
-  action: DecreaseLastMessageIdAction | AddMessageAction
+  action:
+    | DecreaseLastMessageIdAction
+    | AddMessageAction
+    | ReceivedMessageAckAction
 ): MessageState {
   switch (action.type) {
     case messageActionTypes.message.reducer.decreaseLastMessageId:
@@ -34,28 +38,40 @@ function reducer(
       const sendMessageAction = action as SendMessageAction;
       return {
         ...state,
-        list: state.list.set(sendMessageAction.message.id, sendMessageAction.message),
+        list: state.list.set(
+          sendMessageAction.message.id,
+          sendMessageAction.message
+        ),
       };
     }
     case messageActionTypes.message.reducer.sentMessageAck: {
       const sentMessageAckAction = action as SentMessageAckAction;
       return {
         ...state,
-        list: state.list.mapEntries(([messageId, message]: [number, Message]) => [
-          messageId===sentMessageAckAction.tempMessageId ? sentMessageAckAction.messageId : messageId,
-          messageId===sentMessageAckAction.tempMessageId ? {
-            ...message,
-            id: sentMessageAckAction.messageId,
-            status: MessageStatus.Sent,
-          } : message,
-        ])
+        list: state.list.mapEntries(
+          ([messageId, message]: [number, Message]) => [
+            messageId === sentMessageAckAction.tempMessageId
+              ? sentMessageAckAction.messageId
+              : messageId,
+            messageId === sentMessageAckAction.tempMessageId
+              ? {
+                  ...message,
+                  id: sentMessageAckAction.messageId,
+                  status: MessageStatus.Sent,
+                }
+              : message,
+          ]
+        ),
       };
     }
     case messageActionTypes.message.reducer.addMessage: {
       const addMessageAction = action as AddMessageAction;
       return {
         ...state,
-        list: state.list.set(addMessageAction.message.id, addMessageAction.message),
+        list: state.list.set(
+          addMessageAction.message.id,
+          addMessageAction.message
+        ),
       };
     }
     case messageActionTypes.message.reducer.clearMessageList:
@@ -63,6 +79,19 @@ function reducer(
         ...state,
         list: state.list.clear(),
       };
+    case messageActionTypes.message.reducer.receivedMessageAck: {
+      const receivedMessageAckAction = action as ReceivedMessageAckAction;
+      return {
+        ...state,
+        list: state.list.update(
+          receivedMessageAckAction.messageId,
+          (message) => ({
+            ...message,
+            status: MessageStatus.Received,
+          })
+        ),
+      };
+    }
     case authActionTypes.auth.saga.signOut:
       return initialState;
     default:
