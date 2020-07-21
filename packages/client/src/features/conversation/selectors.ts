@@ -10,7 +10,7 @@ const matchSelector = createMatchSelector<
 >("/conversation/@:username");
 
 export function getCurrentConversationUsername(state: RouterRootState) {
-  const match = matchSelector(state);
-  console.log('match', match)
-  return match?.params.username;
+  // @TODO: the above match selector does not work correctly
+  const match = window.location.pathname.match(/\/conversation\/@(.*)$/i);
+  return match ? match[1] : undefined;
 }
