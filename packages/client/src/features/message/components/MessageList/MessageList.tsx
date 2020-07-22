@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useRef } from "react";
+import React, { memo, useEffect, useRef, useMemo, useLayoutEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getMessageList } from "features/message/selectors";
 import MessageRow from "../MessageRow";
@@ -13,13 +13,31 @@ function MessageList() {
   const messageListRef = useRef<HTMLDivElement>(null);
   const lastMessageRef = useRef<HTMLDivElement>(null);
   const classes = useStyles();
+  const isAtEndOfScroll = useRef(true);
 
   useEffect(() => {
     dispatch(clearMessageList());
   }, [username]);
 
-  useEffect(() => {
-    lastMessageRef.current?.scrollIntoView({behavior: 'smooth'});
+  isAtEndOfScroll.current = useMemo(() => {
+    const scrollbar = messageListRef.current;
+
+    if(!scrollbar) {
+      return false;
+    }
+
+    if(messages[messages.length-1].id<0) {
+      return true;
+    }
+
+    return scrollbar.offsetHeight + scrollbar.scrollTop >= scrollbar.scrollHeight
+  }, [messages]);
+
+
+  useLayoutEffect(() => {
+    if(isAtEndOfScroll.current) {
+      lastMessageRef.current?.scrollIntoView();
+    }
   }, [messages]);
 
   return (
