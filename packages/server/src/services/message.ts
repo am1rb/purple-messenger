@@ -17,8 +17,9 @@ import {
 import { dispatchQueue, clientDispatchQueue } from "./queue";
 import { dispatch } from "core/helper/client";
 
+let savedMessageId = 1;
+
 function message(socket: Socket) {
-  let savedMessageId = 1;
 
   socket.on(
     messageActionTypes.message.reducer.sendMessage,
