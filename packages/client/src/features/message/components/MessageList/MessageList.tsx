@@ -26,7 +26,8 @@ function MessageList() {
       return false;
     }
 
-    if(messages[messages.length-1].id<0) {
+    const messagesLen = messages.length;
+    if(messagesLen>0 && messages[messagesLen-1].id<0) {
       return true;
     }
 

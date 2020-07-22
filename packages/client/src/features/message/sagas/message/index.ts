@@ -46,16 +46,18 @@ export function* stopTypingMessage(action: StopTypingMessageAction) {
   }
 }
 
-export function* newMessage({senderUsername, message}: NewMessageAction) {
+export function* newMessage({senderUsername, message, receiverUsername}: NewMessageAction) {
   const selectedConversation: string|undefined = yield select(getCurrentConversationUsername);
-
-  if(selectedConversation!==senderUsername) {
-    return;
+console.log('selectedConversation', selectedConversation)
+  if(selectedConversation===senderUsername || selectedConversation===receiverUsername) {
+    
+    // append to the list if the list is selected
+    yield put(addMessage(message))
+  
+    if(selectedConversation===senderUsername) {
+      // send the ack to the sender
+      yield call(send, receivedMessageAck(senderUsername, message.id));
+    }
   }
 
-  // append to the list if the list is selected
-  yield put(addMessage(message))
-
-  // send the ack to the sender
-  yield call(send, receivedMessageAck(senderUsername, message.id));
 }
