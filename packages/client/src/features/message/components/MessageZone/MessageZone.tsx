@@ -11,7 +11,7 @@ interface Props {
 function MessageZone({ className, friendUsername }: Props) {
   return (
     <Box className={className} display="flex" flexDirection="column">
-      <Box flexGrow="1" flexShrink="1" overflow="auto">
+      <Box flexGrow="1" flexShrink="1" overflow="hidden">
         <MessageList />
       </Box>
       <Box flexGrow="0" flexShrink="0" m={1}>
