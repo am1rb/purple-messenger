@@ -13,6 +13,7 @@ import {
   SentMessageAckAction,
   MessageStatus,
   ReceivedMessageAckAction,
+  SeenMessageAckAction,
 } from "@purple-messenger/core";
 
 export interface ConversationState {
@@ -136,6 +137,22 @@ function reducer(
             message: {
               ...conversation.message!,
               status: MessageStatus.Received,
+            },
+          }) : conversation
+        ),
+      };
+    }
+    case messageActionTypes.message.reducer.seenMessageAck: {
+      const seenMessageAck = action as SeenMessageAckAction;
+      return {
+        ...state,
+        list: state.list.update(
+          seenMessageAck.username,
+          conversation => conversation.message?.id===seenMessageAck.messageId ? ({
+            ...conversation,
+            message: {
+              ...conversation.message!,
+              status: MessageStatus.Seen,
             },
           }) : conversation
         ),
