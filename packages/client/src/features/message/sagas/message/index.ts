@@ -11,6 +11,7 @@ import {
   NewMessageAction,
   receivedMessageAck,
   addMessage,
+  SeenMessageAckAction,
 } from "@purple-messenger/core";
 import { getLastMessageId } from "features/message/selectors";
 import { send } from "features/socket/effects";
@@ -41,6 +42,12 @@ export function* startTypingMessage(action: StartTypingMessageAction) {
 }
 
 export function* stopTypingMessage(action: StopTypingMessageAction) {
+  if(action.phase===MessagePhase.Send) {
+    yield call(send, action);
+  }
+}
+
+export function* seenMessageAck(action: SeenMessageAckAction) {
   if(action.phase===MessagePhase.Send) {
     yield call(send, action);
   }
