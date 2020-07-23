@@ -13,6 +13,8 @@ import {
   stopTypingMessage,
   ReceivedMessageAckAction,
   receivedMessageAck,
+  seenMessageAck,
+  SeenMessageAckAction,
 } from "@purple-messenger/core";
 import { dispatchQueue, clientDispatchQueue } from "./queue";
 import { dispatch } from "core/helper/client";
@@ -90,6 +92,19 @@ function message(socket: Socket) {
         dispatchQueue(
           receiverUsername,
           receivedMessageAck(senderUsername, messageId, MessagePhase.Receive)
+        );
+      }
+    }
+  );
+
+  socket.on(
+    messageActionTypes.message.reducer.seenMessageAck,
+    ({ username: receiverUsername, messageId, phase }: SeenMessageAckAction) => {
+      const senderUsername = socket.session?.username;
+      if (phase === MessagePhase.Send && senderUsername) {
+        dispatchQueue(
+          receiverUsername,
+          seenMessageAck(senderUsername, messageId, MessagePhase.Receive)
         );
       }
     }
