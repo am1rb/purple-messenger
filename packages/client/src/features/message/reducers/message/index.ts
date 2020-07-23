@@ -8,6 +8,7 @@ import {
   SentMessageAckAction,
   AddMessageAction,
   ReceivedMessageAckAction,
+  SeenMessageAckAction,
 } from "@purple-messenger/core";
 import { OrderedMap } from "immutable";
 
@@ -88,6 +89,19 @@ function reducer(
           (message) => ({
             ...message,
             status: MessageStatus.Received,
+          })
+        ),
+      };
+    }
+    case messageActionTypes.message.reducer.seenMessageAck: {
+      const receivedMessageAckAction = action as SeenMessageAckAction;
+      return {
+        ...state,
+        list: state.list.update(
+          receivedMessageAckAction.messageId,
+          (message) => ({
+            ...message,
+            status: MessageStatus.Seen,
           })
         ),
       };

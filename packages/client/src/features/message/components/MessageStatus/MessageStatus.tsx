@@ -14,9 +14,10 @@ function MessageStatus({ status }: Props) {
   const classes = useStyles();
   return (
     <span>
-      {status === Status.Pending && <ScheduleIcon fontSize="small" />}
-      {status === Status.Sent && <DoneIcon fontSize="small" />}
-      {status === Status.Received && <DoneAllIcon fontSize="small" />}
+      {status === Status.Pending && <ScheduleIcon fontSize="small" color="action" />}
+      {status === Status.Sent && <DoneIcon fontSize="small" color="action" />}
+      {status === Status.Received && <DoneAllIcon fontSize="small" color="action" />}
+      {status === Status.Seen && <DoneAllIcon fontSize="small" color="primary" />}
     </span>
   );
 }

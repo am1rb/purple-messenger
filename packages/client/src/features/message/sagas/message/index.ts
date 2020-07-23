@@ -48,7 +48,7 @@ export function* stopTypingMessage(action: StopTypingMessageAction) {
 
 export function* newMessage({senderUsername, message, receiverUsername}: NewMessageAction) {
   const selectedConversation: string|undefined = yield select(getCurrentConversationUsername);
-console.log('selectedConversation', selectedConversation)
+  
   if(selectedConversation===senderUsername || selectedConversation===receiverUsername) {
     
     // append to the list if the list is selected
