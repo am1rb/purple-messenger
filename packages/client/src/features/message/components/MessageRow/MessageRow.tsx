@@ -8,10 +8,13 @@ import {
 import MessageStatus from "../MessageStatus";
 import MessageSentAt from "../MessageSentAt";
 import { MessageSeenSensor } from "../MessageSeenSensor";
+import useStyles from './styles';
 
-export type Props = Message;
+export type MessageProps = Message;
 
-function MessageRow({ body, status, owner, sentAt, id }: Props) {
+function MessageRow({ body, status, owner, sentAt, id }: MessageProps) {
+  const classes = useStyles();
+
   const message = (
     <Box
       m={2}
@@ -21,7 +24,7 @@ function MessageRow({ body, status, owner, sentAt, id }: Props) {
     >
       <Card>
         <Box m={1}>
-          <Typography gutterBottom variant="body2">
+          <Typography gutterBottom variant="body2" className={classes.body}>
             {body}
           </Typography>
           <Box display="flex" justifyContent="space-between">
