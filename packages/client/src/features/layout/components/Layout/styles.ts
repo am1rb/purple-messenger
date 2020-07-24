@@ -23,6 +23,7 @@ export default makeStyles((theme: Theme) => ({
   },
   content: {
     flexGrow: 1,
-    flexShrink: 1
+    flexShrink: 1,
+    overflow: 'hidden',
   }
 }));
