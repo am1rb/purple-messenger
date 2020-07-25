@@ -6,4 +6,5 @@ export default makeStyles((theme: Theme) => ({
     backgroundColor: '#292b4b',
     paddingTop: 15,
   },
+  firstName: { color: theme.palette.background.paper },
 }));
