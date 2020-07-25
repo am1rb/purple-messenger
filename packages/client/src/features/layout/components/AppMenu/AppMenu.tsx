@@ -25,7 +25,7 @@ function AppMenu({ className }: Props) {
       <UserAvatar />
       <Box textAlign="center" mt={2}>
         <Typography className={classes.firstName} color="inherit" gutterBottom>Hi, {profile?.firstName}</Typography>
-        <Button color="secondary" onClick={handleSignOut}>signOut</Button>
+        <Button color="secondary" onClick={handleSignOut} variant="outlined" size="small">signOut</Button>
       </Box>
     </div>
   );
