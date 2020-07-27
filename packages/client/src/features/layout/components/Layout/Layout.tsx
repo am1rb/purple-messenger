@@ -1,7 +1,7 @@
 import React, { memo, ReactNode } from 'react';
 import AppMenu from 'features/layout/components/AppMenu';
 import { ClassesType } from 'core/type/general';
-import useStyles from './styles';
+import useStyles from './Layout.styles';
 
 interface Props {
   children: ReactNode;

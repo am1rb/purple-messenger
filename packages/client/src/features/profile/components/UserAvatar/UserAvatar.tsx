@@ -1,9 +1,9 @@
 import React, { memo } from "react";
+import { useSelector } from "react-redux";
 import clsx from "clsx";
 import { Avatar } from "@material-ui/core";
-import { useSelector } from "react-redux";
 import { getProfileInfo } from "features/profile/selectors";
-import useStyles from "./styles";
+import useStyles from "./UserAvatar.styles";
 
 interface Props {
   className?: string;

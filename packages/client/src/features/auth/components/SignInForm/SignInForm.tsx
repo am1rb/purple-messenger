@@ -6,8 +6,8 @@ import UnformTextField from 'components/UnformTextField';
 import { SignInFormContent } from '../../types/formContent';
 import { signIn, setAuthError } from '@purple-messenger/core';
 import { getAuthError } from 'features/auth/selectors';
-import schema from './schema';
-import useStyles from './styles';
+import schema from './SignInForm.schema';
+import useStyles from './SignInForm.styles';
 
 function SignInForm() {
   const classes = useStyles();

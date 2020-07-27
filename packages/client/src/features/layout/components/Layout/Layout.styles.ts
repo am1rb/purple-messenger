@@ -6,7 +6,7 @@ export default makeStyles((theme: Theme) => ({
     alignItems: 'center',
     alignContent: 'center',
     height: '100%',
-    padding: '20px 0'
+    padding: theme.spacing(3, 0)
   },
   container: {
     maxWidth: 1200,

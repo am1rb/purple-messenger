@@ -6,7 +6,7 @@ import MessageStatus from "features/message/components/MessageStatus";
 import MessageSentAt from "features/message/components/MessageSentAt";
 import CardActionArea from "components/CardActionArea";
 import iff from "core/helper/iff";
-import useStyles from "./styles";
+import useStyles from "./ConversationRow.styles";
 
 export interface Props extends Conversation {
   selected: boolean;

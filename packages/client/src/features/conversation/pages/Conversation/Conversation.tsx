@@ -3,7 +3,7 @@ import Layout from 'features/layout/components/Layout';
 import ConversationList from 'features/conversation/components/ConversationList';
 import MessageZone from 'features/message/components/MessageZone';
 import useConversation from 'features/conversation/components/useConversation';
-import useStyles from './styles';
+import useStyles from './Conversation.styles';
 
 function Conversation() {
   const classes = useStyles();

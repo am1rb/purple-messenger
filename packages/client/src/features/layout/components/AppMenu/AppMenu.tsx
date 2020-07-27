@@ -5,7 +5,7 @@ import { Button, Typography, Box } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import { signOut } from "@purple-messenger/core";
 import { getProfileInfo } from "features/profile/selectors";
-import useStyles from "./styles";
+import useStyles from "./AppMenu.styles";
 
 interface Props {
   className: string;

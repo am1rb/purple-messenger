@@ -4,7 +4,7 @@ import { getMessageList } from "features/message/selectors";
 import MessageRow from "../MessageRow";
 import useConversation from "features/conversation/components/useConversation";
 import { clearMessageList } from "@purple-messenger/core";
-import useStyles from './styles';
+import useStyles from './MessageList.styles';
 
 function MessageList() {
   const messages = useSelector(getMessageList);

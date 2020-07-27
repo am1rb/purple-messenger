@@ -4,7 +4,7 @@ export default makeStyles((theme: Theme) => ({
   root: {
     width: 124,
     backgroundColor: '#292b4b',
-    paddingTop: 15,
+    paddingTop: theme.spacing(2),
   },
   firstName: { color: theme.palette.background.paper },
 }));

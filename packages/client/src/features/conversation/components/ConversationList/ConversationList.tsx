@@ -1,5 +1,4 @@
 import React, { memo, useEffect } from "react";
-import clsx from "clsx";
 import { useDispatch, useSelector } from "react-redux";
 import {
   loadConversationList,
@@ -9,7 +8,6 @@ import { Box } from "@material-ui/core";
 import { getConversationList } from "features/conversation/selectors";
 import ConversationRow from "../ConversationRow";
 import useConversation from "../useConversation";
-import useStyles from "./styles";
 
 interface Props {
   className: string;
@@ -17,7 +15,6 @@ interface Props {
 }
 
 function ConversationList({ className, friendUsername }: Props) {
-  const classes = useStyles();
   const dispatch = useDispatch();
   const conversations = useSelector(getConversationList);
 
@@ -29,7 +26,7 @@ function ConversationList({ className, friendUsername }: Props) {
   }, []);
 
   return (
-    <Box className={clsx(classes.root, className)} p={1}>
+    <Box className={className} p={1}>
       {conversations.toArray().map(([, conversation]) => (
         <ConversationRow
           {...conversation}

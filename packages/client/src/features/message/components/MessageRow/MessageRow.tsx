@@ -8,7 +8,7 @@ import {
 import MessageStatus from "../MessageStatus";
 import MessageSentAt from "../MessageSentAt";
 import { MessageSeenSensor } from "../MessageSeenSensor";
-import useStyles from './styles';
+import useStyles from './MessageRow.styles';
 
 export type MessageProps = Message;
 
