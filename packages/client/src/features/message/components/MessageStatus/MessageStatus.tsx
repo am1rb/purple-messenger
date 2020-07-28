@@ -1,15 +1,14 @@
 import React from "react";
-import clsx from "clsx";
 import DoneIcon from "@material-ui/icons/Done";
 import ScheduleIcon from "@material-ui/icons/Schedule";
 import DoneAllIcon from "@material-ui/icons/DoneAll";
 import { MessageStatus as Status } from "@purple-messenger/core";
 
-interface Props {
+interface MessageStatusProps {
   status: Status;
 }
 
-function MessageStatus({ status }: Props) {
+function MessageStatus({ status }: MessageStatusProps) {
   return (
     <span>
       {status === Status.Pending && <ScheduleIcon fontSize="small" color="action" />}
