@@ -13,4 +13,9 @@ describe("The <MessageStatus /> tests", () => {
     const { getByTestId } = render(<MessageStatus status={Status.Sent} />);
     expect(getByTestId("mui-icons-done")).toBeInTheDocument();
   });
+
+  it("Should display schedule icon if the state is received", () => {
+    const { getByTestId } = render(<MessageStatus status={Status.Received} />);
+    expect(getByTestId("mui-icons-done-all")).toBeInTheDocument();
+  });
 });
