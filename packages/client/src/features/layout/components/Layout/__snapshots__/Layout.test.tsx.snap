@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`The <Layout /> tests Should match the snapshot 1`] = `
+<div>
+  <div
+    class="makeStyles-root-1"
+  >
+    <div
+      class="makeStyles-container-2"
+    >
+      <div
+        class="makeStyles-content-4"
+      >
+        layout children
+      </div>
+    </div>
+  </div>
+</div>
+`;
