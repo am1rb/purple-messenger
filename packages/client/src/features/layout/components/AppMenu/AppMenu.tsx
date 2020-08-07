@@ -1,6 +1,6 @@
 import React, { memo, useCallback } from "react";
 import clsx from "clsx";
-import UserAvatar from "features/profile/components/UserAvatar/UserAvatar";
+import UserAvatar from "features/profile/components/UserAvatar";
 import { Button, Typography, Box } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import { signOut } from "@purple-messenger/core";

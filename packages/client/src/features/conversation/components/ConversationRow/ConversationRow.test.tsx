@@ -1,7 +1,7 @@
 import React from "react";
 import { render } from "@testing-library/react";
-import ConversationRow from ".";
 import { AccountStatus } from "@purple-messenger/core";
+import ConversationRow from ".";
 
 jest.mock("features/message/components/MessageStatus");
 jest.mock("features/message/components/MessageSentAt");
