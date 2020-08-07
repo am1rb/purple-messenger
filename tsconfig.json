@@ -29,5 +29,5 @@
       "@purple-messenger/client/*": ["./packages/client/src/*"],
     },
  },
- "exclude": ["node_modules", "packages/**/__tests__"]
+ "exclude": ["node_modules"]
 }
