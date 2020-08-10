@@ -1,8 +1,8 @@
 import React, { memo } from "react";
 import { useSelector } from "react-redux";
 import clsx from "clsx";
-import { Avatar } from "@material-ui/core";
-import { getProfileInfo } from "features/profile/selectors";
+import Avatar from "@material-ui/core/Avatar";
+import { getProfileInfoImage } from "features/profile/selectors";
 import useStyles from "./UserAvatar.styles";
 
 interface Props {
@@ -11,13 +11,10 @@ interface Props {
 
 function UserAvatar({ className }: Props) {
   const classes = useStyles();
-  const profileInfo = useSelector(getProfileInfo);
+  const profileInfoImage = useSelector(getProfileInfoImage);
 
   return (
-    <Avatar
-      className={clsx(classes.root, className)}
-      src={profileInfo ? profileInfo.image : undefined}
-    />
+    <Avatar className={clsx(classes.root, className)} src={profileInfoImage} />
   );
 }
 
