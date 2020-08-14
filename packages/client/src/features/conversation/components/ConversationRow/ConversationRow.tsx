@@ -8,11 +8,16 @@ import CardActionArea from "components/CardActionArea";
 import iff from "core/helper/iff";
 import useStyles from "./ConversationRow.styles";
 
-export interface Props extends Conversation {
+export interface ConversationRowProps extends Conversation {
   selected: boolean;
 }
 
-function ConversationRow({ message, friend, selected, isTyping }: Props) {
+function ConversationRow({
+  message,
+  friend,
+  selected,
+  isTyping,
+}: ConversationRowProps) {
   const classes = useStyles();
 
   return (
@@ -32,7 +37,7 @@ function ConversationRow({ message, friend, selected, isTyping }: Props) {
                   color="textSecondary"
                   gutterBottom
                 >
-                  {message?.owner===MessageOwner.Me && 'You: '}
+                  {message?.owner === MessageOwner.Me && "You: "}
                   {isTyping ? "Typing..." : message?.body || "No message"}
                 </Typography>
               </Box>

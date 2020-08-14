@@ -7,11 +7,10 @@ import {
 import { Box } from "@material-ui/core";
 import { getConversationList } from "features/conversation/selectors";
 import ConversationRow from "../ConversationRow";
-import useConversation from "../useConversation";
 
 interface Props {
   className: string;
-  friendUsername: string|undefined;
+  friendUsername: string | undefined;
 }
 
 function ConversationList({ className, friendUsername }: Props) {
