@@ -3,49 +3,39 @@
 exports[`The <ConversationRow /> tests Should match the snapshot 1`] = `
 <div>
   <div
-    class="MuiPaper-root MuiCard-root makeStyles-root-1 makeStyles-selected-2 MuiPaper-elevation1 MuiPaper-rounded"
+    data-testid="mui-card"
   >
     <div
       data-testid="card-action-area"
     >
       <div
-        class="MuiCardContent-root"
+        data-testid="mui-card-content"
       >
         <div
-          class="MuiBox-root MuiBox-root-3"
+          data-testid="mui-box"
         >
+          <img
+            data-testid="mui-avatar"
+            src=""
+          />
           <div
-            class="MuiAvatar-root MuiAvatar-circle MuiAvatar-colorDefault"
-          >
-            <svg
-              aria-hidden="true"
-              class="MuiSvgIcon-root MuiAvatar-fallback"
-              focusable="false"
-              viewBox="0 0 24 24"
-            >
-              <path
-                d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"
-              />
-            </svg>
-          </div>
-          <div
-            class="MuiBox-root MuiBox-root-4"
+            data-testid="mui-box"
           >
             <div
-              class="MuiBox-root MuiBox-root-5"
+              data-testid="mui-box"
             >
-              <p
-                class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap"
+              <div
+                data-testid="mui-typography"
               >
                 Lydia
                  
                 Guzman
-              </p>
-              <h6
-                class="MuiTypography-root MuiTypography-subtitle2 MuiTypography-colorTextSecondary MuiTypography-noWrap MuiTypography-gutterBottom"
+              </div>
+              <div
+                data-testid="mui-typography"
               >
                 Typing...
-              </h6>
+              </div>
             </div>
           </div>
         </div>
