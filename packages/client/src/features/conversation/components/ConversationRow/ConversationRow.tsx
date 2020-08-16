@@ -6,6 +6,8 @@ import MessageStatus from "features/message/components/MessageStatus";
 import MessageSentAt from "features/message/components/MessageSentAt";
 import CardActionArea from "components/CardActionArea";
 import iff from "core/helper/iff";
+import MessageIsTyping from "features/message/components/MessageIsTyping";
+import ConversationNoMessage from "../ConversationNoMessage";
 import useStyles from "./ConversationRow.styles";
 
 export interface ConversationRowProps extends Conversation {
@@ -38,7 +40,11 @@ function ConversationRow({
                   gutterBottom
                 >
                   {message?.owner === MessageOwner.Me && "You: "}
-                  {isTyping ? "Typing..." : message?.body || "No message"}
+                  {isTyping ? (
+                    <MessageIsTyping />
+                  ) : (
+                    message?.body || <ConversationNoMessage />
+                  )}
                 </Typography>
               </Box>
               {message && (

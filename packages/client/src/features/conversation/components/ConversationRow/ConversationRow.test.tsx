@@ -10,6 +10,8 @@ import ConversationRow, { ConversationRowProps } from ".";
 jest.mock("features/message/components/MessageStatus");
 jest.mock("features/message/components/MessageSentAt");
 jest.mock("components/CardActionArea");
+jest.mock("features/message/components/MessageIsTyping");
+jest.mock("../ConversationNoMessage");
 
 const sharedProps: ConversationRowProps = {
   selected: true,

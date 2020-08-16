@@ -34,7 +34,9 @@ exports[`The <ConversationRow /> tests Should match the snapshot 1`] = `
               <div
                 data-testid="mui-typography"
               >
-                Typing...
+                <span
+                  data-testid="message-is-typing"
+                />
               </div>
             </div>
           </div>
