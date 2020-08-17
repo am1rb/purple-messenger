@@ -52,4 +52,59 @@ describe("The <ConversationRow /> tests", () => {
     expect(getByTestId("message-status")).toBeInTheDocument();
     expect(getByTestId("message-sent-at")).toBeInTheDocument();
   });
+
+  it("Should render <MessageIsTyping /> component properly", () => {
+    const { getByTestId } = render(
+      <ConversationRow
+        {...sharedProps}
+        isTyping
+        message={{
+          id: 1,
+          body: "This is the message body",
+          owner: MessageOwner.Me,
+          sentAt: new Date(),
+          status: MessageStatus.Seen,
+          unreadCount: 1,
+        }}
+      />
+    );
+    expect(getByTestId("message-is-typing")).toBeInTheDocument();
+  });
+
+  it("Should render <ConversationNoMessage /> component properly", () => {
+    const { getByTestId } = render(
+      <ConversationRow
+        {...sharedProps}
+        isTyping={false}
+        message={{
+          id: 1,
+          body: "",
+          owner: MessageOwner.Me,
+          sentAt: new Date(),
+          status: MessageStatus.Seen,
+          unreadCount: 1,
+        }}
+      />
+    );
+    expect(getByTestId("conversation-no-message")).toBeInTheDocument();
+  });
+
+  it("Should render the message body if it is not in typing mode and has a message body", () => {
+    const messageBody = "This is sample message body";
+    const { getByText } = render(
+      <ConversationRow
+        {...sharedProps}
+        isTyping={false}
+        message={{
+          id: 1,
+          body: messageBody,
+          owner: MessageOwner.Me,
+          sentAt: new Date(),
+          status: MessageStatus.Seen,
+          unreadCount: 1,
+        }}
+      />
+    );
+    expect(getByText(messageBody)).toBeInTheDocument();
+  });
 });
