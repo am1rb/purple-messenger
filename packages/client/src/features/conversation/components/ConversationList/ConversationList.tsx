@@ -8,12 +8,15 @@ import { Box } from "@material-ui/core";
 import { getConversationList } from "features/conversation/selectors";
 import ConversationRow from "../ConversationRow";
 
-interface Props {
-  className: string;
-  friendUsername: string | undefined;
+export interface ConversationListProps {
+  className?: string;
+  selectedUsername: string | undefined;
 }
 
-function ConversationList({ className, friendUsername }: Props) {
+function ConversationList({
+  className,
+  selectedUsername,
+}: ConversationListProps) {
   const dispatch = useDispatch();
   const conversations = useSelector(getConversationList);
 
@@ -30,7 +33,7 @@ function ConversationList({ className, friendUsername }: Props) {
         <ConversationRow
           {...conversation}
           key={conversation.id}
-          selected={friendUsername === conversation.friend.username}
+          selected={selectedUsername === conversation.friend.username}
         />
       ))}
     </Box>
