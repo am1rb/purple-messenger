@@ -5,9 +5,11 @@ import { ConnectedRouter } from "connected-react-router";
 import configureStore, { history } from "core/redux/configureStore";
 import { State as RootState } from "core/redux/reducers";
 
+export type InitialStore = Partial<RootState>;
+
 export function renderWithStore(
   ui: React.ReactElement,
-  initStore: Partial<RootState>
+  initStore: InitialStore
 ) {
   const store = configureStore(initStore);
 
