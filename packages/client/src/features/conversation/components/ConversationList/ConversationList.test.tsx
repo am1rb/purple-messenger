@@ -42,22 +42,42 @@ const sharedProps: ConversationListProps = {
   selectedUsername: undefined,
 };
 
+const initialStore: InitialStore = {
+  conversation: {
+    list: OrderedMap(
+      conversations.map((conversation) => [
+        conversation.friend.username,
+        conversation,
+      ])
+    ),
+  },
+};
+
 describe("The <ConversationList /> tests", () => {
   it("Should render rows properly", () => {
-    const store: InitialStore = {
-      conversation: {
-        list: OrderedMap(
-          conversations.map((conversation) => [
-            conversation.friend.username,
-            conversation,
-          ])
-        ),
-      },
-    };
     const { container } = renderWithStore(
       <ConversationList {...sharedProps} />,
-      store
+      initialStore
     );
     expect(container).toMatchSnapshot();
+  });
+
+  it("Should not select any conversation", () => {
+    const { queryByTestId } = renderWithStore(
+      <ConversationList {...sharedProps} />,
+      initialStore
+    );
+    expect(queryByTestId("conversation-row-selected")).not.toBeInTheDocument();
+  });
+
+  it("Should select the first conversation", () => {
+    const { getByTestId } = renderWithStore(
+      <ConversationList
+        {...sharedProps}
+        selectedUsername={conversations[0].friend.username}
+      />,
+      initialStore
+    );
+    expect(getByTestId("conversation-row-selected")).toBeInTheDocument();
   });
 });
