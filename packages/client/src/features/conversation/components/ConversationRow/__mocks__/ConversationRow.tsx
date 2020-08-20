@@ -1,5 +1,13 @@
 import React from "react";
 
-const conversationRow = jest.fn(() => <div data-testid="conversation-row" />);
+export interface ConversationRowProps {
+  selected: boolean;
+}
+
+const conversationRow = jest.fn(({ selected }: ConversationRowProps) => (
+  <div data-testid="conversation-row">
+    {selected && <span data-testid="conversation-row-selected" />}
+  </div>
+));
 
 export default conversationRow;
