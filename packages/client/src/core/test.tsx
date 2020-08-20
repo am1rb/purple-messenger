@@ -11,7 +11,7 @@ export function renderWithStore(
   ui: React.ReactElement,
   initStore: InitialStore
 ) {
-  const store = configureStore(initStore);
+  const store = configureStore(initStore, false);
 
   return render(ui, {
     wrapper: ({ children }) => (

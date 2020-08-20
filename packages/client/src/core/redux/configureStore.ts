@@ -10,16 +10,24 @@ import rootSagas from "./sagas";
 export const history = createBrowserHistory();
 const sagaMiddleware = createSagaMiddleware();
 
-export default function configureStore(preloadedState?: Partial<RootState>) {
+export default function configureStore(
+  preloadedState?: Partial<RootState>,
+  enableSaga = true
+) {
+  const routerMiddlewareResult = routerMiddleware(history);
   const store = createStore(
     rootReducers(history),
     preloadedState,
     composeWithDevTools(
-      applyMiddleware(routerMiddleware(history), sagaMiddleware)
+      enableSaga
+        ? applyMiddleware(routerMiddlewareResult, sagaMiddleware)
+        : applyMiddleware(routerMiddlewareResult)
     )
   );
 
-  sagaMiddleware.run(rootSagas);
+  if (enableSaga) {
+    sagaMiddleware.run(rootSagas);
+  }
 
   return store;
 }
