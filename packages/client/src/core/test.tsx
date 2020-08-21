@@ -4,6 +4,7 @@ import { Provider } from "react-redux";
 import { ConnectedRouter } from "connected-react-router";
 import configureStore, { history } from "core/redux/configureStore";
 import { State as RootState } from "core/redux/reducers";
+export { renderHook } from "@testing-library/react-hooks";
 
 export type InitialStore = Partial<RootState>;
 
