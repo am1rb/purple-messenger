@@ -72,12 +72,14 @@
   ],
   "gitHead": "ff68d54d2ca35787f8b04723b891fe8abbdfade2",
   "devDependencies": {
+    "@testing-library/react-hooks": "^3.4.1",
     "@types/react-redux": "^7.1.9",
     "@types/react-router": "^5.1.8",
     "@types/socket.io-client": "^1.4.33",
     "husky": "^4.2.5",
     "lint-staged": "^10.2.11",
-    "prettier": "^2.0.5"
+    "prettier": "^2.0.5",
+    "react-test-renderer": "^16.13.1"
   },
   "husky": {
     "hooks": {
