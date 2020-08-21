@@ -7,11 +7,10 @@ import {
   startTypingMessage,
   stopTypingMessage,
   submitMessage,
-  decreaseLastMessageId,
 } from "@purple-messenger/core";
 import Unform from "components/Unform";
 import MessageTextField from "../MessageTextField";
-import useConversation from "features/conversation/components/useConversation";
+import useConversation from "features/conversation/components/useConversationInfo";
 import { MessageFormContent } from "features/message/types/formContent";
 
 interface Props {
@@ -25,7 +24,7 @@ function SendMessageForm({ disabled }: Props) {
 
   const handleSubmit = useCallback<SubmitHandler<MessageFormContent>>(
     (data, helpers) => {
-      if (username) {        
+      if (username) {
         dispatch(submitMessage(username, data.message));
       }
       helpers.resetForm();

@@ -2,12 +2,12 @@ import React, { memo } from "react";
 import Layout from "features/layout/components/Layout";
 import ConversationList from "features/conversation/components/ConversationList";
 import MessageZone from "features/message/components/MessageZone";
-import useConversation from "features/conversation/components/useConversation";
+import useConversationInfo from "features/conversation/components/useConversationInfo";
 import useStyles from "./Conversation.styles";
 
 function Conversation() {
   const classes = useStyles();
-  const { username } = useConversation();
+  const { username } = useConversationInfo();
 
   return (
     <Layout classes={{ content: classes.content }}>

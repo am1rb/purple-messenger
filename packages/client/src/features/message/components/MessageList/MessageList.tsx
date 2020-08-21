@@ -1,14 +1,20 @@
-import React, { memo, useEffect, useRef, useMemo, useLayoutEffect } from "react";
+import React, {
+  memo,
+  useEffect,
+  useRef,
+  useMemo,
+  useLayoutEffect,
+} from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getMessageList } from "features/message/selectors";
 import MessageRow from "../MessageRow";
-import useConversation from "features/conversation/components/useConversation";
+import useConversationInfo from "features/conversation/components/useConversationInfo";
 import { clearMessageList } from "@purple-messenger/core";
-import useStyles from './MessageList.styles';
+import useStyles from "./MessageList.styles";
 
 function MessageList() {
   const messages = useSelector(getMessageList);
-  const {username} = useConversation();
+  const { username } = useConversationInfo();
   const dispatch = useDispatch();
   const messageListRef = useRef<HTMLDivElement>(null);
   const lastMessageRef = useRef<HTMLDivElement>(null);
@@ -22,28 +28,29 @@ function MessageList() {
   isAtEndOfScroll.current = useMemo(() => {
     const scrollbar = messageListRef.current;
 
-    if(!scrollbar) {
+    if (!scrollbar) {
       return false;
     }
 
     const messagesLen = messages.length;
-    if(messagesLen>0 && messages[messagesLen-1].id<0) {
+    if (messagesLen > 0 && messages[messagesLen - 1].id < 0) {
       return true;
     }
 
-    return scrollbar.offsetHeight + scrollbar.scrollTop >= scrollbar.scrollHeight
+    return (
+      scrollbar.offsetHeight + scrollbar.scrollTop >= scrollbar.scrollHeight
+    );
   }, [messages]);
 
-
   useLayoutEffect(() => {
-    if(isAtEndOfScroll.current) {
+    if (isAtEndOfScroll.current) {
       lastMessageRef.current?.scrollIntoView();
     }
   }, [messages]);
 
   return (
     <div className={classes.root} ref={messageListRef}>
-      {messages.map(message => (
+      {messages.map((message) => (
         <MessageRow key={message.id} {...message} />
       ))}
       <div ref={lastMessageRef} />
