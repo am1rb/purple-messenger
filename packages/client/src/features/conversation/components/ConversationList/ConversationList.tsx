@@ -29,7 +29,7 @@ function ConversationList({
 
   return (
     <Box className={className} p={1}>
-      {conversations.toArray().map(([, conversation]) => (
+      {conversations.map((conversation) => (
         <ConversationRow
           {...conversation}
           key={conversation.id}
