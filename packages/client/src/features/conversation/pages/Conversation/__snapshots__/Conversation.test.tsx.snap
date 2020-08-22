@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`The <Conversation /> tests Should match the snapshot 1`] = `
+<div>
+  <div
+    data-testid="layout"
+  >
+    <div
+      data-testid="conversation-list"
+      data-username="john"
+    />
+    <div
+      data-testid="message-zone"
+      data-username="john"
+    />
+  </div>
+</div>
+`;
