@@ -2,9 +2,13 @@ import React from "react";
 import { renderWithStore, InitialStore } from "core/test";
 import ConversationList, { ConversationListProps } from "./ConversationList";
 import { OrderedMap } from "immutable";
-import { Conversation, AccountStatus } from "@purple-messenger/core";
+import {
+  Conversation,
+  AccountStatus,
+  loadConversationList,
+  unloadConversationList,
+} from "@purple-messenger/core";
 
-jest.mock("@material-ui/core");
 jest.mock("../ConversationRow");
 
 const conversations: Conversation[] = [
@@ -79,5 +83,15 @@ describe("The <ConversationList /> tests", () => {
       initialStore
     );
     expect(getByTestId("conversation-row-selected")).toBeInTheDocument();
+  });
+
+  it("Should dispatch loadConversationList and unloadConversationList actions properly", () => {
+    const { unmount } = renderWithStore(
+      <ConversationList {...sharedProps} />,
+      initialStore
+    );
+    expect(loadConversationList).toHaveBeenCalled();
+    unmount();
+    expect(unloadConversationList).toHaveBeenCalled();
   });
 });
