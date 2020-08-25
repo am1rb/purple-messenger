@@ -4,10 +4,11 @@ const mockedPurpleMessengerCore = jest.genMockFromModule<
   typeof purpleMessengerCore
 >("@purple-messenger/core");
 
-export const js = 1;
+export const sharedActionMock = jest.fn(() => ({ type: "" }));
 
 module.exports = {
   ...mockedPurpleMessengerCore,
-  loadConversationList: jest.fn(() => ({ type: "" })),
-  unloadConversationList: jest.fn(() => ({ type: "" })),
+  loadConversationList: sharedActionMock,
+  unloadConversationList: sharedActionMock,
+  signOut: sharedActionMock,
 };
