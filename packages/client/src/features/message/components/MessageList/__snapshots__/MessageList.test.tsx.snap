@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`The <MessageList /> tests Should match the snapshot 1`] = `
+<div>
+  <div
+    class="root"
+  >
+    <div
+      data-testid="mock-message-row"
+    />
+    <div
+      data-testid="mock-message-row"
+    />
+    <div
+      data-testid="mock-message-row"
+    />
+    <div />
+  </div>
+</div>
+`;

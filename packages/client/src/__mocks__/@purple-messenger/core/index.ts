@@ -11,4 +11,5 @@ module.exports = {
   loadConversationList: sharedActionMock,
   unloadConversationList: sharedActionMock,
   signOut: sharedActionMock,
+  clearMessageList: sharedActionMock,
 };

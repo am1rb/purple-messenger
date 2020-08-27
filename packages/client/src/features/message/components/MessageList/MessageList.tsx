@@ -6,11 +6,11 @@ import React, {
   useLayoutEffect,
 } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getMessageList } from "features/message/selectors";
-import MessageRow from "../MessageRow";
-import useConversationInfo from "features/conversation/components/useConversationInfo";
 import { clearMessageList } from "@purple-messenger/core";
-import { mustScrollToTheEnd } from "../../helpers";
+import useConversationInfo from "features/conversation/components/useConversationInfo";
+import { getMessageList } from "features/message/selectors";
+import { mustScrollToTheEnd } from "features/message/helpers";
+import MessageRow from "../MessageRow";
 import useStyles from "./MessageList.styles";
 
 function MessageList() {
