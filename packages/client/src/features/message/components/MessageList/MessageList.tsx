@@ -13,7 +13,7 @@ import { mustScrollToTheEnd } from "features/message/helpers";
 import MessageRow from "../MessageRow";
 import useStyles from "./MessageList.styles";
 
-function MessageList() {
+export function MessageList() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const messages = useSelector(getMessageList);
