@@ -10,40 +10,29 @@ import { getMessageList } from "features/message/selectors";
 import MessageRow from "../MessageRow";
 import useConversationInfo from "features/conversation/components/useConversationInfo";
 import { clearMessageList } from "@purple-messenger/core";
+import { mustScrollToTheEnd } from "../../helpers";
 import useStyles from "./MessageList.styles";
 
 function MessageList() {
+  const classes = useStyles();
+  const dispatch = useDispatch();
   const messages = useSelector(getMessageList);
   const { username } = useConversationInfo();
-  const dispatch = useDispatch();
   const messageListRef = useRef<HTMLDivElement>(null);
   const lastMessageRef = useRef<HTMLDivElement>(null);
-  const classes = useStyles();
-  const isAtEndOfScroll = useRef(true);
+  const needScroll = useRef(true);
 
   useEffect(() => {
     dispatch(clearMessageList());
   }, [username]);
 
-  isAtEndOfScroll.current = useMemo(() => {
+  needScroll.current = useMemo(() => {
     const scrollbar = messageListRef.current;
-
-    if (!scrollbar) {
-      return false;
-    }
-
-    const messagesLen = messages.length;
-    if (messagesLen > 0 && messages[messagesLen - 1].id < 0) {
-      return true;
-    }
-
-    return (
-      scrollbar.offsetHeight + scrollbar.scrollTop >= scrollbar.scrollHeight
-    );
+    return scrollbar ? mustScrollToTheEnd(scrollbar, messages) : false;
   }, [messages]);
 
   useLayoutEffect(() => {
-    if (isAtEndOfScroll.current) {
+    if (needScroll.current) {
       lastMessageRef.current?.scrollIntoView();
     }
   }, [messages]);
