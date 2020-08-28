@@ -1,41 +1,24 @@
-import React, {
-  memo,
-  useEffect,
-  useRef,
-  useMemo,
-  useLayoutEffect,
-} from "react";
+import React, { memo, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { clearMessageList } from "@purple-messenger/core";
-import useConversationInfo from "features/conversation/components/useConversationInfo";
 import { getMessageList } from "features/message/selectors";
-import { mustScrollToTheEnd } from "features/message/helpers";
+import useMessageListScroll from "../useMessageListScroll";
 import MessageRow from "../MessageRow";
 import useStyles from "./MessageList.styles";
 
-export function MessageList() {
+export interface MessageListProps {
+  username: string | undefined;
+}
+
+function MessageList({ username }: MessageListProps) {
   const classes = useStyles();
   const dispatch = useDispatch();
   const messages = useSelector(getMessageList);
-  const { username } = useConversationInfo();
-  const messageListRef = useRef<HTMLDivElement>(null);
-  const lastMessageRef = useRef<HTMLDivElement>(null);
-  const needScroll = useRef(true);
+  const { messageListRef, lastMessageRef } = useMessageListScroll(messages);
 
   useEffect(() => {
     dispatch(clearMessageList());
   }, [username]);
-
-  needScroll.current = useMemo(() => {
-    const scrollbar = messageListRef.current;
-    return scrollbar ? mustScrollToTheEnd(scrollbar, messages) : false;
-  }, [messages]);
-
-  useLayoutEffect(() => {
-    if (needScroll.current) {
-      lastMessageRef.current?.scrollIntoView();
-    }
-  }, [messages]);
 
   return (
     <div className={classes.root} ref={messageListRef}>
