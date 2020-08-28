@@ -10,13 +10,10 @@ import ConversationRow from "../ConversationRow";
 
 export interface ConversationListProps {
   className?: string;
-  selectedUsername: string | undefined;
+  username: string | undefined;
 }
 
-function ConversationList({
-  className,
-  selectedUsername,
-}: ConversationListProps) {
+function ConversationList({ className, username }: ConversationListProps) {
   const dispatch = useDispatch();
   const conversations = useSelector(getConversationList);
 
@@ -33,7 +30,7 @@ function ConversationList({
         <ConversationRow
           {...conversation}
           key={conversation.id}
-          selected={selectedUsername === conversation.friend.username}
+          selected={username === conversation.friend.username}
         />
       ))}
     </Box>

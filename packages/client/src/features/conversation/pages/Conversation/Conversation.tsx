@@ -13,9 +13,9 @@ function Conversation() {
     <Layout classes={{ content: classes.content }}>
       <ConversationList
         className={classes.conversationList}
-        selectedUsername={username}
+        username={username}
       />
-      <MessageZone className={classes.messageZone} friendUsername={username} />
+      <MessageZone className={classes.messageZone} username={username} />
     </Layout>
   );
 }

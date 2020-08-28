@@ -43,7 +43,7 @@ const conversations: Conversation[] = [
 ];
 
 const sharedProps: ConversationListProps = {
-  selectedUsername: undefined,
+  username: undefined,
 };
 
 const initialStore: InitialStore = {
@@ -78,7 +78,7 @@ describe("The <ConversationList /> tests", () => {
     const { getByTestId } = renderWithStore(
       <ConversationList
         {...sharedProps}
-        selectedUsername={conversations[0].friend.username}
+        username={conversations[0].friend.username}
       />,
       initialStore
     );

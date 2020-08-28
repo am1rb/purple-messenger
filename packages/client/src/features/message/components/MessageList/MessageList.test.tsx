@@ -2,12 +2,10 @@ import React from "react";
 import { OrderedMap } from "immutable";
 import { renderWithStore, InitialStore } from "core/test";
 import { Message, MessageOwner, MessageStatus } from "@purple-messenger/core";
-import useConversationInfo from "features/conversation/components/useConversationInfo";
 import { clearMessageList } from "@purple-messenger/core";
-import { MessageList } from "./MessageList";
+import MessageList from "./MessageList";
 
 jest.mock("../MessageRow");
-jest.mock("features/conversation/components/useConversationInfo");
 
 const messages: Message[] = [
   {
@@ -41,23 +39,24 @@ const initStore: InitialStore = {
 };
 
 describe("The <MessageList /> tests", () => {
-  beforeEach(() => {
-    const username = "john";
-    (useConversationInfo as jest.Mock).mockReturnValue({ username });
-  });
   afterEach(() => jest.clearAllMocks());
 
   it("Should match the snapshot", () => {
-    const { container } = renderWithStore(<MessageList />, initStore);
+    const { container } = renderWithStore(
+      <MessageList username="john" />,
+      initStore
+    );
     expect(container).toMatchSnapshot();
   });
 
   it("Should call clearMessageList when the username prop is changed", () => {
-    const { rerender } = renderWithStore(<MessageList />, initStore);
+    const { rerender } = renderWithStore(
+      <MessageList username="john" />,
+      initStore
+    );
     expect(clearMessageList).toHaveBeenCalledTimes(1);
 
-    (useConversationInfo as jest.Mock).mockReturnValue({ username: "sara" });
-    rerender(<MessageList />);
+    rerender(<MessageList username="sara" />);
 
     expect(clearMessageList).toHaveBeenCalledTimes(2);
   });
