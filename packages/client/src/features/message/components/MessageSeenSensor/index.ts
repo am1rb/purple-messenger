@@ -1,1 +1,1 @@
-export { default as MessageSeenSensor } from "./MessageSeenSensor";
+export { default } from "./MessageSeenSensor";

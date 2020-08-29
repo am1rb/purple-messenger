@@ -1,14 +1,10 @@
 import React, { memo } from "react";
 import { Box, Card, Typography } from "@material-ui/core";
-import {
-  Message,
-  MessageOwner,
-  MessageStatus as MessageStatusEnum,
-} from "@purple-messenger/core";
+import { Message, MessageOwner } from "@purple-messenger/core";
 import MessageStatus from "../MessageStatus";
 import MessageSentAt from "../MessageSentAt";
-import { MessageSeenSensor } from "../MessageSeenSensor";
-import useStyles from './MessageRow.styles';
+import MessageSeenSensor from "../MessageSeenSensor";
+import useStyles from "./MessageRow.styles";
 
 export type MessageProps = Message;
 
