@@ -4,7 +4,7 @@ import { Message, MessageStatus, seenMessageAck } from "@purple-messenger/core";
 import VisibilitySensor from "react-visibility-sensor";
 import useConversationInfo from "features/conversation/components/useConversationInfo";
 
-interface MessageSeenSensorProps extends Pick<Message, "status"> {
+export interface MessageSeenSensorProps extends Pick<Message, "status"> {
   messageId: Message["id"];
   children: React.ReactNode;
 }
