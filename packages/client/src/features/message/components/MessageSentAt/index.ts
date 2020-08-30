@@ -1,1 +1,2 @@
-export { default } from './MessageSentAt';
+export { default } from "./MessageSentAt";
+export * from "./MessageSentAt";
