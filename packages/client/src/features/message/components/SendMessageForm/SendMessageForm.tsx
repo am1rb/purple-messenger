@@ -13,11 +13,11 @@ import MessageTextField from "../MessageTextField";
 import useConversation from "features/conversation/components/useConversationInfo";
 import { MessageFormContent } from "features/message/types/formContent";
 
-interface Props {
+export interface SendMessageFormProps {
   disabled: boolean;
 }
 
-function SendMessageForm({ disabled }: Props) {
+function SendMessageForm({ disabled }: SendMessageFormProps) {
   const dispatch = useDispatch();
   const { username } = useConversation();
   const buttonRef = useRef<HTMLButtonElement>(null);
