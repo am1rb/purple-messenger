@@ -3,8 +3,8 @@ import { Box } from "@material-ui/core";
 import SendMessageForm from "../SendMessageForm";
 import MessageList, { MessageListProps } from "../MessageList";
 
-interface MessageZoneProps extends MessageListProps {
-  className: string;
+export interface MessageZoneProps extends MessageListProps {
+  className?: string;
 }
 
 function MessageZone({ className, username }: MessageZoneProps) {
