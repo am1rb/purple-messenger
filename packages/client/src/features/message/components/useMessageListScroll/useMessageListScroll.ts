@@ -8,8 +8,8 @@ function useMessageListScroll(messages: Message[]) {
   const needScroll = useRef(true);
 
   needScroll.current = useMemo(() => {
-    const scrollbar = messageListRef.current;
-    return scrollbar ? mustScrollToTheEnd(scrollbar, messages) : false;
+    const scrollBar = messageListRef.current;
+    return scrollBar ? mustScrollToTheEnd(scrollBar, messages) : false;
   }, [messages]);
 
   useLayoutEffect(() => {
