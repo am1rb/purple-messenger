@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`The <UnformTextField /> tests Should match the snapshot 1`] = `
+<div>
+  <textarea
+    data-testid="mock-unform-text-field"
+    name="field-name"
+  />
+</div>
+`;

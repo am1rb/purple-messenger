@@ -1,10 +1,11 @@
 import React, { useRef, useCallback } from "react";
 import { debounce } from "throttle-debounce";
 import UnformTextField, {
-  Props as UnformTextFieldProps,
+  UnformTextFieldProps,
 } from "components/UnformTextField";
 
-interface Props extends Omit<UnformTextFieldProps, "multiline" | "fullWidth"> {
+export interface MessageTextFieldProps
+  extends Omit<UnformTextFieldProps, "multiline" | "fullWidth"> {
   onStartTyping?: () => void;
   onStopTyping?: () => void;
   onEnter?: () => void;
@@ -19,7 +20,7 @@ function MessageTextField({
   onChange,
   onKeyDown,
   ...other
-}: Props) {
+}: MessageTextFieldProps) {
   const isTyping = useRef(false);
   const handleStartTyping = useCallback(
     debounce(detectTypeTime, true, () => {
