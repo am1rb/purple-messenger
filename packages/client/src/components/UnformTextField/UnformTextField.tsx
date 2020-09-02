@@ -1,18 +1,18 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect } from "react";
 import TextField, {
   TextFieldProps,
-  StandardTextFieldProps
-} from '@material-ui/core/TextField';
-import { useField } from '@rocketseat/unform';
+  StandardTextFieldProps,
+} from "@material-ui/core/TextField";
+import { useField } from "@rocketseat/unform";
 
-export type Props = Omit<
+export type UnformTextFieldProps = Omit<
   TextFieldProps,
-  'name' | 'inputRef' | 'defaultValue' | 'defaultChecked'
+  "name" | "inputRef" | "defaultValue" | "defaultChecked"
 > & {
   name: string;
 };
 
-function UnformTextField({ name, helperText, ...other }: Props) {
+function UnformTextField({ name, helperText, ...other }: UnformTextFieldProps) {
   const ref = useRef();
   const { fieldName, registerField, defaultValue, error } = useField(name);
 
@@ -20,10 +20,10 @@ function UnformTextField({ name, helperText, ...other }: Props) {
     registerField({
       name: fieldName,
       ref: ref.current,
-      path: 'value',
+      path: "value",
       clearValue: (inputRef: HTMLInputElement) => {
-        inputRef.value = '';
-      }
+        inputRef.value = "";
+      },
     });
   }, [ref.current, fieldName]); // eslint-disable-line
 
