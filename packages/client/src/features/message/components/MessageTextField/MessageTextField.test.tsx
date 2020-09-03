@@ -34,10 +34,15 @@ describe("The <UnformTextField /> tests", () => {
     await wait(() => expect(handleStopTyping).toHaveBeenCalled());
   });
 
-  it("Should call onEnter properly", () => {
+  it("Should call onEnter properly and then call onStopTyping after that", () => {
     const handleEnter = jest.fn();
+    const handleStopTyping = jest.fn();
     const { getByTestId } = render(
-      <MessageTextField {...sharedProps} onEnter={handleEnter} />
+      <MessageTextField
+        {...sharedProps}
+        onEnter={handleEnter}
+        onStopTyping={handleStopTyping}
+      />
     );
 
     const input = getByTestId("mock-unform-text-field");
@@ -46,5 +51,27 @@ describe("The <UnformTextField /> tests", () => {
     fireEvent.keyDown(input, { key: "Enter", keyCode: 13 });
 
     expect(handleEnter).toHaveBeenCalled();
+    expect(handleStopTyping).toHaveBeenCalled();
+  });
+
+  it("Should call onChange, onStartTyping, and onStopTyping properly", async () => {
+    const handleStartTyping = jest.fn();
+    const handleStopTyping = jest.fn();
+    const handleChange = jest.fn();
+
+    const { getByTestId } = render(
+      <MessageTextField
+        {...sharedProps}
+        onStartTyping={handleStartTyping}
+        onStopTyping={handleStopTyping}
+        onChange={handleChange}
+      />
+    );
+
+    userEvent.type(getByTestId("mock-unform-text-field"), "Hello World");
+
+    expect(handleChange).toHaveBeenCalled();
+    expect(handleStartTyping).toHaveBeenCalled();
+    await wait(() => expect(handleStopTyping).toHaveBeenCalled());
   });
 });
