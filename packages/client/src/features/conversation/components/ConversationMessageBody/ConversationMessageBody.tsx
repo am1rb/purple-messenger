@@ -5,7 +5,7 @@ export interface ConversationMessageBodyProps {
 }
 
 function ConversationMessageBody({ children }: ConversationMessageBodyProps) {
-  return children;
+  return <>{children}</>;
 }
 
 export default ConversationMessageBody;
