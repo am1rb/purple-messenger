@@ -4,8 +4,8 @@ interface CardActionAreaProps {
   children: React.ReactNode;
 }
 
-const cardActionArea = jest.fn(({ children }: CardActionAreaProps) => (
-  <div data-testid="card-action-area">{children}</div>
-));
+function CardActionArea({ children }: CardActionAreaProps) {
+  return <div data-testid="mock-card-action-area">{children}</div>;
+}
 
-export default cardActionArea;
+export default CardActionArea;

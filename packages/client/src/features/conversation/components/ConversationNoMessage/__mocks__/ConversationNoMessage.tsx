@@ -1,7 +1,7 @@
 import React from "react";
 
-function conversationNoMessage() {
-  return <span data-testid="conversation-no-message" />;
+function ConversationNoMessage() {
+  return <span data-testid="mock-conversation-no-message" />;
 }
 
-export default conversationNoMessage;
+export default ConversationNoMessage;

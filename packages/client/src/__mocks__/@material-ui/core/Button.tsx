@@ -5,10 +5,12 @@ export interface ButtonProps {
   children: React.ReactNode;
 }
 
-const muiButton = jest.fn(({ onClick, children }: ButtonProps) => (
-  <div data-testid="mui-button" onClick={onClick}>
-    {children}
-  </div>
-));
+function MuiButton({ onClick, children }: ButtonProps) {
+  return (
+    <div data-testid="mock-mui-button" onClick={onClick}>
+      {children}
+    </div>
+  );
+}
 
-export default muiButton;
+export default MuiButton;

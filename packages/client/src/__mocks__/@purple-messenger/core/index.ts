@@ -13,4 +13,6 @@ module.exports = {
   signOut: sharedActionMock,
   clearMessageList: sharedActionMock,
   seenMessageAck: sharedActionMock,
+  start: sharedActionMock,
+  shutdown: sharedActionMock,
 };

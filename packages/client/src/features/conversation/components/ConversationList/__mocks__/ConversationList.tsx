@@ -4,10 +4,13 @@ interface ConversationListProps {
   selectedUsername: string | undefined;
 }
 
-const conversationList = jest.fn(
-  ({ selectedUsername }: ConversationListProps) => (
-    <div data-testid="conversation-list" data-username={selectedUsername} />
-  )
-);
+function ConversationList({ selectedUsername }: ConversationListProps) {
+  return (
+    <div
+      data-testid="mock-conversation-list"
+      data-username={selectedUsername}
+    />
+  );
+}
 
-export default conversationList;
+export default ConversationList;

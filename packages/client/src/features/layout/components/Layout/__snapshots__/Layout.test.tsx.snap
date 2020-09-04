@@ -3,13 +3,13 @@
 exports[`The <Layout /> tests Should match the snapshot 1`] = `
 <div>
   <div
-    class="makeStyles-root-1"
+    class="root"
   >
     <div
-      class="makeStyles-container-2"
+      class="container"
     >
       <div
-        class="makeStyles-content-4"
+        class="content"
       >
         layout children
       </div>

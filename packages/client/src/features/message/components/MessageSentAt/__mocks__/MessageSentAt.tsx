@@ -1,5 +1,7 @@
 import React from "react";
 
-const messageSentAt = jest.fn(() => <span data-testid="message-sent-at" />);
+function MessageSentAt() {
+  return <span data-testid="mock-message-sent-at" />;
+}
 
-export default messageSentAt;
+export default MessageSentAt;

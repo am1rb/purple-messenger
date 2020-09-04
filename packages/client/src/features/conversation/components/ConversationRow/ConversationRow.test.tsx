@@ -12,6 +12,7 @@ jest.mock("features/message/components/MessageSentAt");
 jest.mock("components/CardActionArea");
 jest.mock("features/message/components/MessageIsTyping");
 jest.mock("../ConversationNoMessage");
+jest.mock("../ConversationMessageBody");
 
 const sharedProps: ConversationRowProps = {
   selected: true,
@@ -49,8 +50,8 @@ describe("The <ConversationRow /> tests", () => {
         }}
       />
     );
-    expect(getByTestId("message-status")).toBeInTheDocument();
-    expect(getByTestId("message-sent-at")).toBeInTheDocument();
+    expect(getByTestId("mock-message-status")).toBeInTheDocument();
+    expect(getByTestId("mock-message-sent-at")).toBeInTheDocument();
   });
 
   it("Should render <MessageIsTyping /> component properly", () => {
@@ -68,7 +69,7 @@ describe("The <ConversationRow /> tests", () => {
         }}
       />
     );
-    expect(getByTestId("message-is-typing")).toBeInTheDocument();
+    expect(getByTestId("mock-message-is-typing")).toBeInTheDocument();
   });
 
   it("Should render <ConversationNoMessage /> component properly", () => {
@@ -86,12 +87,12 @@ describe("The <ConversationRow /> tests", () => {
         }}
       />
     );
-    expect(getByTestId("conversation-no-message")).toBeInTheDocument();
+    expect(getByTestId("mock-conversation-no-message")).toBeInTheDocument();
   });
 
   it("Should render the message body if it is not in typing mode and has a message body", () => {
     const messageBody = "This is sample message body";
-    const { getByText } = render(
+    const { getByTestId } = render(
       <ConversationRow
         {...sharedProps}
         isTyping={false}
@@ -105,6 +106,6 @@ describe("The <ConversationRow /> tests", () => {
         }}
       />
     );
-    expect(getByText(messageBody)).toBeInTheDocument();
+    expect(getByTestId("mock-conversation-message-body")).toBeInTheDocument();
   });
 });

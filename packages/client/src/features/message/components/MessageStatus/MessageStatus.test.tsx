@@ -6,21 +6,21 @@ import MessageStatus from "./MessageStatus";
 describe("The <MessageStatus /> tests", () => {
   it("Should display schedule icon if the state is pending", () => {
     const { getByTestId } = render(<MessageStatus status={Status.Pending} />);
-    expect(getByTestId("mui-icons-schedule")).toBeInTheDocument();
+    expect(getByTestId("mock-mui-icons-schedule")).toBeInTheDocument();
   });
 
   it("Should display schedule icon if the state is sent", () => {
     const { getByTestId } = render(<MessageStatus status={Status.Sent} />);
-    expect(getByTestId("mui-icons-done")).toBeInTheDocument();
+    expect(getByTestId("mock-mui-icons-done")).toBeInTheDocument();
   });
 
   it("Should display schedule icon if the state is received", () => {
     const { getByTestId } = render(<MessageStatus status={Status.Received} />);
-    expect(getByTestId("mui-icons-done-all")).toBeInTheDocument();
+    expect(getByTestId("mock-mui-icons-done-all")).toBeInTheDocument();
   });
 
   it("Should display schedule icon if the state is seen", () => {
     const { getByTestId } = render(<MessageStatus status={Status.Seen} />);
-    expect(getByTestId("mui-icons-done-all")).toBeInTheDocument();
+    expect(getByTestId("mock-mui-icons-done-all")).toBeInTheDocument();
   });
 });

@@ -71,7 +71,9 @@ describe("The <ConversationList /> tests", () => {
       <ConversationList {...sharedProps} />,
       initialStore
     );
-    expect(queryByTestId("conversation-row-selected")).not.toBeInTheDocument();
+    expect(
+      queryByTestId("mock-conversation-row-selected")
+    ).not.toBeInTheDocument();
   });
 
   it("Should select the first conversation", () => {
@@ -82,7 +84,7 @@ describe("The <ConversationList /> tests", () => {
       />,
       initialStore
     );
-    expect(getByTestId("conversation-row-selected")).toBeInTheDocument();
+    expect(getByTestId("mock-conversation-row-selected")).toBeInTheDocument();
   });
 
   it("Should dispatch loadConversationList and unloadConversationList actions properly", () => {

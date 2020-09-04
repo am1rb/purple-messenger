@@ -1,5 +1,7 @@
 import React from "react";
 
-const muiSchedule = jest.fn(() => <span data-testid="mui-icons-schedule" />);
+function MuiSchedule() {
+  return <span data-testid="mock-mui-icons-schedule" />;
+}
 
-export default muiSchedule;
+export default MuiSchedule;

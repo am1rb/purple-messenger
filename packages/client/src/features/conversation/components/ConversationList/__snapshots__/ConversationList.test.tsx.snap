@@ -3,13 +3,13 @@
 exports[`The <ConversationList /> tests Should render rows properly 1`] = `
 <div>
   <div
-    data-testid="mui-box"
+    data-testid="mock-mui-box"
   >
     <div
-      data-testid="conversation-row"
+      data-testid="mock-conversation-row"
     />
     <div
-      data-testid="conversation-row"
+      data-testid="mock-conversation-row"
     />
   </div>
 </div>

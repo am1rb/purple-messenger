@@ -8,6 +8,7 @@ import CardActionArea from "components/CardActionArea";
 import iff from "core/helper/iff";
 import MessageIsTyping from "features/message/components/MessageIsTyping";
 import ConversationNoMessage from "../ConversationNoMessage";
+import ConversationMessageBody from "../ConversationMessageBody";
 import useStyles from "./ConversationRow.styles";
 
 export interface ConversationRowProps extends Conversation {
@@ -42,8 +43,12 @@ function ConversationRow({
                   {message?.owner === MessageOwner.Me && "You: "}
                   {isTyping ? (
                     <MessageIsTyping />
+                  ) : message?.body ? (
+                    <ConversationMessageBody>
+                      {message?.body}
+                    </ConversationMessageBody>
                   ) : (
-                    message?.body || <ConversationNoMessage />
+                    <ConversationNoMessage />
                   )}
                 </Typography>
               </Box>

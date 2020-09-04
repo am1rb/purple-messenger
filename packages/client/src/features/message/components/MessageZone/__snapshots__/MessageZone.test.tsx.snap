@@ -3,17 +3,17 @@
 exports[`The <MessageZone /> tests Should match the snapshot 1`] = `
 <div>
   <div
-    data-testid="mui-box"
+    data-testid="mock-mui-box"
   >
     <div
-      data-testid="mui-box"
+      data-testid="mock-mui-box"
     >
       <div
         data-testid="mock-message-list"
       />
     </div>
     <div
-      data-testid="mui-box"
+      data-testid="mock-mui-box"
     >
       <form
         data-disabled="false"

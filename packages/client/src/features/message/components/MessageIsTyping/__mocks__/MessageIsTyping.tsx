@@ -1,7 +1,7 @@
 import React from "react";
 
-function messageIsTyping() {
-  return <span data-testid="message-is-typing" />;
+function MessageIsTyping() {
+  return <span data-testid="mock-message-is-typing" />;
 }
 
-export default messageIsTyping;
+export default MessageIsTyping;

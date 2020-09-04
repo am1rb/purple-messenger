@@ -12,13 +12,16 @@ interface UnformTextFieldProps extends TagProps {
   fullWidth?: boolean;
 }
 
-const unformTextField = jest.fn(
-  ({ multiline, fullWidth, ...other }: UnformTextFieldProps) =>
-    multiline ? (
-      <textarea data-testid="mock-unform-text-field" {...other} />
-    ) : (
-      <input data-testid="mock-unform-text-field" {...other} />
-    )
-);
+function UnformTextField({
+  multiline,
+  fullWidth,
+  ...other
+}: UnformTextFieldProps) {
+  return multiline ? (
+    <textarea data-testid="mock-unform-text-field" {...other} />
+  ) : (
+    <input data-testid="mock-unform-text-field" {...other} />
+  );
+}
 
-export default unformTextField;
+export default UnformTextField;

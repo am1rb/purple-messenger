@@ -4,8 +4,8 @@ interface LayoutProps {
   children: React.ReactNode;
 }
 
-const layout = jest.fn(({ children }: LayoutProps) => (
-  <div data-testid="layout">{children}</div>
-));
+function Layout({ children }: LayoutProps) {
+  return <div data-testid="mock-layout">{children}</div>;
+}
 
-export default layout;
+export default Layout;

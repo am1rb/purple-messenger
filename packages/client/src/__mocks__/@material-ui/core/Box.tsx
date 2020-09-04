@@ -4,8 +4,8 @@ export interface BoxProps {
   children: React.ReactNode;
 }
 
-const muiBox = jest.fn(({ children }: BoxProps) => (
-  <div data-testid="mui-box">{children}</div>
-));
+function MuiBox({ children }: BoxProps) {
+  return <div data-testid="mock-mui-box">{children}</div>;
+}
 
-export default muiBox;
+export default MuiBox;

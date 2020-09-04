@@ -6,20 +6,20 @@ exports[`The <AppMenu /> tests Should match the snapshot 1`] = `
     class="root"
   >
     <img
-      data-testid="mui-avatar"
+      data-testid="mock-mui-avatar"
       src="https://picsum.photos/200"
     />
     <div
-      data-testid="mui-box"
+      data-testid="mock-mui-box"
     >
       <div
-        data-testid="mui-typography"
+        data-testid="mock-mui-typography"
       >
         Hi, 
         Logan
       </div>
       <div
-        data-testid="mui-button"
+        data-testid="mock-mui-button"
       >
         signOut
       </div>

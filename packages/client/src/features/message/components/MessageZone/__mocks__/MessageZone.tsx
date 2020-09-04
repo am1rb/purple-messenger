@@ -4,8 +4,8 @@ interface MessageZoneProps {
   friendUsername: string | undefined;
 }
 
-const messageZone = jest.fn(({ friendUsername }: MessageZoneProps) => (
-  <div data-testid="message-zone" data-username={friendUsername} />
-));
+function MessageZone({ friendUsername }: MessageZoneProps) {
+  return <div data-testid="mock-message-zone" data-username={friendUsername} />;
+}
 
-export default messageZone;
+export default MessageZone;

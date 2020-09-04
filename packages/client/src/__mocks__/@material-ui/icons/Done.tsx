@@ -1,5 +1,7 @@
 import React from "react";
 
-const muiDone = jest.fn(() => <span data-testid="mui-icons-done" />);
+function MuiDone() {
+  return <span data-testid="mock-mui-icons-done" />;
+}
 
-export default muiDone;
+export default MuiDone;

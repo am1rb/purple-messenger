@@ -4,10 +4,12 @@ export interface ConversationRowProps {
   selected: boolean;
 }
 
-const conversationRow = jest.fn(({ selected }: ConversationRowProps) => (
-  <div data-testid="conversation-row">
-    {selected && <span data-testid="conversation-row-selected" />}
-  </div>
-));
+function ConversationRow({ selected }: ConversationRowProps) {
+  return (
+    <div data-testid="mock-conversation-row">
+      {selected && <span data-testid="mock-conversation-row-selected" />}
+    </div>
+  );
+}
 
-export default conversationRow;
+export default ConversationRow;

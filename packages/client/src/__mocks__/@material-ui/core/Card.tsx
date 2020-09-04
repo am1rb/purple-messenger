@@ -4,8 +4,8 @@ export interface CardProps {
   children: React.ReactNode;
 }
 
-const muiCard = jest.fn(({ children }: CardProps) => (
-  <div data-testid="mui-card">{children}</div>
-));
+function MuiCard({ children }: CardProps) {
+  return <div data-testid="mock-mui-card">{children}</div>;
+}
 
-export default muiCard;
+export default MuiCard;

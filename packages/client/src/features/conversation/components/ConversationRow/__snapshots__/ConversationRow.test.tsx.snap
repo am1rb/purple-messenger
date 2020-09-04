@@ -3,39 +3,39 @@
 exports[`The <ConversationRow /> tests Should match the snapshot 1`] = `
 <div>
   <div
-    data-testid="mui-card"
+    data-testid="mock-mui-card"
   >
     <div
-      data-testid="card-action-area"
+      data-testid="mock-card-action-area"
     >
       <div
-        data-testid="mui-card-content"
+        data-testid="mock-mui-card-content"
       >
         <div
-          data-testid="mui-box"
+          data-testid="mock-mui-box"
         >
           <img
-            data-testid="mui-avatar"
+            data-testid="mock-mui-avatar"
             src=""
           />
           <div
-            data-testid="mui-box"
+            data-testid="mock-mui-box"
           >
             <div
-              data-testid="mui-box"
+              data-testid="mock-mui-box"
             >
               <div
-                data-testid="mui-typography"
+                data-testid="mock-mui-typography"
               >
                 Lydia
                  
                 Guzman
               </div>
               <div
-                data-testid="mui-typography"
+                data-testid="mock-mui-typography"
               >
                 <span
-                  data-testid="message-is-typing"
+                  data-testid="mock-message-is-typing"
                 />
               </div>
             </div>

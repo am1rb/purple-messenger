@@ -3,15 +3,13 @@
 exports[`The <Conversation /> tests Should match the snapshot 1`] = `
 <div>
   <div
-    data-testid="layout"
+    data-testid="mock-layout"
   >
     <div
-      data-testid="conversation-list"
-      data-username="john"
+      data-testid="mock-conversation-list"
     />
     <div
-      data-testid="message-zone"
-      data-username="john"
+      data-testid="mock-message-zone"
     />
   </div>
 </div>

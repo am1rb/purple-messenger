@@ -1,5 +1,7 @@
 import React from "react";
 
-const appMenu = jest.fn(() => <div data-testid="app-menu" />);
+function AppMenu() {
+  return <div data-testid="mock-app-menu" />;
+}
 
-export default appMenu;
+export default AppMenu;

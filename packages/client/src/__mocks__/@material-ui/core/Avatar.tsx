@@ -4,8 +4,8 @@ interface AvatarProps {
   src?: string;
 }
 
-const muiAvatar = jest.fn(({ src }: AvatarProps) => (
-  <img data-testid="mui-avatar" src={src} />
-));
+function MuiAvatar({ src }: AvatarProps) {
+  return <img data-testid="mock-mui-avatar" src={src} />;
+}
 
-export default muiAvatar;
+export default MuiAvatar;

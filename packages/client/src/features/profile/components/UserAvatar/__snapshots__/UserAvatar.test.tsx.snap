@@ -3,7 +3,7 @@
 exports[`The <UserAvatar /> tests Should match the snapshot 1`] = `
 <div>
   <img
-    data-testid="mui-avatar"
+    data-testid="mock-mui-avatar"
     src="https://picsum.photos/200"
   />
 </div>

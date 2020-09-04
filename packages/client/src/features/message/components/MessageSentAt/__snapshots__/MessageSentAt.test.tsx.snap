@@ -3,7 +3,7 @@
 exports[`The <MessageSentAt /> tests Should match the snapshot 1`] = `
 <div>
   <div
-    data-testid="mui-typography"
+    data-testid="mock-mui-typography"
   >
     a day ago
   </div>

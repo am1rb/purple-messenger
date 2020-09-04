@@ -1,5 +1,7 @@
-import React from 'react';
+import React from "react";
 
-const userAvatar = jest.fn(() => <div data-testid="user-avatar" />);
+function UserAvatar() {
+  return <div data-testid="mock-user-avatar" />;
+}
 
-export default userAvatar;
+export default UserAvatar;
