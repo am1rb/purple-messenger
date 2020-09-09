@@ -1,65 +1,35 @@
 import React, { useRef, useCallback } from "react";
-import { debounce } from "throttle-debounce";
 import UnformTextField, {
   UnformTextFieldProps,
 } from "components/UnformTextField";
+import useTextFieldEvents, {
+  TextFieldEventsProps,
+} from "../useTextFieldEvents";
 
 export interface MessageTextFieldProps
-  extends Omit<UnformTextFieldProps, "multiline" | "fullWidth"> {
-  onStartTyping?: () => void;
-  onStopTyping?: () => void;
-  onEnter?: () => void;
-  detectTypeTime?: number;
-}
+  extends Omit<
+      UnformTextFieldProps,
+      "multiline" | "fullWidth" | "onChange" | "onKeyDown"
+    >,
+    TextFieldEventsProps {}
 
 function MessageTextField({
   onStartTyping,
   onStopTyping,
-  detectTypeTime = 1500,
+  detectTypeTime,
   onEnter,
   onChange,
   onKeyDown,
   ...other
 }: MessageTextFieldProps) {
-  const isTyping = useRef(false);
-  const handleStartTyping = useCallback(
-    debounce(detectTypeTime, true, () => {
-      isTyping.current = true;
-      onStartTyping?.();
-    }),
-    [detectTypeTime, onStartTyping]
-  );
-  const handleStopTyping = useCallback(
-    debounce(detectTypeTime, () => {
-      if (isTyping.current) {
-        isTyping.current = false;
-        onStopTyping?.();
-      }
-    }),
-    [detectTypeTime, onStopTyping]
-  );
-
-  const handleChange = useCallback(
-    (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-      handleStartTyping();
-      handleStopTyping();
-      onChange?.(event);
-    },
-    [handleStartTyping, handleStopTyping, onChange]
-  );
-
-  const handleKeyDown = useCallback(
-    (event: React.KeyboardEvent<HTMLDivElement>) => {
-      if (event.keyCode === 13 && !event.shiftKey) {
-        isTyping.current = false;
-        onStopTyping?.();
-        onEnter?.();
-        event.preventDefault();
-      }
-      onKeyDown?.(event);
-    },
-    [onEnter, onKeyDown]
-  );
+  const { handleChange, handleKeyDown } = useTextFieldEvents({
+    onStartTyping,
+    onStopTyping,
+    detectTypeTime,
+    onEnter,
+    onChange,
+    onKeyDown,
+  });
 
   return (
     <UnformTextField
