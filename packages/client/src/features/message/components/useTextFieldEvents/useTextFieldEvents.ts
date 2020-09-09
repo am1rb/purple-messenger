@@ -50,14 +50,14 @@ function useTextFieldEvents<T extends BaseInputEvents>({
   );
 
   const handleKeyDown = useCallback(
-    (event: React.KeyboardEvent<HTMLDivElement>) => {
+    (event: React.KeyboardEvent, ...args: any) => {
       if (event.keyCode === 13 && !event.shiftKey) {
         isTyping.current = false;
         onStopTyping?.();
         onEnter?.();
         event.preventDefault();
       }
-      onKeyDown?.(event);
+      onKeyDown?.(event, ...args);
     },
     [onEnter, onKeyDown]
   );
