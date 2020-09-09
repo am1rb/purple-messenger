@@ -8,7 +8,7 @@ type InputProps = React.HTMLAttributes<HTMLInputElement>;
 
 type TagProps = TextAreaProps & InputProps;
 
-interface UnformTextFieldProps extends TagProps {
+export interface UnformTextFieldProps extends TagProps {
   fullWidth?: boolean;
 }
 
