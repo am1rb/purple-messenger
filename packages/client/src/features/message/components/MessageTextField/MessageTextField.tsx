@@ -6,12 +6,11 @@ import useTextFieldEvents, {
   TextFieldEventsProps,
 } from "../useTextFieldEvents";
 
-export interface MessageTextFieldProps
-  extends Omit<
-      UnformTextFieldProps,
-      "multiline" | "fullWidth" | "onChange" | "onKeyDown"
-    >,
-    TextFieldEventsProps {}
+export type MessageTextFieldProps = Omit<
+  UnformTextFieldProps,
+  "multiline" | "fullWidth" | "onChange" | "onKeyDown"
+> &
+  TextFieldEventsProps<UnformTextFieldProps>;
 
 function MessageTextField({
   onStartTyping,
@@ -22,7 +21,9 @@ function MessageTextField({
   onKeyDown,
   ...other
 }: MessageTextFieldProps) {
-  const { handleChange, handleKeyDown } = useTextFieldEvents({
+  const { handleChange, handleKeyDown } = useTextFieldEvents<
+    UnformTextFieldProps
+  >({
     onStartTyping,
     onStopTyping,
     detectTypeTime,
