@@ -21,8 +21,6 @@ const sharedStore: InitialStore = {
 };
 
 describe("The <AppMenu /> tests", () => {
-  afterAll(() => jest.clearAllMocks());
-
   it("Should match the snapshot", () => {
     const { container } = renderWithStore(<AppMenu />, sharedStore);
     expect(container).toMatchSnapshot();

@@ -39,8 +39,6 @@ const initStore: InitialStore = {
 };
 
 describe("The <MessageList /> tests", () => {
-  afterEach(() => jest.clearAllMocks());
-
   it("Should match the snapshot", () => {
     const { container } = renderWithStore(
       <MessageList username="john" />,

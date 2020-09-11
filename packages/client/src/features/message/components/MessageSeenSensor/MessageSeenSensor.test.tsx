@@ -17,7 +17,6 @@ describe("The <MessageSeenSensor /> tests", () => {
   beforeEach(() =>
     (useConversationInfo as jest.Mock).mockReturnValue({ username: "john" })
   );
-  afterEach(() => jest.clearAllMocks());
 
   it("Should render VisibilitySensor if it is not seen", () => {
     const { getByTestId } = renderWithStore(
