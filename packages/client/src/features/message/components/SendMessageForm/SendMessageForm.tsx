@@ -1,5 +1,5 @@
 import React, { useCallback, useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { SubmitHandler } from "@rocketseat/unform";
 import { Box, IconButton } from "@material-ui/core";
 import SendIcon from "@material-ui/icons/Send";
@@ -10,16 +10,15 @@ import {
 } from "@purple-messenger/core";
 import Unform from "components/Unform";
 import MessageTextField from "../MessageTextField";
-import useConversation from "features/conversation/components/useConversationInfo";
 import { MessageFormContent } from "features/message/types/formContent";
 
 export interface SendMessageFormProps {
   disabled: boolean;
+  username: string | undefined;
 }
 
-function SendMessageForm({ disabled }: SendMessageFormProps) {
+function SendMessageForm({ disabled, username }: SendMessageFormProps) {
   const dispatch = useDispatch();
-  const { username } = useConversation();
   const buttonRef = useRef<HTMLButtonElement>(null);
 
   const handleSubmit = useCallback<SubmitHandler<MessageFormContent>>(

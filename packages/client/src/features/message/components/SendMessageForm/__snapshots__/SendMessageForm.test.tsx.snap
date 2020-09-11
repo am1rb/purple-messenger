@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`The <SendMessageForm /> tests Should match the snapshot 1`] = `
+<div>
+  <form>
+    <div
+      data-testid="mock-mui-box"
+    >
+      <div
+        data-testid="mock-mui-box"
+      >
+        <input
+          data-testid="mock-message-text-field"
+          name="message"
+        />
+      </div>
+      <div
+        data-testid="mock-mui-box"
+      >
+        <button
+          data-testid="mock-mui-icon-button"
+          type="submit"
+        >
+          <span
+            data-testid="mock-mui-icons-send"
+          />
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+`;

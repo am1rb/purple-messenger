@@ -10,7 +10,7 @@ export type InitialStore = Partial<RootState>;
 
 export function renderWithStore(
   ui: React.ReactElement,
-  initStore: InitialStore
+  initStore: InitialStore = {}
 ) {
   const store = configureStore(initStore, false);
 

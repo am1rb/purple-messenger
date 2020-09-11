@@ -1,7 +1,5 @@
 import React from "react";
 import { renderHook } from "@testing-library/react-hooks";
-import { wait } from "@testing-library/dom";
-import userEvent from "@testing-library/user-event";
 import useTextFieldEvents from "./useTextFieldEvents";
 
 type InputProps = React.HTMLAttributes<HTMLInputElement>;

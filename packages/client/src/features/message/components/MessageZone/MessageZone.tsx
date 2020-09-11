@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React from "react";
 import { Box } from "@material-ui/core";
 import SendMessageForm from "../SendMessageForm";
 import MessageList, { MessageListProps } from "../MessageList";
@@ -14,7 +14,11 @@ function MessageZone({ className, username }: MessageZoneProps) {
         <MessageList username={username} />
       </Box>
       <Box flexGrow="0" flexShrink="0" m={1}>
-        <SendMessageForm key={username} disabled={!username} />
+        <SendMessageForm
+          key={username}
+          disabled={!username}
+          username={username}
+        />
       </Box>
     </Box>
   );
