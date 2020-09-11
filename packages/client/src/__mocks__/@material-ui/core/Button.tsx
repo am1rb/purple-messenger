@@ -7,9 +7,9 @@ export interface ButtonProps {
 
 function MuiButton({ onClick, children }: ButtonProps) {
   return (
-    <div data-testid="mock-mui-button" onClick={onClick}>
+    <button data-testid="mock-mui-button" onClick={onClick}>
       {children}
-    </div>
+    </button>
   );
 }
 
