@@ -18,11 +18,11 @@ exports[`The <AppMenu /> tests Should match the snapshot 1`] = `
         Hi, 
         Logan
       </div>
-      <div
+      <button
         data-testid="mock-mui-button"
       >
         signOut
-      </div>
+      </button>
     </div>
   </div>
 </div>
