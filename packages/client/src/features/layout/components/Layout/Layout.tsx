@@ -1,14 +1,14 @@
-import React, { memo, ReactNode } from 'react';
-import AppMenu from 'features/layout/components/AppMenu';
-import { ClassesType } from 'core/type/general';
-import useStyles from './Layout.styles';
+import React, { memo, ReactNode } from "react";
+import AppMenu from "features/layout/components/AppMenu";
+import { ClassesType } from "core/type/general";
+import useStyles from "./Layout.styles";
 
-interface Props {
+export interface LayoutProps {
   children: ReactNode;
   classes?: ClassesType<typeof useStyles>;
 }
 
-function Layout({ children, classes: classesProp }: Props) {
+function Layout({ children, classes: classesProp }: LayoutProps) {
   const classes = useStyles({ classes: classesProp });
   return (
     <div className={classes.root}>

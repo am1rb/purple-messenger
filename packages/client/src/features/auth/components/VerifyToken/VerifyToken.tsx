@@ -1,12 +1,12 @@
-import React, { memo, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { verifyToken } from '@purple-messenger/core';
+import React, { memo, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { verifyToken } from "@purple-messenger/core";
 
-interface Props {
+export interface VerifyTokenProps {
   token: string;
 }
 
-function VerifyToken({ token }: Props) {
+function VerifyToken({ token }: VerifyTokenProps) {
   const dispatch = useDispatch();
 
   useEffect(() => {

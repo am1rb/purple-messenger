@@ -1,6 +1,6 @@
 import React from "react";
 import { render } from "@testing-library/react";
-import Layout from ".";
+import Layout from "./Layout";
 
 jest.mock("features/layout/components/AppMenu");
 

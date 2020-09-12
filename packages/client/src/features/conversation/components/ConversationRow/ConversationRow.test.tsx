@@ -5,7 +5,7 @@ import {
   MessageOwner,
   MessageStatus,
 } from "@purple-messenger/core";
-import ConversationRow, { ConversationRowProps } from ".";
+import ConversationRow, { ConversationRowProps } from "./ConversationRow";
 
 jest.mock("features/message/components/MessageStatus");
 jest.mock("features/message/components/MessageSentAt");

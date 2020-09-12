@@ -5,11 +5,11 @@ import Avatar from "@material-ui/core/Avatar";
 import { getProfileInfoImage } from "features/profile/selectors";
 import useStyles from "./UserAvatar.styles";
 
-interface Props {
+export interface UserAvatarProps {
   className?: string;
 }
 
-function UserAvatar({ className }: Props) {
+function UserAvatar({ className }: UserAvatarProps) {
   const classes = useStyles();
   const profileInfoImage = useSelector(getProfileInfoImage);
 
