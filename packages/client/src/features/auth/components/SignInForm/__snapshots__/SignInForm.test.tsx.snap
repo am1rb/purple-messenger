@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`The <SignInForm /> tests Should match the snapshot 1`] = `
+<div>
+  <form>
+    
+    <label>
+      Email
+      <input
+        data-testid="mock-unform-text-field"
+        margin="normal"
+        name="email"
+      />
+    </label>
+    <label>
+      Password
+      <input
+        autocomplete="current-password"
+        data-testid="mock-unform-text-field"
+        margin="normal"
+        name="password"
+        type="password"
+      />
+    </label>
+    <button
+      data-testid="mock-mui-button"
+    >
+      SignIn
+    </button>
+  </form>
+</div>
+`;
