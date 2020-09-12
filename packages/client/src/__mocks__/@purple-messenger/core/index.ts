@@ -20,4 +20,6 @@ module.exports = {
   submitMessage: mockedAction(),
   startTypingMessage: mockedAction(),
   stopTypingMessage: mockedAction(),
+  signIn: mockedAction(),
+  setAuthError: mockedAction(),
 };
