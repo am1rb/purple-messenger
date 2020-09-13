@@ -22,4 +22,5 @@ module.exports = {
   stopTypingMessage: mockedAction(),
   signIn: mockedAction(),
   setAuthError: mockedAction(),
+  verifyToken: mockedAction(),
 };
