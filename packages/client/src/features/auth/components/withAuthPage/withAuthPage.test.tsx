@@ -1,9 +1,9 @@
 import React from "react";
-import withAuthBase from "../withAuthBase/withAuthBase";
+import withAuthBase from "../withAuthBase";
 import SignInForm from "features/auth/components/SignInForm";
 import withAuthPage from "./withAuthPage";
 
-jest.mock("../withAuthBase/withAuthBase");
+jest.mock("../withAuthBase");
 jest.mock("features/auth/components/SignInForm");
 
 function AuthComponent() {
