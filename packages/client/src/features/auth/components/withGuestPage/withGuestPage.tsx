@@ -1,12 +1,8 @@
-import React, { ComponentType } from 'react';
-import { Redirect } from 'react-router';
-import withAuthBase from '../withAuthBase/withAuthBase';
+import React from "react";
+import RedirectToRoot from "../RedirectToRoot";
+import withAuthBase from "../withAuthBase";
 
-function RedirectToRoot() {
-  return <Redirect to="/" />;
-}
-
-function withGuestPage<T>(C: ComponentType<T>) {
+function withGuestPage(C: React.ComponentType) {
   return withAuthBase(RedirectToRoot, C);
 }
 
