@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`The <RedirectToRoot /> tests Should match the snapshot 1`] = `
+<div>
+  <span
+    data-testid="mock-redirect"
+    data-to="/"
+  />
+</div>
+`;
