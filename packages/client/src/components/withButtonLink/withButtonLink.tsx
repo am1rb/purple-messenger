@@ -1,9 +1,8 @@
-import { ComponentType } from "react";
 import React from "react";
 import { ButtonBaseProps } from "@material-ui/core";
 import { Link, LinkProps } from "react-router-dom";
 
-function withButtonLink<T extends ButtonBaseProps>(C: ComponentType<T>) {
+function withButtonLink<T extends ButtonBaseProps>(C: React.ComponentType<T>) {
   return function ComponentWithLink({
     to,
     ...other
