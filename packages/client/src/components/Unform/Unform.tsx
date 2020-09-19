@@ -2,7 +2,8 @@ import React, { useMemo } from "react";
 import { Form, SubmitHandler } from "@rocketseat/unform";
 import { FormProps } from "@rocketseat/unform/dist/Form";
 
-interface UnformProps<T> extends Omit<FormProps, "initialData" | "onSubmit"> {
+export interface UnformProps<T>
+  extends Omit<FormProps, "initialData" | "onSubmit"> {
   initialData?: Partial<T>;
   onSubmit: SubmitHandler<T>;
 }
