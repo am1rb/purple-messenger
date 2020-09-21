@@ -2,7 +2,7 @@ import {
   authActionTypes as actionTypes,
   SetIsAuthenticatedAction,
   SetAuthErrorAction,
-  SetTokenAction,  
+  SetTokenAction,
 } from "@purple-messenger/core";
 
 export interface AuthState {
@@ -16,7 +16,7 @@ const initialState: AuthState = {
   token: localStorage.getItem("token")
     ? (localStorage.getItem("token") as string)
     : undefined,
-  authError: ""
+  authError: "",
 };
 
 const authState = (
@@ -28,14 +28,14 @@ const authState = (
       const setIsAuthenticated = action as SetIsAuthenticatedAction;
       return {
         ...state,
-        isAuthenticated: setIsAuthenticated.status
+        isAuthenticated: setIsAuthenticated.status,
       };
     }
     case actionTypes.auth.reducer.setAuthError: {
       const setAuthErrorAction = action as SetAuthErrorAction;
       return {
         ...state,
-        authError: setAuthErrorAction.message
+        authError: setAuthErrorAction.message,
       };
     }
     case actionTypes.auth.reducer.setToken: {
@@ -44,14 +44,14 @@ const authState = (
       return {
         ...state,
         token: setTokenAction.token,
-        isAuthenticated: true
+        isAuthenticated: true,
       };
     }
     case actionTypes.auth.saga.signOut:
     case actionTypes.auth.reducer.resetToken: {
       const newState = {
         ...state,
-        isAuthenticated: false
+        isAuthenticated: false,
       };
       delete newState.token;
       localStorage.removeItem("token");
