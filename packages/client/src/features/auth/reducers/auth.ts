@@ -3,6 +3,7 @@ import {
   SetIsAuthenticatedAction,
   SetAuthErrorAction,
   SetTokenAction,
+  SingOutAction,
 } from "@purple-messenger/core";
 
 export interface AuthState {
@@ -19,10 +20,14 @@ const initialState: AuthState = {
   authError: "",
 };
 
-const authState = (
+function authState(
   state: AuthState = initialState,
-  action: SetIsAuthenticatedAction | SetAuthErrorAction | SetTokenAction
-) => {
+  action:
+    | SetIsAuthenticatedAction
+    | SetAuthErrorAction
+    | SetTokenAction
+    | SingOutAction
+): AuthState {
   switch (action.type) {
     case actionTypes.auth.reducer.setIsAuthenticated: {
       const setIsAuthenticated = action as SetIsAuthenticatedAction;
@@ -49,17 +54,16 @@ const authState = (
     }
     case actionTypes.auth.saga.signOut:
     case actionTypes.auth.reducer.resetToken: {
-      const newState = {
+      localStorage.removeItem("token");
+      return {
         ...state,
+        token: "",
         isAuthenticated: false,
       };
-      delete newState.token;
-      localStorage.removeItem("token");
-      return newState;
     }
     default:
       return state;
   }
-};
+}
 
 export default authState;
