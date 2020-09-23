@@ -8,6 +8,8 @@ export const signIn = (email: string, password: string) => ({
 export type SingInAction = ReturnType<typeof signIn>;
 
 export const signOut = () => ({ type: actionTypes.auth.saga.signOut });
+export type SingOutAction = ReturnType<typeof signOut>;
+
 
 export const setIsAuthenticated = (status: boolean) => ({
   type: actionTypes.auth.reducer.setIsAuthenticated,
