@@ -1,8 +1,5 @@
 import { put, fork, take, select } from "redux-saga/effects";
-import {
-  socketActionTypes,
-  verifyToken
-} from "@purple-messenger/core";
+import { socketActionTypes, verifyToken } from "@purple-messenger/core";
 import { getToken } from "features/auth/selectors";
 
 export function* handleReconnect() {
@@ -12,7 +9,7 @@ export function* handleReconnect() {
 
     const token = yield select(getToken);
 
-    if(token) {
+    if (token) {
       yield put(verifyToken(token));
     }
   }
