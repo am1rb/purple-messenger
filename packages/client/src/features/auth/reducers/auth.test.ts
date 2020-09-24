@@ -35,13 +35,13 @@ describe("The auth reducer tests", () => {
 
   it("Should apply signOut action correctly", () => {
     const state = reducer(sharedState, signOut());
-    expect(state.token).toBeEmpty();
+    expect(state.token).toBe("");
     expect(state.isAuthenticated).toBeFalsy();
   });
 
   it("Should apply resetToken action correctly", () => {
     const state = reducer(sharedState, signOut());
-    expect(state.token).toBeEmpty();
+    expect(state.token).toBe("");
     expect(state.isAuthenticated).toBeFalsy();
   });
 });
