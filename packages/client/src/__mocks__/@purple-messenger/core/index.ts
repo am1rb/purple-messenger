@@ -4,8 +4,8 @@ const mockedPurpleMessengerCore = jest.genMockFromModule<
   typeof purpleMessengerCore
 >("@purple-messenger/core");
 
-function mockedAction() {
-  return jest.fn(() => ({ type: "" }));
+function mockedAction(action = () => ({ type: "" })) {
+  return jest.fn(action);
 }
 
 module.exports = {
@@ -23,4 +23,6 @@ module.exports = {
   signIn: mockedAction(),
   setAuthError: mockedAction(),
   verifyToken: mockedAction(),
+  connected: mockedAction(purpleMessengerCore.connected),
+  disconnected: mockedAction(purpleMessengerCore.disconnected),
 };
