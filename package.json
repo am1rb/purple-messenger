@@ -17,6 +17,9 @@
   },
   "scripts": {
     "publish": "lerna run build && lerna publish",
-    "build": "lerna exec --parallel --scope=@purple-messenger/core --scope=@purple-messenger/server -- rollup -c ../../rollup.config.js && lerna run build"
+    "build": "lerna exec --parallel --scope=@purple-messenger/core --scope=@purple-messenger/server -- rollup -c ../../rollup.config.js && lerna run build",
+    "build-core": "lerna exec --parallel --scope=@purple-messenger/core -- rollup -c ../../rollup.config.js",
+    "build-server": "lerna exec --parallel --scope=@purple-messenger/server -- rollup -c ../../rollup.config.js",
+    "build-client": "lerna exec --parallel --scope=@purple-messenger/client -- rollup -c ../../rollup.config.js"
   }
 }
