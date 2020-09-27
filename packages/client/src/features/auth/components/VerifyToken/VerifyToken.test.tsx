@@ -11,7 +11,7 @@ describe("The <VerifyToken /> tests", () => {
 
   it("Should call verifyToken on mount event", () => {
     const token = "sample token";
-    renderWithStore(<VerifyToken token={token} />);
-    expect(verifyToken).toHaveBeenCalledWith(token);
+    const { store } = renderWithStore(<VerifyToken token={token} />);
+    expect(store.actions).toContainEqual(verifyToken(token));
   });
 });

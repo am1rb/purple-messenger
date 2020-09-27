@@ -4,8 +4,6 @@ import { renderWithStore, InitialStore } from "core/test";
 import { signOut } from "@purple-messenger/core";
 import AppMenu from "./AppMenu";
 
-jest.mock("@purple-messenger/core");
-
 const sharedStore: InitialStore = {
   profile: {
     profileInfo: {
@@ -27,8 +25,8 @@ describe("The <AppMenu /> tests", () => {
   });
 
   it("Should call signOut action when the button is clicked", () => {
-    const { getByText } = renderWithStore(<AppMenu />, sharedStore);
+    const { getByText, store } = renderWithStore(<AppMenu />, sharedStore);
     fireEvent.click(getByText("signOut"));
-    expect(signOut).toHaveBeenCalled();
+    expect(store.actions).toContainEqual(signOut());
   });
 });

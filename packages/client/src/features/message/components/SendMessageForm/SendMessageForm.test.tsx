@@ -26,18 +26,20 @@ describe("The <SendMessageForm /> tests", () => {
 
   it("Should send the message by clicking on the send button", () => {
     const message = "Hello World!";
-    const { getByTestId } = renderWithStore(
+    const { getByTestId, store } = renderWithStore(
       <SendMessageForm {...sharedProps} />
     );
 
     userEvent.type(getByTestId("mock-message-text-field"), message);
     userEvent.click(getByTestId("mock-mui-icon-button"));
 
-    expect(submitMessage).toHaveBeenCalledWith(sharedProps.username, message);
+    expect(store.actions).toContainEqual(
+      submitMessage(sharedProps.username!, message)
+    );
   });
 
   it("Should send the message by pressing the enter button", () => {
-    const { getByTestId } = renderWithStore(
+    const { getByTestId, store } = renderWithStore(
       <SendMessageForm {...sharedProps} />
     );
 
@@ -45,27 +47,28 @@ describe("The <SendMessageForm /> tests", () => {
     userEvent.type(messageField, sharedMessage);
     fireEvent.keyDown(messageField, { keyCode: 13 });
 
-    expect(submitMessage).toHaveBeenCalledWith(
-      sharedProps.username,
-      sharedMessage
+    expect(store.actions).toContainEqual(
+      submitMessage(sharedProps.username!, sharedMessage)
     );
   });
 
   it("Should call startTypingMessage when something is typed", () => {
-    const { getByTestId } = renderWithStore(
+    const { getByTestId, store } = renderWithStore(
       <SendMessageForm {...sharedProps} />
     );
 
     const messageField = getByTestId("mock-message-text-field");
     userEvent.type(messageField, sharedMessage);
 
-    expect(startTypingMessage).toHaveBeenCalledWith(sharedProps.username);
+    expect(store.actions).toContainEqual(
+      startTypingMessage(sharedProps.username!)
+    );
   });
 
   it("Should call stopTypingMessage when something is typed", () => {
     jest.useFakeTimers();
 
-    const { getByTestId } = renderWithStore(
+    const { getByTestId, store } = renderWithStore(
       <SendMessageForm {...sharedProps} />
     );
 
@@ -74,7 +77,9 @@ describe("The <SendMessageForm /> tests", () => {
 
     jest.runAllTimers();
 
-    expect(stopTypingMessage).toHaveBeenCalledWith(sharedProps.username);
+    expect(store.actions).toContainEqual(
+      stopTypingMessage(sharedProps.username!)
+    );
 
     jest.clearAllTimers();
   });

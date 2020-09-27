@@ -17,14 +17,16 @@ describe("The <SignInForm /> tests", () => {
     const username = "john@doe.com";
     const password = "strong-password";
 
-    const { getByLabelText, getByTestId } = renderWithStore(<SignInForm />);
+    const { getByLabelText, getByTestId, store } = renderWithStore(
+      <SignInForm />
+    );
 
     userEvent.type(getByLabelText("Email"), username);
     userEvent.type(getByLabelText("Password"), password);
 
     userEvent.click(getByTestId("mock-mui-button"));
 
-    expect(setAuthError).toHaveBeenCalled();
-    expect(signIn).toHaveBeenCalledWith(username, password);
+    expect(store.actions).toContainEqual(setAuthError(""));
+    expect(store.actions).toContainEqual(signIn(username, password));
   });
 });

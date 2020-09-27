@@ -5,6 +5,7 @@ import {
   SetTokenAction,
   SingOutAction,
 } from "@purple-messenger/core";
+import { Action } from "redux";
 
 export interface AuthState {
   isAuthenticated: boolean;
@@ -20,13 +21,9 @@ const initialState: AuthState = {
   authError: "",
 };
 
-function authState(
+function authReducer(
   state: AuthState = initialState,
-  action:
-    | SetIsAuthenticatedAction
-    | SetAuthErrorAction
-    | SetTokenAction
-    | SingOutAction
+  action: Action
 ): AuthState {
   switch (action.type) {
     case actionTypes.auth.reducer.setIsAuthenticated: {
@@ -66,4 +63,4 @@ function authState(
   }
 }
 
-export default authState;
+export default authReducer;

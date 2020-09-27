@@ -6,8 +6,6 @@ import {
   signOut,
 } from "@purple-messenger/core";
 
-jest.unmock("@purple-messenger/core");
-
 const state1 = reducer(undefined, setToken("A sample token"));
 const state2 = reducer(state1, setAuthError("An error"));
 const sharedState = state2;

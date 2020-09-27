@@ -15,6 +15,7 @@ import {
   ReceivedMessageAckAction,
   SeenMessageAckAction,
 } from "@purple-messenger/core";
+import { Action } from "redux";
 
 export interface ConversationState {
   list: OrderedMap<string, Conversation>;
@@ -24,15 +25,9 @@ const initialState: ConversationState = {
   list: OrderedMap(),
 };
 
-function reducer(
+function conversationReducer(
   state: ConversationState = initialState,
-  action:
-    | SetConversationListAction
-    | StartTypingMessageAction
-    | StopTypingMessageAction
-    | NewMessageAction
-    | SendMessageAction
-    | SentMessageAckAction
+  action: Action
 ) {
   switch (action.type) {
     case conversationActionTypes.conversation.reducer.setConversationList:
@@ -168,4 +163,4 @@ function reducer(
   }
 }
 
-export default reducer;
+export default conversationReducer;

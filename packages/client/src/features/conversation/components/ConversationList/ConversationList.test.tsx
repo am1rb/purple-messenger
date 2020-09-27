@@ -3,44 +3,12 @@ import { renderWithStore, InitialStore } from "core/test";
 import ConversationList, { ConversationListProps } from "./ConversationList";
 import { OrderedMap } from "immutable";
 import {
-  Conversation,
-  AccountStatus,
   loadConversationList,
   unloadConversationList,
+  sampleConversationList,
 } from "@purple-messenger/core";
 
 jest.mock("../ConversationRow");
-
-const conversations: Conversation[] = [
-  {
-    id: 1,
-    isTyping: false,
-    friend: {
-      id: 1,
-      bio: "759 Ujipa Parkway",
-      email: "potpe@ubdop.ml",
-      firstName: "Maurice",
-      lastName: "Underwood",
-      image: "",
-      status: AccountStatus.Online,
-      username: "potpe",
-    },
-  },
-  {
-    id: 2,
-    isTyping: true,
-    friend: {
-      id: 2,
-      bio: "1573 Basog Square",
-      email: "gizez@odudormar.do",
-      firstName: "Alan",
-      lastName: "Townsend",
-      image: "",
-      status: AccountStatus.Online,
-      username: "alan",
-    },
-  },
-];
 
 const sharedProps: ConversationListProps = {
   username: undefined,
@@ -49,7 +17,7 @@ const sharedProps: ConversationListProps = {
 const initialStore: InitialStore = {
   conversation: {
     list: OrderedMap(
-      conversations.map((conversation) => [
+      sampleConversationList.map((conversation) => [
         conversation.friend.username,
         conversation,
       ])
@@ -80,7 +48,7 @@ describe("The <ConversationList /> tests", () => {
     const { getByTestId } = renderWithStore(
       <ConversationList
         {...sharedProps}
-        username={conversations[0].friend.username}
+        username={sampleConversationList[0].friend.username}
       />,
       initialStore
     );
@@ -88,12 +56,12 @@ describe("The <ConversationList /> tests", () => {
   });
 
   it("Should dispatch loadConversationList and unloadConversationList actions properly", () => {
-    const { unmount } = renderWithStore(
+    const { unmount, store } = renderWithStore(
       <ConversationList {...sharedProps} />,
       initialStore
     );
-    expect(loadConversationList).toHaveBeenCalled();
+    expect(store.actions).toContainEqual(loadConversationList());
     unmount();
-    expect(unloadConversationList).toHaveBeenCalled();
+    expect(store.actions).toContainEqual(unloadConversationList());
   });
 });

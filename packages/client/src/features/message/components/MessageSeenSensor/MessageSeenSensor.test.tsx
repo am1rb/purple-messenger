@@ -7,6 +7,7 @@ import useConversationInfo from "features/conversation/components/useConversatio
 
 jest.mock("features/conversation/components/useConversationInfo");
 
+const sharedUsername = "john";
 const sharedProps: MessageSeenSensorProps = {
   children: <span />,
   messageId: 1,
@@ -15,7 +16,9 @@ const sharedProps: MessageSeenSensorProps = {
 
 describe("The <MessageSeenSensor /> tests", () => {
   beforeEach(() =>
-    (useConversationInfo as jest.Mock).mockReturnValue({ username: "john" })
+    (useConversationInfo as jest.Mock).mockReturnValue({
+      username: sharedUsername,
+    })
   );
 
   it("Should render VisibilitySensor if it is not seen", () => {
@@ -37,13 +40,15 @@ describe("The <MessageSeenSensor /> tests", () => {
   });
 
   it("Should call seenMessageAck action if a message is seen", () => {
-    const { getByTestId } = renderWithStore(
+    const { getByTestId, store } = renderWithStore(
       <MessageSeenSensor {...sharedProps} status={MessageStatus.Received} />,
       {}
     );
 
     userEvent.click(getByTestId("mock-react-visibility-sensor-visible"));
 
-    expect(seenMessageAck).toHaveBeenCalled();
+    expect(store.actions).toContainEqual(
+      seenMessageAck(sharedUsername, sharedProps.messageId)
+    );
   });
 });
