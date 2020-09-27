@@ -1,5 +1,5 @@
 import { InitialStore } from "core/test";
-import { getAuthError, getToken, isAuthenticated } from ".";
+import { getAuthError, getToken, isAuthenticated } from "./selectors";
 import { State } from "core/redux/reducers";
 
 const sharedState: InitialStore = {

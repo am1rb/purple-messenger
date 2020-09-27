@@ -1,4 +1,4 @@
-import { State } from '../reducers';
+import { State } from "./reducers";
 
 export const isAuthenticated = (state: State) => state.auth.isAuthenticated;
 
