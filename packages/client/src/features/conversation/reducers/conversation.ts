@@ -115,14 +115,17 @@ function reducer(
         ...state,
         list: state.list.update(
           sentMessageAck.receiverUsername,
-          (conversation) => conversation.message?.id===sentMessageAck.tempMessageId ? ({
-            ...conversation,
-            message: {
-              ...conversation.message,
-              id: sentMessageAck.messageId,
-              status: MessageStatus.Sent,
-            },
-          }) : conversation
+          (conversation) =>
+            conversation.message?.id === sentMessageAck.tempMessageId
+              ? {
+                  ...conversation,
+                  message: {
+                    ...conversation.message,
+                    id: sentMessageAck.messageId,
+                    status: MessageStatus.Sent,
+                  },
+                }
+              : conversation
         ),
       };
     }
@@ -130,15 +133,16 @@ function reducer(
       const receivedMessageAck = action as ReceivedMessageAckAction;
       return {
         ...state,
-        list: state.list.update(
-          receivedMessageAck.username,
-          conversation => conversation.message?.id===receivedMessageAck.messageId ? ({
-            ...conversation,
-            message: {
-              ...conversation.message!,
-              status: MessageStatus.Received,
-            },
-          }) : conversation
+        list: state.list.update(receivedMessageAck.username, (conversation) =>
+          conversation.message?.id === receivedMessageAck.messageId
+            ? {
+                ...conversation,
+                message: {
+                  ...conversation.message!,
+                  status: MessageStatus.Received,
+                },
+              }
+            : conversation
         ),
       };
     }
@@ -146,15 +150,16 @@ function reducer(
       const seenMessageAck = action as SeenMessageAckAction;
       return {
         ...state,
-        list: state.list.update(
-          seenMessageAck.username,
-          conversation => conversation.message?.id===seenMessageAck.messageId ? ({
-            ...conversation,
-            message: {
-              ...conversation.message!,
-              status: MessageStatus.Seen,
-            },
-          }) : conversation
+        list: state.list.update(seenMessageAck.username, (conversation) =>
+          conversation.message?.id === seenMessageAck.messageId
+            ? {
+                ...conversation,
+                message: {
+                  ...conversation.message!,
+                  status: MessageStatus.Seen,
+                },
+              }
+            : conversation
         ),
       };
     }
