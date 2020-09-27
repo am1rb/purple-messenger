@@ -71,7 +71,7 @@
   "files": [
     "build"
   ],
-  "gitHead": "ff68d54d2ca35787f8b04723b891fe8abbdfade2",
+  "gitHead": "a568fcbd8f6f116dbf91b6c9fbc399186f40b3f1",
   "devDependencies": {
     "@testing-library/react-hooks": "^3.4.1",
     "@types/react-redux": "^7.1.9",
