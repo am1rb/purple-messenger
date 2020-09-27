@@ -4,7 +4,7 @@ export interface RedirectProps {
   to: string;
 }
 
-function Redirect({ to }: RedirectProps) {
+export function Redirect({ to }: RedirectProps) {
   return <span data-testid="mock-redirect" data-to={to} />;
 }
 
