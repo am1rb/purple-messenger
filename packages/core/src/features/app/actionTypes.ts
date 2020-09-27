@@ -9,6 +9,6 @@ const actionTypes = uniqueActionTypes({
       redirectTo: '',
     },
   },
-});
+} as const);
 
 export default actionTypes;

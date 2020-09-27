@@ -14,6 +14,6 @@ const actionTypes = uniqueActionTypes({
       verifyToken: '',
     },
   },
-});
+} as const);
 
 export default actionTypes;

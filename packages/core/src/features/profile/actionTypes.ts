@@ -8,6 +8,6 @@ const actionTypes = uniqueActionTypes({
     },
     saga: {}
   }
-});
+} as const);
 
 export default actionTypes;

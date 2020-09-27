@@ -20,6 +20,6 @@ const actionTypes = uniqueActionTypes({
       newMessage: '',
     },
   },
-});
+} as const);
 
 export default actionTypes;

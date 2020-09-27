@@ -9,6 +9,6 @@ const actionTypes = uniqueActionTypes({
     },
     saga: { sendData: "" }
   }
-});
+} as const);
 
 export default actionTypes;
