@@ -59,7 +59,7 @@ function useTextFieldEvents<T extends BaseInputEvents>({
       }
       onKeyDown?.(event, ...args);
     },
-    [onEnter, onKeyDown]
+    [onEnter, onKeyDown, onStopTyping]
   );
 
   return {

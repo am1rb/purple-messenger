@@ -22,7 +22,7 @@ function ConversationList({ className, username }: ConversationListProps) {
     return () => {
       dispatch(unloadConversationList());
     };
-  }, []);
+  }, [dispatch]);
 
   return (
     <Box className={className} p={1}>

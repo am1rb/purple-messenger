@@ -23,7 +23,7 @@ function MessageSeenSensor({
         dispatch(seenMessageAck(username, messageId));
       }
     },
-    [username, messageId]
+    [dispatch, username, messageId]
   );
 
   return status !== MessageStatus.Seen ? (
