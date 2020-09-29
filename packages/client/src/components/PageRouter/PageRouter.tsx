@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import withAuthPage from "features/auth/components/withAuthPage";
 import withGuestPage from "features/auth/components/withGuestPage";
 import routes from "core/routes";
@@ -15,21 +15,18 @@ const authRoutes = routes.map((route) => {
   const authFunc = routeAuthModeMap[route.authMode];
   const item = {
     ...route,
-    component: authFunc ? authFunc!(route.component!) : route.component,
+    component: authFunc ? authFunc!(route.component! as any) : route.component,
   };
-  delete item.authMode;
   return item;
 });
 
 function PageRouter() {
   return (
-    <Router>
-      <Switch>
-        {authRoutes.map((route, idx) => (
-          <Route key={idx} {...route} />
-        ))}
-      </Switch>
-    </Router>
+    <Switch>
+      {authRoutes.map((route, idx) => (
+        <Route key={idx} {...route} />
+      ))}
+    </Switch>
   );
 }
 
