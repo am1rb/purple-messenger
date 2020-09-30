@@ -7,8 +7,6 @@ import {
   StartTypingMessageAction,
   MessagePhase,
   StopTypingMessageAction,
-  NewMessageAction,
-  MessageOwner,
   SendMessageAction,
   SentMessageAckAction,
   MessageStatus,
@@ -70,38 +68,17 @@ function conversationReducer(
             ),
           };
     }
-    case messageActionTypes.message.saga.newMessage: {
-      const newMessageAction = action as NewMessageAction;
-      return {
-        ...state,
-        list: state.list.update(
-          newMessageAction.message.owner === MessageOwner.Me
-            ? newMessageAction.receiverUsername
-            : newMessageAction.senderUsername,
-          (conversation) => ({
-            ...conversation,
-            message: {
-              unreadCount: conversation.message?.unreadCount || 0,
-              ...newMessageAction.message,
-            },
-          })
-        ),
-      };
-    }
-    case messageActionTypes.message.reducer.sendMessage: {
+    case messageActionTypes.message.saga.sendMessage: {
       const sendMessageAction = action as SendMessageAction;
       return {
         ...state,
-        list: state.list.update(
-          sendMessageAction.receiverUsername,
-          (conversation) => ({
-            ...conversation,
-            message: {
-              unreadCount: conversation.message?.unreadCount || 0,
-              ...sendMessageAction.message,
-            },
-          })
-        ),
+        list: state.list.update(sendMessageAction.username, (conversation) => ({
+          ...conversation,
+          message: {
+            unreadCount: conversation.message?.unreadCount || 0,
+            ...sendMessageAction.message,
+          },
+        })),
       };
     }
     case messageActionTypes.message.reducer.sentMessageAck: {

@@ -3,7 +3,6 @@ import {
   messageActionTypes,
   Message,
   authActionTypes,
-  SendMessageAction,
   MessageStatus,
   SentMessageAckAction,
   AddMessageAction,
@@ -35,16 +34,6 @@ function reducer(
         ...state,
         lastMessageId: state.lastMessageId - 1,
       };
-    case messageActionTypes.message.reducer.sendMessage: {
-      const sendMessageAction = action as SendMessageAction;
-      return {
-        ...state,
-        list: state.list.set(
-          sendMessageAction.message.id,
-          sendMessageAction.message
-        ),
-      };
-    }
     case messageActionTypes.message.reducer.sentMessageAck: {
       const sentMessageAckAction = action as SentMessageAckAction;
       return {
