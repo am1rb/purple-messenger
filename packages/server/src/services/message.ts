@@ -3,7 +3,7 @@ import {
   messageActionTypes,
   SendMessageAction,
   sentMessageAck,
-  newMessage,
+  sendMessage,
   MessageOwner,
   MessageStatus,
   StartTypingMessageAction,
@@ -24,11 +24,11 @@ let savedMessageId = 1;
 function message(socket: Socket) {
 
   socket.on(
-    messageActionTypes.message.reducer.sendMessage,
-    ({ receiverUsername, message }: SendMessageAction) => {
+    messageActionTypes.message.saga.sendMessage,
+    ({ username: receiverUsername, message, phase }: SendMessageAction) => {
       const senderUsername = socket.session?.username;
 
-      if (!senderUsername) {
+      if (phase === MessagePhase.Receive || !senderUsername) {
         return;
       }
 
@@ -43,17 +43,26 @@ function message(socket: Socket) {
 
       clientDispatchQueue(
         socket,
-        newMessage(senderUsername, receiverUsername, {
-          ...msg,
-          owner: MessageOwner.Me,
-        })
+        sendMessage(
+          receiverUsername,
+          {
+            ...msg,
+            owner: MessageOwner.Me,
+          },
+          MessagePhase.Receive
+        )
       );
+
       dispatchQueue(
         receiverUsername,
-        newMessage(senderUsername, receiverUsername, {
-          ...msg,
-          owner: MessageOwner.Friend,
-        })
+        sendMessage(
+          senderUsername,
+          {
+            ...msg,
+            owner: MessageOwner.Friend,
+          },
+          MessagePhase.Receive
+        )
       );
     }
   );
@@ -86,7 +95,11 @@ function message(socket: Socket) {
 
   socket.on(
     messageActionTypes.message.reducer.receivedMessageAck,
-    ({ username: receiverUsername, messageId, phase }: ReceivedMessageAckAction) => {
+    ({
+      username: receiverUsername,
+      messageId,
+      phase,
+    }: ReceivedMessageAckAction) => {
       const senderUsername = socket.session?.username;
       if (phase === MessagePhase.Send && senderUsername) {
         dispatchQueue(
@@ -99,7 +112,11 @@ function message(socket: Socket) {
 
   socket.on(
     messageActionTypes.message.reducer.seenMessageAck,
-    ({ username: receiverUsername, messageId, phase }: SeenMessageAckAction) => {
+    ({
+      username: receiverUsername,
+      messageId,
+      phase,
+    }: SeenMessageAckAction) => {
       const senderUsername = socket.session?.username;
       if (phase === MessagePhase.Send && senderUsername) {
         dispatchQueue(
