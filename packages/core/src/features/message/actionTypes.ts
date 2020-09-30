@@ -11,13 +11,12 @@ const actionTypes = uniqueActionTypes({
       receivedMessageAck: '',
       seenMessageAck: '',
       
-      sendMessage: '',
     },
     saga: {
       submitMessage: '',
       startTypingMessage: '',
       stopTypingMessage: '',
-      newMessage: '',
+      sendMessage: '',
     },
   },
 } as const);

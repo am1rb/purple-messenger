@@ -11,24 +11,13 @@ export const submitMessage = (
 });
 export type SubmitMessageAction = ReturnType<typeof submitMessage>;
 
-export const sendMessage = (receiverUsername: string, message: NewMessage) => ({
-  type: actionTypes.message.reducer.sendMessage,
-  receiverUsername,
+export const sendMessage = (username: string, message: NewMessage, phase = MessagePhase.Send) => ({
+  type: actionTypes.message.saga.sendMessage,
+  username,
   message,
+  phase,
 });
 export type SendMessageAction = ReturnType<typeof sendMessage>;
-
-export const newMessage = (
-  senderUsername: string,
-  receiverUsername: string,
-  message: Message
-) => ({
-  type: actionTypes.message.saga.newMessage,
-  senderUsername,
-  receiverUsername,
-  message,
-});
-export type NewMessageAction = ReturnType<typeof newMessage>;
 
 export const addMessage = (message: Message) => ({
   type: actionTypes.message.reducer.addMessage,
