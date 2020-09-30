@@ -3,7 +3,6 @@ import {
   SetIsAuthenticatedAction,
   SetAuthErrorAction,
   SetTokenAction,
-  SingOutAction,
 } from "@purple-messenger/core";
 import { Action } from "redux";
 
