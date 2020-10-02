@@ -1,7 +1,7 @@
 import { Message, MessageOwner, MessageStatus } from "./types";
 
 export const sampleMessage1: Message = {
-  id: 1,
+  id: -1,
   body: "496 Veic Lane 1662 Ezeler Manor",
   owner: MessageOwner.Friend,
   sentAt: new Date(),
@@ -22,6 +22,14 @@ export const sampleMessage3: Message = {
   owner: MessageOwner.Me,
   sentAt: new Date(),
   status: MessageStatus.Sent,
+}
+
+export const sampleMessage4: Message = {
+  id: 4,
+  body: "1109 Bofup Extension 992 Iviaha Pass",
+  owner: MessageOwner.Me,
+  sentAt: new Date(),
+  status: MessageStatus.Received,
 }
 
 export const sampleMessageList: Message[] = [
