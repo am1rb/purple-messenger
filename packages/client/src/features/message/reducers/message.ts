@@ -16,7 +16,7 @@ export interface MessageState {
   lastMessageId: number;
 }
 
-const initialState: MessageState = {
+export const initialState: MessageState = {
   list: OrderedMap([]),
   lastMessageId: -1,
 };
