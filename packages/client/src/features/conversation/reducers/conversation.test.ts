@@ -1,7 +1,6 @@
 import {
   MessagePhase,
   MessageStatus,
-  newMessage,
   receivedMessageAck,
   sampleConversationList,
   sampleMessage3,
@@ -52,8 +51,6 @@ describe("The conversation reducer tests", () => {
     );
     expect(state2.list.get(conversation.friend.username)?.isTyping).toBeFalsy();
   });
-
-  // it('Should append a new conversation if there is a newMessage action', () => {})
 
   it("Should update the conversation when a message received", () => {
     const conversation = sampleConversationList[1];
