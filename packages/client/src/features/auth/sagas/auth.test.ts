@@ -8,12 +8,12 @@ jest.unmock("@purple-messenger/core");
 
 describe("The auth sagas tests", () => {
   it("Should fork the reconnect correctly", () => {
-    expectSaga(rootSaga).fork(handleReconnect);
+    return expectSaga(rootSaga).fork(handleReconnect).run();
   });
 
   it("Should handle reconnect event and verify the token if exists", () => {
     const token = "A token value";
-    expectSaga(handleReconnect)
+    return expectSaga(handleReconnect)
       .provide([[select(getToken), token]])
       .dispatch(disconnected())
       .dispatch(connected())
