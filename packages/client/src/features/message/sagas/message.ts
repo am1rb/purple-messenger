@@ -49,10 +49,8 @@ export function* newMessage({ message, username }: SendMessageAction) {
   const selectedConversation: string | undefined = yield select(
     getCurrentConversationUsername
   );
-  const profileInfo: ProfileInfo | undefined = yield select(getProfileInfo);
-  const currentProfileUsername = profileInfo?.username;
 
-  if (currentProfileUsername && selectedConversation === username) {
+  if (selectedConversation && selectedConversation === username) {
     // append to the list if the list is selected
     yield put(addMessage(message));
 
