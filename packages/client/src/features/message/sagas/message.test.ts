@@ -1,10 +1,12 @@
 import { expectSaga, testSaga } from "redux-saga-test-plan";
-import { select, call } from "redux-saga/effects";
+import { select } from "redux-saga/effects";
 import {
+  addMessage,
   decreaseLastMessageId,
   MessageOwner,
   MessagePhase,
   MessageStatus,
+  receivedMessageAck,
   sendMessage,
   submitMessage,
 } from "@purple-messenger/core";
@@ -16,6 +18,7 @@ import {
 } from "./message";
 import { getLastMessageId } from "../selectors";
 import { getIsReady } from "features/socket/selectors";
+import { getCurrentConversationUsername } from "features/conversation/selectors";
 
 jest.unmock("@purple-messenger/core");
 
@@ -67,5 +70,43 @@ describe("The message sagas tests", () => {
       phase: MessagePhase.Receive,
     };
     testSaga(sendIfMessagePhaseIsSend, action).finish().isDone();
+  });
+
+  it("Should add the message to the message box if the conversation is selected", () => {
+    const receiverName = "john.doe";
+    const message = {
+      id: 1,
+      body: "message body",
+      status: MessageStatus.Pending,
+      owner: MessageOwner.Me,
+      sentAt: new Date(),
+    };
+    const action = sendMessage(receiverName, message);
+    return expectSaga(newMessage, action)
+      .provide([
+        [select(getCurrentConversationUsername), receiverName],
+        [select(getIsReady), true],
+      ])
+      .put(addMessage(message))
+      .run();
+  });
+
+  it("Should send receive ack", () => {
+    const receiverName = "john.doe";
+    const message = {
+      id: 1,
+      body: "message body",
+      status: MessageStatus.Pending,
+      owner: MessageOwner.Friend,
+      sentAt: new Date(),
+    };
+    const action = sendMessage(receiverName, message);
+    return expectSaga(newMessage, action)
+      .provide([
+        [select(getCurrentConversationUsername), receiverName],
+        [select(getIsReady), true],
+      ])
+      .call(send, receivedMessageAck(receiverName, message.id))
+      .run();
   });
 });
