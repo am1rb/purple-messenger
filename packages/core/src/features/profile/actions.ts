@@ -8,3 +8,4 @@ export const setProfileInfo = (profileInfo: ProfileInfo) => ({
 export type SetProfileInfoAction = ReturnType<typeof setProfileInfo>;
 
 export const resetProfileInfo = () => ({ type: actionTypes.profile.reducer.resetProfileInfo });
+export type ResetProfileInfoAction = ReturnType<typeof resetProfileInfo>;
