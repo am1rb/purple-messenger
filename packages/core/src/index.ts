@@ -9,6 +9,7 @@ export { default as appActionTypes } from "./features/app/actionTypes";
 
 export * from "./features/profile/actions";
 export * from "./features/profile/types";
+export * from "./features/profile/sample";
 export { default as profileActionTypes } from "./features/profile/actionTypes";
 
 export * from "./features/conversation/actions";
