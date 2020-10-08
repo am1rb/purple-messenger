@@ -6,6 +6,8 @@ import {
 } from "@purple-messenger/core";
 import reducer from "./profile";
 
+jest.unmock("@purple-messenger/core");
+
 describe("The profile reducer tests", () => {
   it("Should set profile info correctly", () => {
     expect(reducer(undefined, setProfileInfo(sampleProfileInfo))).toEqual(

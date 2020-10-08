@@ -1,21 +1,11 @@
 import React from "react";
 import fireEvent from "@testing-library/user-event";
+import { sampleProfileInfo, signOut } from "@purple-messenger/core";
 import { renderWithStore, InitialStore } from "core/test";
-import { signOut } from "@purple-messenger/core";
 import AppMenu from "./AppMenu";
 
 const sharedStore: InitialStore = {
-  profile: {
-    profileInfo: {
-      bio: "1618 Novvi Parkway",
-      email: "bi@mipu.bi",
-      firstName: "Logan",
-      lastName: "Swanson",
-      id: 1,
-      image: "https://picsum.photos/200",
-      username: "owens",
-    },
-  },
+  profile: sampleProfileInfo,
 };
 
 describe("The <AppMenu /> tests", () => {
