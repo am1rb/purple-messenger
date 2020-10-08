@@ -1,6 +1,8 @@
 import {
   socketActionTypes as actionTypes,
-  SetIsReadyAction
+  SetIsReadyAction,
+  DisconnectedAction,
+  ConnectedAction,
 } from "@purple-messenger/core";
 
 export interface SocketState {
@@ -10,29 +12,32 @@ export interface SocketState {
 
 const initialState: SocketState = {
   isConnected: false,
-  isReady: false
+  isReady: false,
 };
 
-function reducer(state: SocketState = initialState, action: SetIsReadyAction) {
+function socketReducer(
+  state: SocketState = initialState,
+  action: SetIsReadyAction | DisconnectedAction | ConnectedAction
+) {
   switch (action.type) {
     case actionTypes.socket.reducer.connected:
       return {
         ...state,
-        isConnected: true
+        isConnected: true,
       };
     case actionTypes.socket.reducer.disconnected:
       return {
         ...state,
-        isConnected: false
+        isConnected: false,
       };
     case actionTypes.socket.reducer.setIsReady:
       return {
         ...state,
-        isReady: action.status
+        isReady: (action as SetIsReadyAction).status,
       };
     default:
       return state;
   }
 }
 
-export default reducer;
+export default socketReducer;
