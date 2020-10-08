@@ -4,10 +4,12 @@ import actionTypes from "./actionTypes";
 export const connected = () => ({
   type: actionTypes.socket.reducer.connected
 });
+export type ConnectedAction = ReturnType<typeof connected>;
 
 export const disconnected = () => ({
   type: actionTypes.socket.reducer.disconnected
 });
+export type DisconnectedAction = ReturnType<typeof disconnected>;
 
 export const sendData = (data: Action) => ({
   type: actionTypes.socket.saga.sendData,
