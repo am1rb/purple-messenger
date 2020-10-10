@@ -18,6 +18,6 @@ describe("The socket effects tests", () => {
     return expectSaga(send, action)
       .provide([[select(getIsReady), false]])
       .take(socketActionTypes.socket.reducer.setIsReady)
-      .run();
+      .run({ silenceTimeout: true });
   });
 });

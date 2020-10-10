@@ -6,7 +6,9 @@ import { handleReconnect, rootSaga } from "./auth";
 
 describe("The auth sagas tests", () => {
   it("Should fork the reconnect correctly", () => {
-    return expectSaga(rootSaga).fork(handleReconnect).run();
+    return expectSaga(rootSaga)
+      .fork(handleReconnect)
+      .run({ silenceTimeout: true });
   });
 
   it("Should handle reconnect event and verify the token if exists", () => {
@@ -16,6 +18,6 @@ describe("The auth sagas tests", () => {
       .dispatch(disconnected())
       .dispatch(connected())
       .put(verifyToken(token))
-      .run();
+      .run({ silenceTimeout: true });
   });
 });
