@@ -4,8 +4,6 @@ import { verifyToken, connected, disconnected } from "@purple-messenger/core";
 import { getToken } from "features/auth/selectors";
 import { handleReconnect, rootSaga } from "./auth";
 
-jest.unmock("@purple-messenger/core");
-
 describe("The auth sagas tests", () => {
   it("Should fork the reconnect correctly", () => {
     return expectSaga(rootSaga).fork(handleReconnect).run();

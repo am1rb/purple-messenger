@@ -20,8 +20,6 @@ import { getLastMessageId } from "../selectors";
 import { getIsReady } from "features/socket/selectors";
 import { getCurrentConversationUsername } from "features/conversation/selectors";
 
-jest.unmock("@purple-messenger/core");
-
 describe("The message sagas tests", () => {
   let dateSpy: jest.SpyInstance;
 

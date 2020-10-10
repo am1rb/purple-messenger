@@ -4,8 +4,6 @@ import { sendData, socketActionTypes } from "@purple-messenger/core";
 import { send } from "./effects";
 import { getIsReady } from "./selectors";
 
-jest.unmock("@purple-messenger/core");
-
 describe("The socket effects tests", () => {
   it("Should send data if the socket is ready", () => {
     const action = { type: "DO_SOMETHING" };
