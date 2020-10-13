@@ -11,14 +11,11 @@ import {
   setIsReady,
 } from "@purple-messenger/core";
 
-const serverURL = "http://localhost:8000";
-
-export function connect() {
+export function connect(serverURL = "http://localhost:8000") {
   const socket = io(serverURL);
-  return new Promise((resolve) => {
-    socket.on("connect", () => {
-      resolve(socket);
-    });
+  return new Promise<SocketIOClient.Socket>((resolve, reject) => {
+    socket.on("connect", () => resolve(socket));
+    socket.on("disconnect", reject);
   });
 }
 
