@@ -1,6 +1,6 @@
 import io from "socket.io-client";
 import { eventChannel } from "redux-saga";
-import { put, fork, take, call, cancel } from "redux-saga/effects";
+import { put, fork, take, call, cancel, takeEvery } from "redux-saga/effects";
 import { Action } from "redux";
 import {
   connected,
@@ -38,19 +38,17 @@ export const subscribe = (socket: SocketIOClient.Socket) =>
 
 export function* read(socket: SocketIOClient.Socket) {
   const channel = yield call(subscribe, socket);
-  while (true) {
-    const action = yield take(channel);
+  yield takeEvery(channel, function* (action: Action) {
     yield put(action);
-  }
+  });
 }
 
 export function* write(socket: SocketIOClient.Socket) {
-  while (true) {
-    const action: SendDataAction = yield take(
-      socketActionTypes.socket.saga.sendData
-    );
+  yield takeEvery(socketActionTypes.socket.saga.sendData, function* (
+    action: SendDataAction
+  ) {
     socket.emit(action.data.type, action.data);
-  }
+  });
 }
 
 export function* handleIO(socket: SocketIOClient.Socket) {
