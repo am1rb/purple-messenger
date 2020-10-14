@@ -12,10 +12,29 @@ import {
 import {
   appActionTypes,
   connected,
+  disconnected,
   sendData,
   setIsReady,
   socketActionTypes,
 } from "@purple-messenger/core";
+import { put, take, takeEvery } from "redux-saga/effects";
+import { Action } from "redux";
+
+function getSubscribedSaga(
+  socketFunc: (socket: SocketIOClient.Socket) => () => void
+) {
+  const socket = socketIOClient("server-address");
+  const channel = subscribe(socket);
+
+  function* saga() {
+    setTimeout(socketFunc(socket), 0);
+    yield takeEvery(channel, function* (action: Action) {
+      yield put(action);
+    });
+  }
+
+  return saga;
+}
 
 describe("The socket saga tests", () => {
   it("Should connect to the server properly", async () => {
@@ -88,5 +107,23 @@ describe("The socket saga tests", () => {
       .next();
 
     expect(handleDisconnect).toHaveBeenCalled();
+  });
+
+  it("Should subscribe emit the connected action correctly", () => {
+    const gen = getSubscribedSaga((socket) => () => socket.disconnect());
+    return expectSaga(gen).put(connected()).run({ silenceTimeout: true });
+  });
+
+  it("Should subscribe emit the disconnect action correctly", () => {
+    const gen = getSubscribedSaga((socket) => () => socket.disconnect());
+    return expectSaga(gen).put(disconnected()).run({ silenceTimeout: true });
+  });
+
+  it("Should subscribe emit the dispatched action correctly", () => {
+    const action = { type: "sample-action" };
+    const gen = getSubscribedSaga((socket) => () =>
+      socket.emit("dispatch", action)
+    );
+    return expectSaga(gen).put(action).run({ silenceTimeout: true });
   });
 });
