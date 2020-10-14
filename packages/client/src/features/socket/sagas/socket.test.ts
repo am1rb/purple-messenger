@@ -15,9 +15,8 @@ import {
   disconnected,
   sendData,
   setIsReady,
-  socketActionTypes,
 } from "@purple-messenger/core";
-import { put, take, takeEvery } from "redux-saga/effects";
+import { put, takeEvery } from "redux-saga/effects";
 import { Action } from "redux";
 
 function getSubscribedSaga(
@@ -44,16 +43,19 @@ describe("The socket saga tests", () => {
 
   it("Should read saga work correctly", () => {
     const socket = socketIOClient("server-address");
-    const channel = "sample-channel";
-    const action = { type: "sample-action1" };
 
-    testSaga(read, socket)
-      .next()
-      .call(subscribe, socket)
-      .next(channel)
-      .take(channel)
-      .next(action)
-      .put(action);
+    const action1 = { type: "sample-action1" };
+    const action2 = { type: "sample-action2" };
+
+    setTimeout(() => {
+      socket.emit("dispatch", action1);
+      socket.emit("dispatch", action2);
+    }, 5);
+
+    return expectSaga(read, socket)
+      .put(action1)
+      .put(action2)
+      .run({ silenceTimeout: true });
   });
 
   it("Should write saga work correctly", () => {
@@ -63,12 +65,12 @@ describe("The socket saga tests", () => {
 
     socket.on(action.type, handleWrite);
 
-    testSaga(write, socket)
-      .next()
-      .take(socketActionTypes.socket.saga.sendData)
-      .next(sendData(action));
-
-    expect(handleWrite).toHaveBeenCalledWith(action);
+    return expectSaga(write, socket)
+      .dispatch(sendData(action))
+      .run({ silenceTimeout: true })
+      .finally(() => {
+        expect(handleWrite).toHaveBeenCalledWith(action);
+      });
   });
 
   it("Should handle io properly", () => {
