@@ -67,7 +67,7 @@ describe("The message sagas tests", () => {
       type: "ActionType",
       phase: MessagePhase.Receive,
     };
-    testSaga(sendIfMessagePhaseIsSend, action).finish().isDone();
+    testSaga(sendIfMessagePhaseIsSend, action).next().finish().isDone();
   });
 
   it("Should add the message to the message box if the conversation is selected", () => {
@@ -87,6 +87,24 @@ describe("The message sagas tests", () => {
       ])
       .put(addMessage(message))
       .run();
+  });
+
+  it("Should ignore the message if the conversation is not selected", () => {
+    const receiverName = "john.doe";
+    const message = {
+      id: 1,
+      body: "message body",
+      status: MessageStatus.Pending,
+      owner: MessageOwner.Me,
+      sentAt: new Date(),
+    };
+    const action = sendMessage(receiverName, message);
+
+    testSaga(newMessage, action)
+      .next()
+      .select(getCurrentConversationUsername)
+      .next("anotherConversation")
+      .isDone();
   });
 
   it("Should send receive ack", () => {
