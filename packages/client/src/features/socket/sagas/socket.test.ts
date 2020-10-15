@@ -32,7 +32,7 @@ function getSubscribedSaga(
     });
   }
 
-  return saga;
+  return { saga, channel, socket };
 }
 
 describe("The socket saga tests", () => {
@@ -112,20 +112,32 @@ describe("The socket saga tests", () => {
   });
 
   it("Should subscribe emit the connected action correctly", () => {
-    const gen = getSubscribedSaga((socket) => () => socket.disconnect());
-    return expectSaga(gen).put(connected()).run({ silenceTimeout: true });
+    const { saga } = getSubscribedSaga((socket) => () => socket.disconnect());
+    return expectSaga(saga).put(connected()).run({ silenceTimeout: true });
   });
 
   it("Should subscribe emit the disconnect action correctly", () => {
-    const gen = getSubscribedSaga((socket) => () => socket.disconnect());
-    return expectSaga(gen).put(disconnected()).run({ silenceTimeout: true });
+    const { saga } = getSubscribedSaga((socket) => () => socket.disconnect());
+    return expectSaga(saga).put(disconnected()).run({ silenceTimeout: true });
   });
 
   it("Should subscribe emit the dispatched action correctly", () => {
     const action = { type: "sample-action" };
-    const gen = getSubscribedSaga((socket) => () =>
+    const { saga } = getSubscribedSaga((socket) => () =>
       socket.emit("dispatch", action)
     );
-    return expectSaga(gen).put(action).run({ silenceTimeout: true });
+    return expectSaga(saga).put(action).run({ silenceTimeout: true });
+  });
+
+  it("Should remove callbacks when the channel is closed", () => {
+    const { saga, channel, socket } = getSubscribedSaga(() => () => {});
+    return expectSaga(saga)
+      .run({ silenceTimeout: true })
+      .then(() => {
+        channel.close();
+        expect(socket.listeners("connect")).toHaveLength(0);
+        expect(socket.listeners("disconnect")).toHaveLength(0);
+        expect(socket.listeners("dispatch")).toHaveLength(0);
+      });
   });
 });
