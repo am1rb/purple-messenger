@@ -96,6 +96,7 @@
   "jest": {
     "coveragePathIgnorePatterns": [
       ".*\\.styles\\.ts",
+      "core/style/theme.ts",
       "serviceWorker.ts"
     ]
   }
