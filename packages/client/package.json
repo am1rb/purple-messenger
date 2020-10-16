@@ -97,7 +97,8 @@
     "coveragePathIgnorePatterns": [
       ".*\\.styles\\.ts",
       "core/style/theme.ts",
-      "serviceWorker.ts"
+      "serviceWorker.ts",
+      ".*/index\\.ts"
     ]
   }
 }
