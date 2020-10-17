@@ -32,10 +32,8 @@ function useTextFieldEvents<T extends BaseInputEvents>({
   );
   const handleStopTyping = useCallback(
     debounce(detectTypeTime, () => {
-      if (isTyping.current) {
-        isTyping.current = false;
-        onStopTyping?.();
-      }
+      isTyping.current = false;
+      onStopTyping?.();
     }),
     [detectTypeTime, onStopTyping]
   );
