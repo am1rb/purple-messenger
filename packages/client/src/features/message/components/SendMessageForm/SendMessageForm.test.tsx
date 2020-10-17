@@ -38,6 +38,20 @@ describe("The <SendMessageForm /> tests", () => {
     );
   });
 
+  it("Should not send the message by clicking on the send button if the username is undefined", () => {
+    const message = "Hello World!";
+    const { getByTestId, store } = renderWithStore(
+      <SendMessageForm {...sharedProps} username={undefined} />
+    );
+
+    userEvent.type(getByTestId("mock-message-text-field"), message);
+    userEvent.click(getByTestId("mock-mui-icon-button"));
+
+    expect(store.actions).not.toContainEqual(
+      submitMessage(sharedProps.username!, message)
+    );
+  });
+
   it("Should send the message by pressing the enter button", () => {
     const { getByTestId, store } = renderWithStore(
       <SendMessageForm {...sharedProps} />
@@ -65,6 +79,19 @@ describe("The <SendMessageForm /> tests", () => {
     );
   });
 
+  it("Should not call startTypingMessage when something is typed if the username is undefined", () => {
+    const { getByTestId, store } = renderWithStore(
+      <SendMessageForm {...sharedProps} username={undefined} />
+    );
+
+    const messageField = getByTestId("mock-message-text-field");
+    userEvent.type(messageField, sharedMessage);
+
+    expect(store.actions).not.toContainEqual(
+      startTypingMessage(sharedProps.username!)
+    );
+  });
+
   it("Should call stopTypingMessage when something is typed", () => {
     jest.useFakeTimers();
 
@@ -78,6 +105,25 @@ describe("The <SendMessageForm /> tests", () => {
     jest.runAllTimers();
 
     expect(store.actions).toContainEqual(
+      stopTypingMessage(sharedProps.username!)
+    );
+
+    jest.clearAllTimers();
+  });
+
+  it("Should not call stopTypingMessage when something is typed if the username is undefined", () => {
+    jest.useFakeTimers();
+
+    const { getByTestId, store } = renderWithStore(
+      <SendMessageForm {...sharedProps} username={undefined} />
+    );
+
+    const messageField = getByTestId("mock-message-text-field");
+    userEvent.type(messageField, sharedMessage);
+
+    jest.runAllTimers();
+
+    expect(store.actions).not.toContainEqual(
       stopTypingMessage(sharedProps.username!)
     );
 
