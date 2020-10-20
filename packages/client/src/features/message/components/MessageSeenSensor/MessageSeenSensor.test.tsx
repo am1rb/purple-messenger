@@ -51,4 +51,19 @@ describe("The <MessageSeenSensor /> tests", () => {
       seenMessageAck(sharedUsername, sharedProps.messageId)
     );
   });
+
+  it("Should not call seenMessageAck action if a message is seen and username is not defined", () => {
+    (useConversationInfo as jest.Mock).mockClear();
+
+    const { getByTestId, store } = renderWithStore(
+      <MessageSeenSensor {...sharedProps} status={MessageStatus.Received} />,
+      {}
+    );
+
+    userEvent.click(getByTestId("mock-react-visibility-sensor-visible"));
+
+    expect(store.actions).toContainEqual(
+      seenMessageAck(sharedUsername, sharedProps.messageId)
+    );
+  });
 });
