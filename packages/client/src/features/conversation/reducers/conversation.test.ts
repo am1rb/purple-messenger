@@ -39,6 +39,19 @@ describe("The conversation reducer tests", () => {
     ).toBeTruthy();
   });
 
+  it("Should not set isTyping to true for the target conversation", () => {
+    const conversation = sampleConversationList[0];
+    const state1 = reducer(
+      undefined,
+      setConversationList([{ ...conversation, isTyping: false }])
+    );
+    const state2 = reducer(
+      state1,
+      startTypingMessage(conversation.friend.username, MessagePhase.Send)
+    );
+    expect(state2.list.get(conversation.friend.username)?.isTyping).toBeFalsy();
+  });
+
   it("Should set isTyping to false for the target conversation", () => {
     const conversation = sampleConversationList[0];
     const state1 = reducer(
@@ -50,6 +63,21 @@ describe("The conversation reducer tests", () => {
       stopTypingMessage(conversation.friend.username, MessagePhase.Receive)
     );
     expect(state2.list.get(conversation.friend.username)?.isTyping).toBeFalsy();
+  });
+
+  it("Should not set isTyping to false for the target conversation", () => {
+    const conversation = sampleConversationList[0];
+    const state1 = reducer(
+      undefined,
+      setConversationList([{ ...conversation, isTyping: true }])
+    );
+    const state2 = reducer(
+      state1,
+      stopTypingMessage(conversation.friend.username, MessagePhase.Send)
+    );
+    expect(
+      state2.list.get(conversation.friend.username)?.isTyping
+    ).toBeTruthy();
   });
 
   it("Should update the conversation when a message received", () => {
