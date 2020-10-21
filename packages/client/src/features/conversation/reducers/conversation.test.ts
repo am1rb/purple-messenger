@@ -116,6 +116,31 @@ describe("The conversation reducer tests", () => {
     });
   });
 
+  it("Should not update the message info if the temp id is invalid", () => {
+    const conversation = sampleConversationList[1];
+    const receiverUsername = conversation.friend.username;
+    const message = {
+      ...sampleMessage3,
+      id: -1,
+      status: MessageStatus.Pending,
+    };
+    const newMessageId = 10;
+    const state1 = reducer(
+      undefined,
+      setConversationList(sampleConversationList)
+    );
+    const state2 = reducer(state1, sendMessage(receiverUsername, message));
+    const state3 = reducer(
+      state2,
+      sentMessageAck(receiverUsername, -999, newMessageId)
+    );
+
+    expect(state3.list.get(receiverUsername)?.message).toMatchObject({
+      status: MessageStatus.Pending,
+      id: message.id,
+    });
+  });
+
   it("Should mark the message as received properly", () => {
     const conversation = sampleConversationList[1];
     const receiverUsername = conversation.friend.username;
@@ -139,7 +164,27 @@ describe("The conversation reducer tests", () => {
     );
   });
 
-  it("Should the message status as seen properly", () => {
+  it("Should not mark the message as received if the id is invalid", () => {
+    const conversation = sampleConversationList[1];
+    const receiverUsername = conversation.friend.username;
+    const message = {
+      ...sampleMessage3,
+      id: 10,
+      status: MessageStatus.Sent,
+    };
+    const state1 = reducer(
+      undefined,
+      setConversationList(sampleConversationList)
+    );
+    const state2 = reducer(state1, sendMessage(receiverUsername, message));
+    const state3 = reducer(state2, receivedMessageAck(receiverUsername, 999));
+
+    expect(state3.list.get(receiverUsername)?.message?.status).not.toBe(
+      MessageStatus.Received
+    );
+  });
+
+  it("Should set the message status as seen properly", () => {
     const conversation = sampleConversationList[1];
     const receiverUsername = conversation.friend.username;
     const message = {
@@ -158,6 +203,26 @@ describe("The conversation reducer tests", () => {
     );
 
     expect(state3.list.get(receiverUsername)?.message?.status).toBe(
+      MessageStatus.Seen
+    );
+  });
+
+  it("Should not set the message status as seen if the id is invalid", () => {
+    const conversation = sampleConversationList[1];
+    const receiverUsername = conversation.friend.username;
+    const message = {
+      ...sampleMessage3,
+      id: 10,
+      status: MessageStatus.Sent,
+    };
+    const state1 = reducer(
+      undefined,
+      setConversationList(sampleConversationList)
+    );
+    const state2 = reducer(state1, sendMessage(receiverUsername, message));
+    const state3 = reducer(state2, seenMessageAck(receiverUsername, 999));
+
+    expect(state3.list.get(receiverUsername)?.message?.status).not.toBe(
       MessageStatus.Seen
     );
   });
