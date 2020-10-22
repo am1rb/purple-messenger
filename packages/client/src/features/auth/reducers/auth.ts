@@ -1,10 +1,10 @@
+import { Action } from "redux";
 import {
   authActionTypes as actionTypes,
   SetIsAuthenticatedAction,
   SetAuthErrorAction,
   SetTokenAction,
 } from "@purple-messenger/core";
-import { Action } from "redux";
 
 export interface AuthState {
   isAuthenticated: boolean;
@@ -12,18 +12,18 @@ export interface AuthState {
   authError: string;
 }
 
-const initialState: AuthState = {
-  isAuthenticated: false,
-  token: localStorage.getItem("token")
-    ? (localStorage.getItem("token") as string)
-    : undefined,
-  authError: "",
-};
-
 function authReducer(
-  state: AuthState = initialState,
+  currentState: AuthState | undefined,
   action: Action
 ): AuthState {
+  const state: AuthState = currentState ?? {
+    isAuthenticated: false,
+    token: localStorage.getItem("token")
+      ? (localStorage.getItem("token") as string)
+      : undefined,
+    authError: "",
+  };
+
   switch (action.type) {
     case actionTypes.auth.reducer.setIsAuthenticated: {
       const setIsAuthenticated = action as SetIsAuthenticatedAction;
