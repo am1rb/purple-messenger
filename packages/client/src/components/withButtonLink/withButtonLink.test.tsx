@@ -15,7 +15,17 @@ describe("The withButtonLink tests", () => {
     render(<Button to={link}>{children}</Button>);
     expect(TestComponent).toHaveBeenCalledWith(
       { children: children, component: Link, to: link },
-      {}
+      expect.anything()
+    );
+  });
+
+  it("Should not pass component and to props if the to prop is not passed", () => {
+    const Button = withButtonLink(TestComponent);
+    const children = "Click me";
+    render(<Button>{children}</Button>);
+    expect(TestComponent).toHaveBeenCalledWith(
+      { children: children },
+      expect.anything()
     );
   });
 });
