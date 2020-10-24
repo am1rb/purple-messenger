@@ -98,6 +98,7 @@
       ".*\\.styles\\.ts",
       ".*\\.schema\\.ts",
       ".*/types/.*\\.ts",
+      ".*/type/.*\\.ts",
       "routes.ts",
       "core/style/theme.ts",
       "serviceWorker.ts",
