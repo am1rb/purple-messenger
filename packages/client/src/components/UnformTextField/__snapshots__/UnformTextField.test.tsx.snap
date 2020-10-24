@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UnformTextField Component Tests Should match the snapshot 1`] = `
+<div>
+  <input
+    data-testid="mock-mui-text-field"
+    type="text"
+  />
+</div>
+`;

@@ -26,12 +26,10 @@ function UnformTextField({
   );
 
   return label ? (
-    <>
-      <label>
-        {label}
-        {field}
-      </label>
-    </>
+    <label>
+      {label}
+      {field}
+    </label>
   ) : (
     field
   );
