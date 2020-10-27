@@ -1,10 +1,43 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`UnformTextField Component Tests Should match the snapshot 1`] = `
+exports[`UnformTextField Component Tests Should match the snapshot when the field has a helper text 1`] = `
 <div>
   <input
     data-testid="mock-mui-text-field"
     type="text"
+    value="defaultValue"
+  />
+  <span
+    data-testid="mock-mui-text-field-helper-text"
+  >
+    helper text
+  </span>
+</div>
+`;
+
+exports[`UnformTextField Component Tests Should match the snapshot when the field has a label 1`] = `
+<div>
+  <label>
+    <span
+      data-testid="mock-mui-text-field-label"
+    >
+      field label
+    </span>
+    <input
+      data-testid="mock-mui-text-field"
+      type="text"
+      value="defaultValue"
+    />
+  </label>
+</div>
+`;
+
+exports[`UnformTextField Component Tests Should match the snapshot when there is a simple input 1`] = `
+<div>
+  <input
+    data-testid="mock-mui-text-field"
+    type="text"
+    value="defaultValue"
   />
 </div>
 `;
