@@ -9,6 +9,7 @@ export interface UnformProps<T>
 }
 
 function Unform<T>({ initialData: initialDataProp, ...other }: UnformProps<T>) {
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const initialData = useMemo(() => initialDataProp, []);
   return <Form {...(other as FormProps)} initialData={initialData} />;
 }

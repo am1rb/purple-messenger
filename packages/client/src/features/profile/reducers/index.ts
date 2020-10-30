@@ -1,7 +1,9 @@
-import profile, { ProfileState } from './profile';
+import profile, { ProfileState } from "./profile";
 
 export interface State {
   profile: ProfileState;
 }
 
-export default { profile };
+const reducers = { profile };
+
+export default reducers;

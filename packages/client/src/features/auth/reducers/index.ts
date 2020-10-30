@@ -1,7 +1,9 @@
-import auth, { AuthState } from './auth';
+import auth, { AuthState } from "./auth";
 
 export interface State {
   auth: AuthState;
 }
 
-export default { auth };
+const reducers = { auth };
+
+export default reducers;

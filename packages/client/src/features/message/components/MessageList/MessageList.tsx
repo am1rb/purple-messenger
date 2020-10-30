@@ -18,6 +18,7 @@ function MessageList({ username }: MessageListProps) {
 
   useEffect(() => {
     dispatch(clearMessageList());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [username]);
 
   return (

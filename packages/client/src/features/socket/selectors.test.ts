@@ -4,7 +4,7 @@ import { getIsConnected, getIsReady } from "./selectors";
 
 describe("The socket selectors tests", () => {
   it("Should return the ready status correctly", () => {
-    [true, false].map((status) => {
+    [true, false].forEach((status) => {
       const store: InitialStore = {
         socket: {
           isReady: status,
@@ -16,7 +16,7 @@ describe("The socket selectors tests", () => {
   });
 
   it("Should return the connected status correctly", () => {
-    [true, false].map((status) => {
+    [true, false].forEach((status) => {
       const store: InitialStore = {
         socket: {
           isReady: false,

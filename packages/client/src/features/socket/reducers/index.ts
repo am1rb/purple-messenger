@@ -1,7 +1,9 @@
-import socket, { SocketState } from './socket';
+import socket, { SocketState } from "./socket";
 
 export interface State {
   socket: SocketState;
 }
 
-export default { socket };
+const reducers = { socket };
+
+export default reducers;

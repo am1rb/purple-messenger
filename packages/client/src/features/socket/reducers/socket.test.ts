@@ -11,7 +11,7 @@ describe("The socket reducer tests", () => {
   });
 
   it("Should set isReadyStatus correctly", () => {
-    [true, false].map((status) => {
+    [true, false].forEach((status) => {
       expect(reducer(undefined, setIsReady(status)).isReady).toBe(status);
     });
   });

@@ -4,6 +4,8 @@ export interface State {
   message: MessageState;
 }
 
-export default {
+const reducers = {
   message,
 };
+
+export default reducers;

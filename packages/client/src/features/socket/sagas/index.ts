@@ -1,3 +1,5 @@
 import { execSocket } from "./socket";
 
-export default [execSocket()];
+const sagas = [execSocket()];
+
+export default sagas;

@@ -10,12 +10,10 @@ import {
   receivedMessageAck,
   addMessage,
   SendMessageAction,
-  ProfileInfo,
 } from "@purple-messenger/core";
 import { getLastMessageId } from "features/message/selectors";
 import { send } from "features/socket/effects";
 import { getCurrentConversationUsername } from "features/conversation/selectors";
-import { getProfileInfo } from "features/profile/selectors";
 
 export function* submitMessage({
   receiverUsername,

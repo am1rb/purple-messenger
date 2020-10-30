@@ -23,6 +23,7 @@ function useTextFieldEvents<T extends BaseInputEvents>({
 }: TextFieldEventsProps<T>) {
   const isTyping = useRef(false);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const handleStartTyping = useCallback(
     debounce(detectTypeTime, true, () => {
       isTyping.current = true;
@@ -30,6 +31,8 @@ function useTextFieldEvents<T extends BaseInputEvents>({
     }),
     [detectTypeTime, onStartTyping]
   );
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const handleStopTyping = useCallback(
     debounce(detectTypeTime, () => {
       isTyping.current = false;

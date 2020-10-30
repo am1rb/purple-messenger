@@ -3,7 +3,7 @@ import { isAuthenticated, getToken } from "features/auth/selectors";
 import { useSelector } from "react-redux";
 import VerifyToken from "../VerifyToken";
 
-function withAuthBase<T, U>(
+function withAuthBase<T>(
   UserComponent: ComponentType<T>,
   GuestComponent: ComponentType
 ) {

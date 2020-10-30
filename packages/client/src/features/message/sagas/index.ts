@@ -2,7 +2,7 @@ import { takeEvery } from "redux-saga/effects";
 import { messageActionTypes } from "@purple-messenger/core";
 import * as messageSagas from "./message";
 
-export default [
+const sagas = [
   takeEvery(
     messageActionTypes.message.saga.submitMessage,
     messageSagas.submitMessage
@@ -28,3 +28,5 @@ export default [
     messageSagas.newMessage
   ),
 ];
+
+export default sagas;

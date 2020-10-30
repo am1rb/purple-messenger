@@ -47,7 +47,7 @@ export function* write(socket: SocketIOClient.Socket) {
   yield takeEvery(socketActionTypes.socket.saga.sendData, function* (
     action: SendDataAction
   ) {
-    socket.emit(action.data.type, action.data);
+    yield socket.emit(action.data.type, action.data);
   });
 }
 
