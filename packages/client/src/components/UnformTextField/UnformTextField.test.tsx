@@ -3,9 +3,16 @@ import React from "react";
 import { useField } from "@rocketseat/unform";
 import UnformTextField from "./UnformTextField";
 
-jest.mock("@rocketseat/unform");
-
 describe("UnformTextField Component Tests", () => {
+  beforeEach(() => {
+    (useField as jest.Mock).mockReturnValue({
+      fieldName: "fieldName",
+      registerField: () => {},
+      defaultValue: "defaultValue",
+      error: "",
+    });
+  });
+
   it("Should match the snapshot when there is a simple input", () => {
     const { container } = render(<UnformTextField name="myField" />);
     expect(container).toMatchSnapshot();

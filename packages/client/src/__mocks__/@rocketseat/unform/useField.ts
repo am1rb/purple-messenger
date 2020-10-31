@@ -1,10 +1,3 @@
-const useField = jest.fn(() => {
-  return {
-    fieldName: "fieldName",
-    registerField: () => {},
-    defaultValue: "defaultValue",
-    error: "",
-  };
-});
+const useField = jest.fn();
 
 export default useField;
