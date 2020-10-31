@@ -16,8 +16,8 @@ const sharedKeyDownEvent = (sharedEvent as Partial<
 >) as React.KeyboardEvent<HTMLInputElement>;
 
 describe("The useTextFieldEvents hook tests", () => {
-  beforeAll(() => jest.useFakeTimers());
-  afterAll(() => jest.clearAllTimers());
+  beforeEach(() => jest.useFakeTimers());
+  afterEach(() => jest.clearAllTimers());
 
   it("Should call onChange event if the handleChange is called", () => {
     const handleChange = jest.fn();
