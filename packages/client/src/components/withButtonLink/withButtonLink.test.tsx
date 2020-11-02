@@ -3,11 +3,13 @@ import { render } from "@testing-library/react";
 import { Link } from "react-router-dom";
 import withButtonLink from "./withButtonLink";
 
-jest.mock("react-router-dom");
-
-const TestComponent = jest.fn(() => <span data-testid="mock-test" />);
+const TestComponent = jest.fn();
 
 describe("The withButtonLink tests", () => {
+  beforeEach(() => {
+    TestComponent.mockImplementation(() => <span data-testid="mock-test" />);
+  });
+
   it("Should pass component and to props correctly", () => {
     const Button = withButtonLink(TestComponent);
     const link = "/sample-route";
