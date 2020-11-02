@@ -7,6 +7,7 @@ import {
   unloadConversationList,
   sampleConversationList,
 } from "@purple-messenger/core";
+import { act } from "@testing-library/react";
 
 jest.mock("../ConversationRow");
 
@@ -61,7 +62,9 @@ describe("The <ConversationList /> tests", () => {
       initialStore
     );
     expect(store.actions).toContainEqual(loadConversationList());
-    unmount();
+    act(() => {
+      unmount();
+    });
     expect(store.actions).toContainEqual(unloadConversationList());
   });
 });
