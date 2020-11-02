@@ -9,6 +9,9 @@ exports[`The <Layout /> tests Should match the snapshot 1`] = `
       class="container"
     >
       <div
+        data-testid="mock-app-menu"
+      />
+      <div
         class="content"
       >
         layout children
