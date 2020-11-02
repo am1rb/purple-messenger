@@ -5,12 +5,12 @@ import MessageSentAt from "./MessageSentAt";
 describe("The <MessageSentAt /> tests", () => {
   let dateSpy: jest.SpyInstance;
 
-  beforeAll(() => {
+  beforeEach(() => {
     dateSpy = jest
       .spyOn(global.Date, "now")
       .mockImplementation(() => Date.parse("2020-02-14"));
   });
-  afterAll(() => dateSpy.mockRestore());
+  afterEach(() => dateSpy.mockRestore());
 
   it("Should match the snapshot", () => {
     const { container } = render(
