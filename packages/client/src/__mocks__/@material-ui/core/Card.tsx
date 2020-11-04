@@ -1,8 +1,5 @@
 import React from "react";
-
-export interface CardProps {
-  children: React.ReactNode;
-}
+import type { CardProps } from "@material-ui/core/Card";
 
 function MuiCard({ children }: CardProps) {
   return <div data-testid="mock-mui-card">{children}</div>;

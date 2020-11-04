@@ -1,9 +1,5 @@
 import React from "react";
-
-export interface ButtonProps {
-  onClick?: () => void;
-  children: React.ReactNode;
-}
+import type { ButtonProps } from "@material-ui/core/Button";
 
 function MuiButton({ onClick, children }: ButtonProps) {
   return (

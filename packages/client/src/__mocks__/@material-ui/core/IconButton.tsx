@@ -1,13 +1,5 @@
 import React from "react";
-
-export interface IconButtonProps
-  extends Pick<
-    React.ButtonHTMLAttributes<HTMLButtonElement>,
-    "type" | "disabled"
-  > {
-  onClick?: () => void;
-  children: React.ReactNode;
-}
+import type { IconButtonProps } from "@material-ui/core/IconButton";
 
 function MuiIconButton(
   { type, disabled, onClick, children }: IconButtonProps,
