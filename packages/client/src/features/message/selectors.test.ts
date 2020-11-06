@@ -8,7 +8,7 @@ import {
   getMessageList,
 } from "./selectors";
 
-jest.unmock("react-router");
+jest.unmock("react-router-dom");
 
 const sharedState: InitialStore = {
   message: {

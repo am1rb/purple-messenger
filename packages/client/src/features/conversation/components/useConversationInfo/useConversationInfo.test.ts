@@ -1,5 +1,5 @@
 import { renderHook } from "core/test";
-import { useParams } from "react-router";
+import { useParams } from "react-router-dom";
 import useConversationInfo from "./useConversationInfo";
 
 describe("The useConversationInfo tests", () => {

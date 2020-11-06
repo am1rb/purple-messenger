@@ -8,7 +8,7 @@ import { State } from "core/redux/reducers";
 import { OrderedMap } from "immutable";
 import { sampleConversationList } from "@purple-messenger/core";
 
-jest.unmock("react-router");
+jest.unmock("react-router-dom");
 
 const sharedState: InitialStore = {
   router: {
