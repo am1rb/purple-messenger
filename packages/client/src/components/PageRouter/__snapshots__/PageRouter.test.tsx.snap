@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PageRouter Component Tests Should match the snapshot 1`] = `
+<div>
+  <div
+    data-testid="mock-switch"
+  >
+    <div
+      data-path="/conversation/@:username_/"
+      data-testid="mock-route"
+    />
+  </div>
+</div>
+`;
