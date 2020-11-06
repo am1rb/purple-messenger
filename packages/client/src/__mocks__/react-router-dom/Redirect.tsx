@@ -1,10 +1,7 @@
 import React from "react";
+import type { RedirectProps } from "react-router-dom";
 
-export interface RedirectProps {
-  to: string;
-}
-
-export function Redirect({ to }: RedirectProps) {
+function Redirect({ to }: RedirectProps) {
   return <span data-testid="mock-redirect" data-to={to} />;
 }
 
