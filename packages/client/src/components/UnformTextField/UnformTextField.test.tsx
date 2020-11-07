@@ -1,5 +1,5 @@
-import { render } from "@testing-library/react";
 import React from "react";
+import { render, screen, act } from "@testing-library/react";
 import { useField } from "@rocketseat/unform";
 import UnformTextField from "./UnformTextField";
 
@@ -32,7 +32,7 @@ describe("UnformTextField Component Tests", () => {
     expect(container).toMatchSnapshot();
   });
 
-  it("should register the field in unform correctly", () => {
+  it("Should register the field in unform correctly", () => {
     const registerField = jest.fn();
     const useFieldMock = (useField as jest.Mock).mockReturnValue({
       registerField,
@@ -48,29 +48,49 @@ describe("UnformTextField Component Tests", () => {
     useFieldMock.mockClear();
   });
 
-  it("should render the field error correctly", () => {
+  it("Should render the field error correctly", () => {
     const errorMessage = "field error message";
     const useFieldMock = (useField as jest.Mock).mockReturnValue({
       registerField: () => {},
       fieldName: "field",
       error: errorMessage,
     });
-    const { getByTestId } = render(<UnformTextField name="myField" />);
-    expect(getByTestId("mock-mui-text-field-helper-text")).toHaveTextContent(
-      errorMessage
-    );
+    render(<UnformTextField name="myField" />);
+    expect(
+      screen.getByTestId("mock-mui-text-field-helper-text")
+    ).toHaveTextContent(errorMessage);
     useFieldMock.mockClear();
   });
 
-  it("should use the default value properly", () => {
+  it("Should use the default value properly", () => {
     const defaultValue = "hello world";
     const useFieldMock = (useField as jest.Mock).mockReturnValue({
       registerField: () => {},
       fieldName: "field",
       defaultValue,
     });
-    const { getByRole } = render(<UnformTextField name="myField" />);
-    expect(getByRole("textbox")).toHaveValue(defaultValue);
+    render(<UnformTextField name="myField" />);
+    expect(screen.getByRole("textbox")).toHaveValue(defaultValue);
+    useFieldMock.mockClear();
+  });
+
+  it("Should clear the input value correctly", () => {
+    const defaultValue = "hello world";
+    const clearValue = jest.fn();
+    const useFieldMock = (useField as jest.Mock).mockReturnValue({
+      registerField: ({ clearValue: clearValueProp }: any) => {
+        clearValue.mockImplementation(clearValueProp);
+      },
+      fieldName: "field",
+      defaultValue,
+    });
+    render(<UnformTextField name="myField" />);
+
+    act(() => {
+      clearValue();
+    });
+
+    expect(screen.getByRole("textbox")).toHaveValue("");
     useFieldMock.mockClear();
   });
 });

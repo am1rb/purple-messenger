@@ -13,19 +13,19 @@ export type UnformTextFieldProps = Omit<
 };
 
 function UnformTextField({ name, helperText, ...other }: UnformTextFieldProps) {
-  const ref = useRef();
+  const ref = useRef<HTMLInputElement>(null);
   const { fieldName, registerField, defaultValue, error } = useField(name);
 
   useEffect(() => {
     registerField({
       name: fieldName,
-      ref: ref.current,
+      ref: ref.current as HTMLInputElement,
       path: "value",
-      clearValue: (inputRef: HTMLInputElement) => {
-        inputRef.value = "";
+      clearValue: () => {
+        ref.current!.value = "";
       },
     });
-  }, [ref.current, fieldName]); // eslint-disable-line
+  }, [fieldName]); // eslint-disable-line
 
   return (
     <TextField
