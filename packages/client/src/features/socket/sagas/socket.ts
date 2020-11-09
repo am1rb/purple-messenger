@@ -11,7 +11,13 @@ import {
   setIsReady,
 } from "@purple-messenger/core";
 
-export function connect(serverURL = "http://localhost:8000") {
+export function connect() {
+  const serverURL = process.env.REACT_APP_SERVER_SOCKET;
+
+  if (!serverURL) {
+    throw new Error("The REACT_APP_SERVER_SOCKET does not exist");
+  }
+
   const socket = io(serverURL);
   return new Promise<SocketIOClient.Socket>((resolve, reject) => {
     socket.on("connect", () => resolve(socket));

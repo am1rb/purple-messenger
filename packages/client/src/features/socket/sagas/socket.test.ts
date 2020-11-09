@@ -36,6 +36,15 @@ function getSubscribedSaga(
 }
 
 describe("The socket saga tests", () => {
+  const realEnv = process.env;
+
+  beforeAll(() => {
+    process.env.REACT_APP_SERVER_SOCKET = "server-address";
+  });
+  afterAll(() => {
+    process.env = realEnv;
+  });
+
   it("Should connect to the server properly", async () => {
     const socket = await connect();
     expect(socket.connected).toBeTruthy();
