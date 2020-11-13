@@ -4,9 +4,9 @@ const actionTypes = uniqueActionTypes({
   app: {
     reducer: { },
     saga: {
-      start: '',
-      shutdown: '',
-      redirectTo: '',
+      start: '' as 'start',
+      shutdown: '' as 'shutdown',
+      redirectTo: '' as 'redirectTo',
     },
   },
 } as const);
