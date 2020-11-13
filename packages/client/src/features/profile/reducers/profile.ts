@@ -17,7 +17,7 @@ function profileReducer(
 ): ProfileState {
   switch (action.type) {
     case actionTypes.profile.reducer.setProfileInfo:
-      return { ...(action as SetProfileInfoAction).profileInfo };
+      return { ...action.profileInfo };
     case actionTypes.profile.reducer.resetProfileInfo:
     case authActionTypes.auth.saga.signOut:
       return null;
