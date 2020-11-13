@@ -1,9 +1,10 @@
-import { Action } from "redux";
 import {
   authActionTypes as actionTypes,
   SetIsAuthenticatedAction,
   SetAuthErrorAction,
   SetTokenAction,
+  SingOutAction,
+  ResetTokenAction,
 } from "@purple-messenger/core";
 
 export interface AuthState {
@@ -14,7 +15,12 @@ export interface AuthState {
 
 function authReducer(
   currentState: AuthState | undefined,
-  action: Action
+  action:
+    | SetIsAuthenticatedAction
+    | SetAuthErrorAction
+    | SetTokenAction
+    | SingOutAction
+    | ResetTokenAction
 ): AuthState {
   const state: AuthState = currentState ?? {
     isAuthenticated: false,
@@ -26,25 +32,22 @@ function authReducer(
 
   switch (action.type) {
     case actionTypes.auth.reducer.setIsAuthenticated: {
-      const setIsAuthenticated = action as SetIsAuthenticatedAction;
       return {
         ...state,
-        isAuthenticated: setIsAuthenticated.status,
+        isAuthenticated: action.status,
       };
     }
     case actionTypes.auth.reducer.setAuthError: {
-      const setAuthErrorAction = action as SetAuthErrorAction;
       return {
         ...state,
-        authError: setAuthErrorAction.message,
+        authError: action.message,
       };
     }
     case actionTypes.auth.reducer.setToken: {
-      const setTokenAction = action as SetTokenAction;
-      localStorage.setItem("token", setTokenAction.token);
+      localStorage.setItem("token", action.token);
       return {
         ...state,
-        token: setTokenAction.token,
+        token: action.token,
         isAuthenticated: true,
       };
     }
