@@ -3,12 +3,12 @@ import uniqueActionTypes from "../../core/helper/uniqueActionTypes";
 const actionTypes = uniqueActionTypes({
   socket: {
     reducer: {
-      connected: "",
-      disconnected: "",
-      setIsReady: ""
+      connected: "" as "connected",
+      disconnected: "" as "disconnected",
+      setIsReady: "" as "setIsReady",
     },
-    saga: { sendData: "" }
-  }
+    saga: { sendData: "" as "sendData" },
+  },
 } as const);
 
 export default actionTypes;

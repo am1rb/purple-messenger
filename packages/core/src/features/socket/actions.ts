@@ -19,6 +19,6 @@ export type SendDataAction = ReturnType<typeof sendData>;
 
 export const setIsReady = (status: boolean) => ({
   type: actionTypes.socket.reducer.setIsReady,
-  status
+  status,
 });
 export type SetIsReadyAction = ReturnType<typeof setIsReady>;

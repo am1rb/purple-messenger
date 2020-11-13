@@ -33,7 +33,7 @@ function socketReducer(
     case actionTypes.socket.reducer.setIsReady:
       return {
         ...state,
-        isReady: (action as SetIsReadyAction).status,
+        isReady: action.status,
       };
     default:
       return state;
