@@ -3,11 +3,11 @@ import uniqueActionTypes from "../../core/helper/uniqueActionTypes";
 const actionTypes = uniqueActionTypes({
   conversation: {
     reducer: {
-      setConversationList: '',
+      setConversationList: '' as 'setConversationList',
     },
     saga: {
-      loadConversationList: '',
-      unloadConversationList: '',
+      loadConversationList: '' as 'loadConversationList',
+      unloadConversationList: '' as 'unloadConversationList',
     },
   },
 } as const);
