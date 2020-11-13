@@ -8,6 +8,8 @@ import {
   AddMessageAction,
   ReceivedMessageAckAction,
   SeenMessageAckAction,
+  ClearMessageListAction,
+  SingOutAction,
 } from "@purple-messenger/core";
 import { OrderedMap } from "immutable";
 
@@ -27,6 +29,12 @@ function reducer(
     | DecreaseLastMessageIdAction
     | AddMessageAction
     | ReceivedMessageAckAction
+    | SentMessageAckAction
+    | AddMessageAction
+    | ClearMessageListAction
+    | ReceivedMessageAckAction
+    | SeenMessageAckAction
+    | SingOutAction
 ): MessageState {
   switch (action.type) {
     case messageActionTypes.message.reducer.decreaseLastMessageId:
@@ -35,18 +43,15 @@ function reducer(
         lastMessageId: state.lastMessageId - 1,
       };
     case messageActionTypes.message.reducer.sentMessageAck: {
-      const sentMessageAckAction = action as SentMessageAckAction;
       return {
         ...state,
         list: state.list.mapEntries(
           ([messageId, message]: [number, Message]) => [
-            messageId === sentMessageAckAction.tempMessageId
-              ? sentMessageAckAction.messageId
-              : messageId,
-            messageId === sentMessageAckAction.tempMessageId
+            messageId === action.tempMessageId ? action.messageId : messageId,
+            messageId === action.tempMessageId
               ? {
                   ...message,
-                  id: sentMessageAckAction.messageId,
+                  id: action.messageId,
                   status: MessageStatus.Sent,
                 }
               : message,
@@ -55,13 +60,9 @@ function reducer(
       };
     }
     case messageActionTypes.message.reducer.addMessage: {
-      const addMessageAction = action as AddMessageAction;
       return {
         ...state,
-        list: state.list.set(
-          addMessageAction.message.id,
-          addMessageAction.message
-        ),
+        list: state.list.set(action.message.id, action.message),
       };
     }
     case messageActionTypes.message.reducer.clearMessageList:
@@ -70,29 +71,21 @@ function reducer(
         list: state.list.clear(),
       };
     case messageActionTypes.message.reducer.receivedMessageAck: {
-      const receivedMessageAckAction = action as ReceivedMessageAckAction;
       return {
         ...state,
-        list: state.list.update(
-          receivedMessageAckAction.messageId,
-          (message) => ({
-            ...message,
-            status: MessageStatus.Received,
-          })
-        ),
+        list: state.list.update(action.messageId, (message) => ({
+          ...message,
+          status: MessageStatus.Received,
+        })),
       };
     }
     case messageActionTypes.message.reducer.seenMessageAck: {
-      const receivedMessageAckAction = action as SeenMessageAckAction;
       return {
         ...state,
-        list: state.list.update(
-          receivedMessageAckAction.messageId,
-          (message) => ({
-            ...message,
-            status: MessageStatus.Seen,
-          })
-        ),
+        list: state.list.update(action.messageId, (message) => ({
+          ...message,
+          status: MessageStatus.Seen,
+        })),
       };
     }
     case authActionTypes.auth.saga.signOut:
