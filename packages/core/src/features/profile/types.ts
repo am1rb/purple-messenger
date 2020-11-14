@@ -1,3 +1,10 @@
+export interface Person {
+  id: number;
+  image: string;
+  firstName: string;
+  lastName: string;
+}
+
 export interface ProfileInfo {
   id: number;
   image: string;

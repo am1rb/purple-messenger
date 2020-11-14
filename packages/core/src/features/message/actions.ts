@@ -1,5 +1,6 @@
+import { Phase } from "@purple-messenger/core/core/type";
 import actionTypes from "./actionTypes";
-import { NewMessage, Message, MessagePhase } from "./types";
+import { NewMessage, Message } from "./types";
 
 export const submitMessage = (
   receiverUsername: string,
@@ -11,7 +12,11 @@ export const submitMessage = (
 });
 export type SubmitMessageAction = ReturnType<typeof submitMessage>;
 
-export const sendMessage = (username: string, message: NewMessage, phase = MessagePhase.Send) => ({
+export const sendMessage = (
+  username: string,
+  message: NewMessage,
+  phase = Phase.Send
+) => ({
   type: actionTypes.message.saga.sendMessage,
   username,
   message,
@@ -25,20 +30,14 @@ export const addMessage = (message: Message) => ({
 });
 export type AddMessageAction = ReturnType<typeof addMessage>;
 
-export const startTypingMessage = (
-  username: string,
-  phase = MessagePhase.Send
-) => ({
+export const startTypingMessage = (username: string, phase = Phase.Send) => ({
   type: actionTypes.message.saga.startTypingMessage,
   username,
   phase,
 });
 export type StartTypingMessageAction = ReturnType<typeof startTypingMessage>;
 
-export const stopTypingMessage = (
-  username: string,
-  phase = MessagePhase.Send
-) => ({
+export const stopTypingMessage = (username: string, phase = Phase.Send) => ({
   type: actionTypes.message.saga.stopTypingMessage,
   username,
   phase,
@@ -60,7 +59,7 @@ export type SentMessageAckAction = ReturnType<typeof sentMessageAck>;
 export const receivedMessageAck = (
   username: string,
   messageId: number,
-  phase = MessagePhase.Send
+  phase = Phase.Send
 ) => ({
   type: actionTypes.message.reducer.receivedMessageAck,
   username,
@@ -72,7 +71,7 @@ export type ReceivedMessageAckAction = ReturnType<typeof receivedMessageAck>;
 export const seenMessageAck = (
   username: string,
   messageId: number,
-  phase = MessagePhase.Send
+  phase = Phase.Send
 ) => ({
   type: actionTypes.message.reducer.seenMessageAck,
   username,

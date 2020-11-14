@@ -21,3 +21,5 @@ export * from "./features/message/actions";
 export * from "./features/message/types";
 export * from "./features/message/sample";
 export { default as messageActionTypes } from "./features/message/actionTypes";
+
+export * from "./core/type";

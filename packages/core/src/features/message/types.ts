@@ -1,7 +1,4 @@
-export enum MessageOwner {
-  Me = 0,
-  Friend,
-}
+import { Owner } from "@purple-messenger/core/core/type";
 
 export enum MessageStatus {
   Pending = 0,
@@ -15,14 +12,9 @@ export interface NewMessage {
   body: string;
   status: MessageStatus;
   sentAt: Date;
-  owner: MessageOwner;
+  owner: Owner;
 }
 
 export interface Message extends NewMessage {
   receivedAt?: Date;
-}
-
-export enum MessagePhase {
-  Send = 0,
-  Receive,
 }
