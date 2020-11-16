@@ -1,13 +1,14 @@
-import React, { memo, useCallback } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Button } from '@material-ui/core';
-import Unform from 'components/Unform';
-import UnformTextField from 'components/UnformTextField';
-import { SignInFormContent } from '../../types/formContent';
-import { signIn, setAuthError } from '@purple-messenger/core';
-import { getAuthError } from 'features/auth/selectors';
-import schema from './SignInForm.schema';
-import useStyles from './SignInForm.styles';
+import React, { memo, useCallback } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import yup from "yup";
+import { Button } from "@material-ui/core";
+import Unform from "components/Unform";
+import UnformTextField from "components/UnformTextField";
+import { SignInFormContent } from "../../types/formContent";
+import { signIn, setAuthError } from "@purple-messenger/core";
+import { getAuthError } from "features/auth/selectors";
+import schema from "./SignInForm.schema";
+import useStyles from "./SignInForm.styles";
 
 function SignInForm() {
   const classes = useStyles();
@@ -16,7 +17,7 @@ function SignInForm() {
 
   const handleSubmit = useCallback(
     (content: SignInFormContent) => {
-      dispatch(setAuthError(''));
+      dispatch(setAuthError(""));
       dispatch(signIn(content.email, content.password));
     },
     [dispatch]
@@ -24,7 +25,7 @@ function SignInForm() {
 
   return (
     <Unform<SignInFormContent>
-      schema={schema as any}
+      schema={schema as yup.ObjectSchema<object>}
       onSubmit={handleSubmit}
       className={classes.form}
     >
