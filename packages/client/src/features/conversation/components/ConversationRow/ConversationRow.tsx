@@ -25,9 +25,17 @@ function ConversationRow({
 
   return (
     <Card className={clsx(classes.root, iff(selected, classes.selected))}>
-      <CardActionArea to={"/conversation/@" + friend.username} disableRipple>
-        <CardContent>
-          <Box display="flex" alignItems="center" width="100%">
+      <CardActionArea
+        to={"/conversation/@" + friend.username}
+        disableRipple={selected}
+      >
+        <CardContent className={classes.content}>
+          <Box
+            className={classes.box}
+            display="flex"
+            alignItems="center"
+            width="100%"
+          >
             <Avatar src={friend.image} />
             <Box ml={1} overflow="hidden" width="100%">
               <Box>
