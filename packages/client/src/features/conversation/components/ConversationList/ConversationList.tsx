@@ -1,31 +1,20 @@
-import React, { memo, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  loadConversationList,
-  unloadConversationList,
-} from "@purple-messenger/core";
+import React, { memo } from "react";
+import { useSelector } from "react-redux";
 import { Box } from "@material-ui/core";
 import { getConversationList } from "features/conversation/selectors";
 import ConversationRow from "../ConversationRow";
+import useConversationInfo from "../useConversationInfo";
 
 export interface ConversationListProps {
   className?: string;
-  username: string | undefined;
 }
 
-function ConversationList({ className, username }: ConversationListProps) {
-  const dispatch = useDispatch();
+function ConversationList({ className }: ConversationListProps) {
   const conversations = useSelector(getConversationList);
-
-  useEffect(() => {
-    dispatch(loadConversationList());
-    return () => {
-      dispatch(unloadConversationList());
-    };
-  }, [dispatch]);
+  const { username } = useConversationInfo();
 
   return (
-    <Box className={className} p={1}>
+    <Box className={className}>
       {conversations.map((conversation) => (
         <ConversationRow
           {...conversation}
