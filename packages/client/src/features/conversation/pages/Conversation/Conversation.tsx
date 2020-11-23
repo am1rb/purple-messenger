@@ -1,9 +1,9 @@
 import React, { memo } from "react";
 import Layout from "features/layout/components/Layout";
-import ConversationList from "features/conversation/components/ConversationList";
 import MessageZone from "features/message/components/MessageZone";
 import useConversationInfo from "features/conversation/components/useConversationInfo";
 import useStyles from "./Conversation.styles";
+import SidePanel from "features/conversation/components/SidePanel";
 
 function Conversation() {
   const classes = useStyles();
@@ -11,10 +11,7 @@ function Conversation() {
 
   return (
     <Layout classes={{ content: classes.content }}>
-      <ConversationList
-        className={classes.conversationList}
-        username={username}
-      />
+      <SidePanel className={classes.sidePanel} />
       <MessageZone className={classes.messageZone} username={username} />
     </Layout>
   );
