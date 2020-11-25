@@ -17,40 +17,52 @@ export const unloadRequestList = () => ({
 });
 export type UnloadRequestListAction = ReturnType<typeof unloadRequestList>;
 
-export const newRequest = () => ({ type: actionTypes.request.saga.newRequest });
+export const newRequest = (tempRequestId: number, username: string) => ({
+  type: actionTypes.request.saga.newRequest,
+  tempRequestId,
+  username,
+});
 export type NewRequestAction = ReturnType<typeof newRequest>;
 
-export const newRequestAck = () => ({
+export const newRequestAck = (tempRequestId: number, requestId: number) => ({
   type: actionTypes.request.saga.newRequestAck,
+  tempRequestId,
+  requestId,
 });
 export type NewRequestAckAction = ReturnType<typeof newRequestAck>;
 
-export const cancelRequest = () => ({
+export const cancelRequest = (requestId: number) => ({
   type: actionTypes.request.saga.cancelRequest,
+  requestId,
 });
 export type CancelRequestAction = ReturnType<typeof cancelRequest>;
 
-export const cancelRequestAck = () => ({
+export const cancelRequestAck = (requestId: number) => ({
   type: actionTypes.request.saga.cancelRequestAck,
+  requestId,
 });
 export type CancelRequestAckAction = ReturnType<typeof cancelRequestAck>;
 
-export const acceptRequest = () => ({
+export const acceptRequest = (requestId: number) => ({
   type: actionTypes.request.saga.acceptRequest,
+  requestId,
 });
 export type AcceptRequestAction = ReturnType<typeof acceptRequest>;
 
-export const acceptRequestAck = () => ({
+export const acceptRequestAck = (requestId: number) => ({
   type: actionTypes.request.saga.acceptRequestAck,
+  requestId,
 });
 export type AcceptRequestAckAction = ReturnType<typeof acceptRequestAck>;
 
-export const rejectRequest = () => ({
+export const rejectRequest = (requestId: number) => ({
   type: actionTypes.request.saga.rejectRequest,
+  requestId,
 });
 export type RejectRequestAction = ReturnType<typeof rejectRequest>;
 
-export const rejectRequestAck = () => ({
+export const rejectRequestAck = (requestId: number) => ({
   type: actionTypes.request.saga.rejectRequestAck,
+  requestId,
 });
 export type RejectRequestAckAction = ReturnType<typeof rejectRequestAck>;
