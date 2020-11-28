@@ -4,10 +4,10 @@ import {
   SendMessageAction,
   sentMessageAck,
   sendMessage,
-  MessageOwner,
+  Owner,
   MessageStatus,
   StartTypingMessageAction,
-  MessagePhase,
+  Phase,
   startTypingMessage,
   StopTypingMessageAction,
   stopTypingMessage,
@@ -22,13 +22,12 @@ import { dispatch } from "core/helper/client";
 let savedMessageId = 1;
 
 function message(socket: Socket) {
-
   socket.on(
     messageActionTypes.message.saga.sendMessage,
     ({ username: receiverUsername, message, phase }: SendMessageAction) => {
       const senderUsername = socket.session?.username;
 
-      if (phase === MessagePhase.Receive || !senderUsername) {
+      if (phase === Phase.Receive || !senderUsername) {
         return;
       }
 
@@ -47,9 +46,9 @@ function message(socket: Socket) {
           receiverUsername,
           {
             ...msg,
-            owner: MessageOwner.Me,
+            owner: Owner.Me,
           },
-          MessagePhase.Receive
+          Phase.Receive
         )
       );
 
@@ -59,9 +58,9 @@ function message(socket: Socket) {
           senderUsername,
           {
             ...msg,
-            owner: MessageOwner.Friend,
+            owner: Owner.Friend,
           },
-          MessagePhase.Receive
+          Phase.Receive
         )
       );
     }
@@ -71,10 +70,10 @@ function message(socket: Socket) {
     messageActionTypes.message.saga.startTypingMessage,
     ({ username: receiverUsername, phase }: StartTypingMessageAction) => {
       const senderUsername = socket.session?.username;
-      if (phase === MessagePhase.Send && senderUsername) {
+      if (phase === Phase.Send && senderUsername) {
         dispatchQueue(
           receiverUsername,
-          startTypingMessage(senderUsername, MessagePhase.Receive)
+          startTypingMessage(senderUsername, Phase.Receive)
         );
       }
     }
@@ -84,10 +83,10 @@ function message(socket: Socket) {
     messageActionTypes.message.saga.stopTypingMessage,
     ({ username: receiverUsername, phase }: StopTypingMessageAction) => {
       const senderUsername = socket.session?.username;
-      if (phase === MessagePhase.Send && senderUsername) {
+      if (phase === Phase.Send && senderUsername) {
         dispatchQueue(
           receiverUsername,
-          stopTypingMessage(senderUsername, MessagePhase.Receive)
+          stopTypingMessage(senderUsername, Phase.Receive)
         );
       }
     }
@@ -101,10 +100,10 @@ function message(socket: Socket) {
       phase,
     }: ReceivedMessageAckAction) => {
       const senderUsername = socket.session?.username;
-      if (phase === MessagePhase.Send && senderUsername) {
+      if (phase === Phase.Send && senderUsername) {
         dispatchQueue(
           receiverUsername,
-          receivedMessageAck(senderUsername, messageId, MessagePhase.Receive)
+          receivedMessageAck(senderUsername, messageId, Phase.Receive)
         );
       }
     }
@@ -118,10 +117,10 @@ function message(socket: Socket) {
       phase,
     }: SeenMessageAckAction) => {
       const senderUsername = socket.session?.username;
-      if (phase === MessagePhase.Send && senderUsername) {
+      if (phase === Phase.Send && senderUsername) {
         dispatchQueue(
           receiverUsername,
-          seenMessageAck(senderUsername, messageId, MessagePhase.Receive)
+          seenMessageAck(senderUsername, messageId, Phase.Receive)
         );
       }
     }
