@@ -1,10 +1,6 @@
 import React from "react";
 import { render } from "@testing-library/react";
-import {
-  AccountStatus,
-  MessageOwner,
-  MessageStatus,
-} from "@purple-messenger/core";
+import { AccountStatus, Owner, MessageStatus } from "@purple-messenger/core";
 import ConversationRow, { ConversationRowProps } from "./ConversationRow";
 
 jest.mock("features/message/components/MessageStatus");
@@ -43,7 +39,7 @@ describe("The <ConversationRow /> tests", () => {
         message={{
           id: 1,
           body: "This is the message body",
-          owner: MessageOwner.Me,
+          owner: Owner.Me,
           sentAt: new Date(),
           status: MessageStatus.Seen,
           unreadCount: 1,
@@ -62,7 +58,7 @@ describe("The <ConversationRow /> tests", () => {
         message={{
           id: 1,
           body: "This is the message body",
-          owner: MessageOwner.Me,
+          owner: Owner.Me,
           sentAt: new Date(),
           status: MessageStatus.Seen,
           unreadCount: 1,
@@ -80,7 +76,7 @@ describe("The <ConversationRow /> tests", () => {
         message={{
           id: 1,
           body: "",
-          owner: MessageOwner.Me,
+          owner: Owner.Me,
           sentAt: new Date(),
           status: MessageStatus.Seen,
           unreadCount: 1,
@@ -99,7 +95,7 @@ describe("The <ConversationRow /> tests", () => {
         message={{
           id: 1,
           body: messageBody,
-          owner: MessageOwner.Me,
+          owner: Owner.Me,
           sentAt: new Date(),
           status: MessageStatus.Seen,
           unreadCount: 1,

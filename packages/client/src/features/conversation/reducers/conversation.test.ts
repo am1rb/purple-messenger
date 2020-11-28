@@ -1,5 +1,5 @@
 import {
-  MessagePhase,
+  Phase,
   MessageStatus,
   receivedMessageAck,
   sampleConversationList,
@@ -32,7 +32,7 @@ describe("The conversation reducer tests", () => {
     );
     const state2 = reducer(
       state1,
-      startTypingMessage(conversation.friend.username, MessagePhase.Receive)
+      startTypingMessage(conversation.friend.username, Phase.Receive)
     );
     expect(
       state2.list.get(conversation.friend.username)?.isTyping
@@ -47,7 +47,7 @@ describe("The conversation reducer tests", () => {
     );
     const state2 = reducer(
       state1,
-      startTypingMessage(conversation.friend.username, MessagePhase.Send)
+      startTypingMessage(conversation.friend.username, Phase.Send)
     );
     expect(state2.list.get(conversation.friend.username)?.isTyping).toBeFalsy();
   });
@@ -60,7 +60,7 @@ describe("The conversation reducer tests", () => {
     );
     const state2 = reducer(
       state1,
-      stopTypingMessage(conversation.friend.username, MessagePhase.Receive)
+      stopTypingMessage(conversation.friend.username, Phase.Receive)
     );
     expect(state2.list.get(conversation.friend.username)?.isTyping).toBeFalsy();
   });
@@ -73,7 +73,7 @@ describe("The conversation reducer tests", () => {
     );
     const state2 = reducer(
       state1,
-      stopTypingMessage(conversation.friend.username, MessagePhase.Send)
+      stopTypingMessage(conversation.friend.username, Phase.Send)
     );
     expect(
       state2.list.get(conversation.friend.username)?.isTyping

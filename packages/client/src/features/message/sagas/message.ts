@@ -4,9 +4,9 @@ import {
   SubmitMessageAction,
   decreaseLastMessageId,
   sendMessage,
-  MessagePhase,
+  Phase,
   MessageStatus,
-  MessageOwner,
+  Owner,
   receivedMessageAck,
   addMessage,
   SendMessageAction,
@@ -27,18 +27,18 @@ export function* submitMessage({
       id: messageId,
       body: message,
       status: MessageStatus.Pending,
-      owner: MessageOwner.Me,
+      owner: Owner.Me,
       sentAt: new Date(),
     })
   );
 }
 
 interface MessageWithSendPhaseAction extends Action {
-  phase: MessagePhase;
+  phase: Phase;
 }
 
-export function* sendIfMessagePhaseIsSend(action: MessageWithSendPhaseAction) {
-  if (action.phase === MessagePhase.Send) {
+export function* sendIfPhaseIsSend(action: MessageWithSendPhaseAction) {
+  if (action.phase === Phase.Send) {
     yield call(send, action);
   }
 }
@@ -53,7 +53,7 @@ export function* newMessage({ message, username }: SendMessageAction) {
     yield put(addMessage(message));
 
     // send the ack to the sender
-    if (message.owner === MessageOwner.Friend) {
+    if (message.owner === Owner.Friend) {
       yield call(send, receivedMessageAck(username, message.id));
     }
   }

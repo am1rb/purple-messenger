@@ -1,6 +1,6 @@
 import React, { memo } from "react";
 import clsx from "clsx";
-import { Conversation, MessageOwner } from "@purple-messenger/core";
+import { Conversation, Owner } from "@purple-messenger/core";
 import { Card, CardContent, Box, Avatar, Typography } from "@material-ui/core";
 import MessageStatus from "features/message/components/MessageStatus";
 import MessageSentAt from "features/message/components/MessageSentAt";
@@ -48,7 +48,7 @@ function ConversationRow({
                   color="textSecondary"
                   gutterBottom
                 >
-                  {message?.owner === MessageOwner.Me && "You: "}
+                  {message?.owner === Owner.Me && "You: "}
                   {isTyping ? (
                     <MessageIsTyping />
                   ) : message?.body ? (

@@ -9,19 +9,19 @@ const sagas = [
   ),
   takeEvery(
     messageActionTypes.message.saga.startTypingMessage,
-    messageSagas.sendIfMessagePhaseIsSend
+    messageSagas.sendIfPhaseIsSend
   ),
   takeEvery(
     messageActionTypes.message.saga.stopTypingMessage,
-    messageSagas.sendIfMessagePhaseIsSend
+    messageSagas.sendIfPhaseIsSend
   ),
   takeEvery(
     messageActionTypes.message.reducer.seenMessageAck,
-    messageSagas.sendIfMessagePhaseIsSend
+    messageSagas.sendIfPhaseIsSend
   ),
   takeEvery(
     messageActionTypes.message.saga.sendMessage,
-    messageSagas.sendIfMessagePhaseIsSend
+    messageSagas.sendIfPhaseIsSend
   ),
   takeEvery(
     messageActionTypes.message.saga.sendMessage,

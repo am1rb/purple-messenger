@@ -3,12 +3,12 @@ import {
   isMessageHasTemporaryId,
   isScrollAtTheEnd,
 } from "./messageList";
-import { Message, MessageOwner, MessageStatus } from "@purple-messenger/core";
+import { Message, Owner, MessageStatus } from "@purple-messenger/core";
 
 const sharedMessage: Message = {
   id: -1,
   body: "1183 Veptat Grove",
-  owner: MessageOwner.Me,
+  owner: Owner.Me,
   sentAt: new Date(),
   status: MessageStatus.Pending,
 };

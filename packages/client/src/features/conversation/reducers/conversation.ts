@@ -5,7 +5,7 @@ import {
   SetConversationListAction,
   messageActionTypes,
   StartTypingMessageAction,
-  MessagePhase,
+  Phase,
   StopTypingMessageAction,
   SendMessageAction,
   SentMessageAckAction,
@@ -42,7 +42,7 @@ function conversationReducer(
         ),
       };
     case messageActionTypes.message.saga.startTypingMessage: {
-      return action.phase === MessagePhase.Send
+      return action.phase === Phase.Send
         ? state
         : {
             ...state,
@@ -53,7 +53,7 @@ function conversationReducer(
           };
     }
     case messageActionTypes.message.saga.stopTypingMessage: {
-      return action.phase === MessagePhase.Send
+      return action.phase === Phase.Send
         ? state
         : {
             ...state,

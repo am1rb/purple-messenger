@@ -1,6 +1,6 @@
 import React, { memo } from "react";
 import { Box, Card, Typography } from "@material-ui/core";
-import { Message, MessageOwner } from "@purple-messenger/core";
+import { Message, Owner } from "@purple-messenger/core";
 import MessageStatus from "../MessageStatus";
 import MessageSentAt from "../MessageSentAt";
 import MessageSeenSensor from "../MessageSeenSensor";
@@ -15,8 +15,8 @@ function MessageRow({ body, status, owner, sentAt, id }: MessageProps) {
     <Box
       m={2}
       maxWidth="65%"
-      marginLeft={owner === MessageOwner.Me ? "auto" : undefined}
-      marginRight={owner === MessageOwner.Friend ? "auto" : undefined}
+      marginLeft={owner === Owner.Me ? "auto" : undefined}
+      marginRight={owner === Owner.Friend ? "auto" : undefined}
     >
       <Card>
         <Box m={1}>
@@ -24,11 +24,7 @@ function MessageRow({ body, status, owner, sentAt, id }: MessageProps) {
             {body}
           </Typography>
           <Box display="flex" justifyContent="space-between">
-            {owner === MessageOwner.Me ? (
-              <MessageStatus status={status} />
-            ) : (
-              <span />
-            )}
+            {owner === Owner.Me ? <MessageStatus status={status} /> : <span />}
             <MessageSentAt sentAt={sentAt} />
           </Box>
         </Box>
@@ -36,7 +32,7 @@ function MessageRow({ body, status, owner, sentAt, id }: MessageProps) {
     </Box>
   );
 
-  return owner === MessageOwner.Friend ? (
+  return owner === Owner.Friend ? (
     <MessageSeenSensor status={status} messageId={id}>
       {message}
     </MessageSeenSensor>

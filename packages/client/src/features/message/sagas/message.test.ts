@@ -3,8 +3,8 @@ import { select } from "redux-saga/effects";
 import {
   addMessage,
   decreaseLastMessageId,
-  MessageOwner,
-  MessagePhase,
+  Owner,
+  Phase,
   MessageStatus,
   receivedMessageAck,
   sendMessage,
@@ -13,7 +13,7 @@ import {
 import { send } from "features/socket/effects";
 import {
   submitMessage as submitMessageSaga,
-  sendIfMessagePhaseIsSend,
+  sendIfPhaseIsSend,
   newMessage,
 } from "./message";
 import { getLastMessageId } from "../selectors";
@@ -44,7 +44,7 @@ describe("The message sagas tests", () => {
           id: messageId,
           body: message,
           status: MessageStatus.Pending,
-          owner: MessageOwner.Me,
+          owner: Owner.Me,
           sentAt: new Date(),
         })
       )
@@ -54,9 +54,9 @@ describe("The message sagas tests", () => {
   it("Should call the send effect", () => {
     const action = {
       type: "ActionType",
-      phase: MessagePhase.Send,
+      phase: Phase.Send,
     };
-    return expectSaga(sendIfMessagePhaseIsSend, action)
+    return expectSaga(sendIfPhaseIsSend, action)
       .provide([[select(getIsReady), true]])
       .call(send, action)
       .run();
@@ -65,9 +65,9 @@ describe("The message sagas tests", () => {
   it("Should not call the send effect", () => {
     const action = {
       type: "ActionType",
-      phase: MessagePhase.Receive,
+      phase: Phase.Receive,
     };
-    testSaga(sendIfMessagePhaseIsSend, action).next().finish().isDone();
+    testSaga(sendIfPhaseIsSend, action).next().finish().isDone();
   });
 
   it("Should add the message to the message box if the conversation is selected", () => {
@@ -76,7 +76,7 @@ describe("The message sagas tests", () => {
       id: 1,
       body: "message body",
       status: MessageStatus.Pending,
-      owner: MessageOwner.Me,
+      owner: Owner.Me,
       sentAt: new Date(),
     };
     const action = sendMessage(receiverName, message);
@@ -95,7 +95,7 @@ describe("The message sagas tests", () => {
       id: 1,
       body: "message body",
       status: MessageStatus.Pending,
-      owner: MessageOwner.Me,
+      owner: Owner.Me,
       sentAt: new Date(),
     };
     const action = sendMessage(receiverName, message);
@@ -113,7 +113,7 @@ describe("The message sagas tests", () => {
       id: 1,
       body: "message body",
       status: MessageStatus.Pending,
-      owner: MessageOwner.Friend,
+      owner: Owner.Friend,
       sentAt: new Date(),
     };
     const action = sendMessage(receiverName, message);
