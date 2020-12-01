@@ -18,3 +18,16 @@ export const getConversationMap = (state: State) => state.conversation.list;
 export const getConversationList = createSelector(getConversationMap, (list) =>
   list.toArray().map(([, conversation]) => conversation)
 );
+
+export const getHasUndeadMessage = createSelector(
+  getConversationList,
+  (list) => {
+    for (let item of list) {
+      const unreadCount = item.message?.unreadCount ?? 0;
+      if (unreadCount > 0) {
+        return true;
+      }
+    }
+    return false;
+  }
+);
