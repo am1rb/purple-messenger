@@ -1,10 +1,12 @@
 import React, { memo } from "react";
 import PhoneIcon from "@material-ui/icons/Phone";
-import IconButton from "@material-ui/core/IconButton";
+import IconButton, { IconButtonProps } from "@material-ui/core/IconButton";
 
-function CallButton() {
+type CallButtonProps = Pick<IconButtonProps, "disabled">;
+
+function CallButton(props: CallButtonProps) {
   return (
-    <IconButton size="small">
+    <IconButton size="small" {...props}>
       <PhoneIcon />
     </IconButton>
   );
