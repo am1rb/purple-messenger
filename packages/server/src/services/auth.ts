@@ -9,15 +9,15 @@ import {
   setProfileInfo,
   signOut,
 } from "@purple-messenger/core";
-import { dispatch } from "core/helper/client";
+import { dispatch } from "core/helper/action";
 import Socket from "core/type/socket";
 import jwt from "core/helper/jwt";
-import { openQueue, closeQueue } from './queue';
+import { openQueue, closeQueue } from "../core/helper/queue";
 
 export const sampleProfiles: ProfileInfo[] = [
   {
     id: 1,
-    username: 'demo',
+    username: "demo",
     image: "https://picsum.photos/200",
     firstName: "Demo",
     lastName: "Demo",
@@ -26,7 +26,7 @@ export const sampleProfiles: ProfileInfo[] = [
   },
   {
     id: 2,
-    username: 'john',
+    username: "john",
     email: "john@doe.demo",
     bio: "French Southern Territories Ireland",
     firstName: "John",
@@ -35,7 +35,7 @@ export const sampleProfiles: ProfileInfo[] = [
   },
   {
     id: 3,
-    username: 'sara',
+    username: "sara",
     email: "sara@doe.demo",
     bio: "Dominica Kazakhstan",
     firstName: "Sara",
@@ -48,7 +48,11 @@ function auth(socket: Socket) {
   socket.on(
     authActionTypes.auth.saga.signIn,
     ({ email, password }: SingInAction) => {
-      const user = sampleProfiles.find(u => (email===u.username && password===u.username) || (email===u.email && password===u.email));
+      const user = sampleProfiles.find(
+        (u) =>
+          (email === u.username && password === u.username) ||
+          (email === u.email && password === u.email)
+      );
 
       if (user) {
         socket.session = {
@@ -71,7 +75,7 @@ function auth(socket: Socket) {
     authActionTypes.auth.saga.verifyToken,
     async ({ token }: VerifyTokenAction) => {
       const session = await jwt.verify(token).catch(() => null);
-      const user = sampleProfiles.find(u => session?.id===u.id);
+      const user = sampleProfiles.find((u) => session?.id === u.id);
       if (!!session && user) {
         socket.session = session;
         dispatch(socket, setIsAuthenticated(true));

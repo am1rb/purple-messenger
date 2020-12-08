@@ -16,8 +16,8 @@ import {
   seenMessageAck,
   SeenMessageAckAction,
 } from "@purple-messenger/core";
-import { dispatchQueue, clientDispatchQueue } from "./queue";
-import { dispatch } from "core/helper/client";
+import { dispatch } from "core/helper/action";
+import { io } from "core/server";
 
 let savedMessageId = 1;
 
@@ -40,8 +40,8 @@ function message(socket: Socket) {
 
       dispatch(socket, sentMessageAck(receiverUsername, message.id, msg.id));
 
-      clientDispatchQueue(
-        socket,
+      dispatch(
+        socket.to(senderUsername),
         sendMessage(
           receiverUsername,
           {
@@ -52,8 +52,8 @@ function message(socket: Socket) {
         )
       );
 
-      dispatchQueue(
-        receiverUsername,
+      dispatch(
+        io.to(receiverUsername),
         sendMessage(
           senderUsername,
           {
@@ -71,8 +71,8 @@ function message(socket: Socket) {
     ({ username: receiverUsername, phase }: StartTypingMessageAction) => {
       const senderUsername = socket.session?.username;
       if (phase === Phase.Send && senderUsername) {
-        dispatchQueue(
-          receiverUsername,
+        dispatch(
+          io.to(receiverUsername),
           startTypingMessage(senderUsername, Phase.Receive)
         );
       }
@@ -84,8 +84,8 @@ function message(socket: Socket) {
     ({ username: receiverUsername, phase }: StopTypingMessageAction) => {
       const senderUsername = socket.session?.username;
       if (phase === Phase.Send && senderUsername) {
-        dispatchQueue(
-          receiverUsername,
+        dispatch(
+          io.to(receiverUsername),
           stopTypingMessage(senderUsername, Phase.Receive)
         );
       }
@@ -101,8 +101,8 @@ function message(socket: Socket) {
     }: ReceivedMessageAckAction) => {
       const senderUsername = socket.session?.username;
       if (phase === Phase.Send && senderUsername) {
-        dispatchQueue(
-          receiverUsername,
+        dispatch(
+          io.to(receiverUsername),
           receivedMessageAck(senderUsername, messageId, Phase.Receive)
         );
       }
@@ -118,8 +118,8 @@ function message(socket: Socket) {
     }: SeenMessageAckAction) => {
       const senderUsername = socket.session?.username;
       if (phase === Phase.Send && senderUsername) {
-        dispatchQueue(
-          receiverUsername,
+        dispatch(
+          io.to(receiverUsername),
           seenMessageAck(senderUsername, messageId, Phase.Receive)
         );
       }

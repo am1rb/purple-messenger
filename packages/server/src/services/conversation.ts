@@ -5,7 +5,7 @@ import {
   setConversationList,
 } from "@purple-messenger/core";
 import Socket from "core/type/socket";
-import { dispatch } from "core/helper/client";
+import { dispatch } from "core/helper/action";
 import { sampleProfiles } from "./auth";
 
 function conversation(socket: Socket) {
