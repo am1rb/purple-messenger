@@ -12,7 +12,7 @@ import {
 import { dispatch } from "core/helper/action";
 import Socket from "core/type/socket";
 import jwt from "core/helper/jwt";
-import { openQueue, closeQueue } from "../core/helper/queue";
+import { joinQueue, leaveQueue } from "../core/helper/queue";
 
 export const sampleProfiles: ProfileInfo[] = [
   {
@@ -62,11 +62,11 @@ function auth(socket: Socket) {
 
         dispatch(socket, setToken(jwt.sign(socket.session)));
         dispatch(socket, setProfileInfo(user));
-        openQueue(socket);
+        joinQueue(socket);
       } else {
         dispatch(socket, signOut());
         dispatch(socket, setAuthError("Email or Password is incorrect"));
-        closeQueue(socket);
+        leaveQueue(socket);
       }
     }
   );
@@ -80,18 +80,18 @@ function auth(socket: Socket) {
         socket.session = session;
         dispatch(socket, setIsAuthenticated(true));
         dispatch(socket, setProfileInfo(user));
-        openQueue(socket);
+        joinQueue(socket);
       } else {
         dispatch(socket, signOut());
         dispatch(socket, setAuthError("Invalid token"));
-        closeQueue(socket);
+        leaveQueue(socket);
         delete socket.session;
       }
     }
   );
 
   socket.on(authActionTypes.auth.saga.signOut, () => {
-    closeQueue(socket);
+    leaveQueue(socket);
     delete socket.session;
   });
 }

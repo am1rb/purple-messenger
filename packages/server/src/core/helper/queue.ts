@@ -1,6 +1,6 @@
 import Socket from "core/type/socket";
 
-export function openQueue(socket: Socket) {
+export function joinQueue(socket: Socket) {
   const username = socket.session?.username;
   if (!username) {
     return false;
@@ -11,7 +11,7 @@ export function openQueue(socket: Socket) {
   return true;
 }
 
-export function closeQueue(socket: Socket) {
+export function leaveQueue(socket: Socket) {
   const username = socket.session?.username;
   if (!username) {
     return false;
