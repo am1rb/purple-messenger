@@ -11,10 +11,10 @@ server.listen(serverPort, function () {
   console.log("server run on " + serverPort);
 });
 
+const services = [auth, conversation, message];
+
 io.on("connection", (socket: Socket) => {
-  auth(socket);
-  conversation(socket);
-  message(socket);
+  services.forEach((service) => service(socket));
 
   socket.on("disconnect", () => {
     console.log("disconnect");
