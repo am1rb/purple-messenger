@@ -23,7 +23,7 @@
     "connected-react-router": "^6.8.0",
     "cra-template-typescript": "1.1.0",
     "immutable": "^4.0.0-rc.12",
-    "moment": "^2.27.0",
+    "moment": "^2.29.4",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-redux": "^7.2.0",
